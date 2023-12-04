@@ -1,6 +1,6 @@
-import gns.application.config.utilities.Browser;
-import gns.application.config.utilities.WhatsAppDriver;
-import gns.application.gns_project_whatsender.GNS_PROJECT_WHATSENDER;
+import bot.application.config.utilities.Browser;
+import bot.application.config.utilities.WhatsAppDriver;
+import bot.application.gns_project_whatsender.GNS_PROJECT_WHATSENDER;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.AfterClass;

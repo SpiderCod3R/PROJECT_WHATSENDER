@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package gns.application.gns_project_whatsender;
-import gns.application.config.utilities.Browser;
-import gns.application.config.utilities.WhatsAppDriver;
+package bot.application.gns_project_whatsender;
+import bot.application.config.utilities.Browser;
+import bot.application.config.utilities.WhatsAppDriver;
 
 /**
  *
@@ -19,16 +19,11 @@ public class GNS_PROJECT_WHATSENDER{
     public static void main(String[] args) {
         System.out.println("GNS_PROJECT_WHATSENDER --- started");
 
-//        ArrayList<String> lista_contatos = new ArrayList<>();
-//        lista_contatos.add("22996072173");
-//        lista_contatos.add("22992073683");
+
 //        
         
         
-//        for (String contato : lista_contatos) {
-//           message_sender.localizar_contato(contato);
-//           //message_sender.enviar_mensagem_do_whatsappweb(mensagem);
-//        }
+        
 //        
         String mensagem = "olá eu sou uma nova mensagem";
 
