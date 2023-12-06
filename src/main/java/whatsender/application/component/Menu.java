@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JPanel {
     }
     
     public void addMenu(ModelMenu menu){
-        panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()));
+        panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()), "h 40!");
     }
     
     private EventMenu getEventMenu(){
@@ -114,7 +114,7 @@ public class Menu extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+            .addGap(0, 686, Short.MAX_VALUE)
         );
 
         sp.setViewportView(panel);
@@ -123,13 +123,13 @@ public class Menu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addComponent(sp)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
+                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
