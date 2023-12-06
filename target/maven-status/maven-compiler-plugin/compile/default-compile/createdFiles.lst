@@ -8,6 +8,7 @@ whatsender\application\main\Application.class
 whatsender\application\bot\config\boot\SystemFile.class
 whatsender\application\swing\MenuAnimation$1.class
 whatsender\application\swing\Button$2.class
+whatsender\application\component\Profile.class
 whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
