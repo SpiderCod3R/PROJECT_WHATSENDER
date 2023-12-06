@@ -18,6 +18,7 @@ import whatsender.application.event.EventMenu;
 import whatsender.application.event.EventMenuSelected;
 import whatsender.application.forms.ModelMenu;
 import icon.IconConstants;
+import whatsender.application.swing.MenuAnimation;
 import whatsender.application.swing.MenuItem;
 import whatsender.application.swing.scrollbar.ScrollBarCustom;
 
@@ -54,12 +55,25 @@ public class Menu extends javax.swing.JPanel {
         return new EventMenu() {
             @Override
             public boolean menuPressed(Component com, boolean open) {
-                System.err.println("Menu press");
-                return true;
+//                System.err.println("Menu press");
+//                return true;
+                if(enableMenu){
+                    if(showMenu){
+                        if(open){
+                            new MenuAnimation(layout, com).openMenu();
+                        }else{
+                            new MenuAnimation(layout, com).closeMenu();
+                        }
+                        return true;
+                    }else {
+                        System.err.println("Show pop up menu (Menu is Closed)");
+                    }
+                }
+                return false;
             }
         };
     }
-    
+
     protected ImageIcon createImageIcon(URL imgURL,String description) {
         return new ImageIcon(imgURL, description);
     }

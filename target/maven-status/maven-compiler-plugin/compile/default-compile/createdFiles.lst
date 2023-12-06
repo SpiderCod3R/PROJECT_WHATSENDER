@@ -6,6 +6,7 @@ whatsender\application\swing\MenuItem$1.class
 whatsender\application\bot\models\Company.class
 whatsender\application\main\Application.class
 whatsender\application\bot\config\boot\SystemFile.class
+whatsender\application\swing\MenuAnimation$1.class
 whatsender\application\swing\Button$2.class
 whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
@@ -28,6 +29,7 @@ whatsender\application\event\EventMenuSelected.class
 whatsender\application\swing\MenuButton$1.class
 whatsender\application\bot\config\boot\FileMessage.class
 whatsender\application\swing\ProgressBarCustom.class
+whatsender\application\swing\MenuAnimation.class
 whatsender\application\bot\config\helpers\MessageHelper.class
 whatsender\application\bot\config\boot\FileTypeFilter.class
 whatsender\application\swing\MenuButton$2.class

@@ -32,7 +32,7 @@ public class Application extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
-                System.err.println("Menu index : " + menuIndex + "SubMenu index" + subMenuIndex);
+                System.out.println("Menu index : " + menuIndex + " SubMenu index " + subMenuIndex);
             }
         });
         menu.initMenuItem();
