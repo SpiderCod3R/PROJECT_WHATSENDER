@@ -1,7 +1,12 @@
 package whatsender.application.main;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.application.component.Header;
 import whatsender.application.component.Menu;
 import whatsender.application.event.EventMenuSelected;
@@ -16,6 +21,7 @@ public class Application extends javax.swing.JFrame {
     private Menu menu;
     private Header header;
     private MainForm mainForm;
+    private Animator animator;
     
     public Application() {
         initComponents();
@@ -41,6 +47,42 @@ public class Application extends javax.swing.JFrame {
         bg.add(header, "h 50!, wrap");
         bg.add(mainForm, "w 100%, h 100%");
         
+        TimingTarget target = new TimingTargetAdapter(){
+            @Override
+            public void timingEvent(float fraction) {
+                double width;
+                if(menu.isShowMenu()){
+                    width=60 + (170 * (1f - fraction));
+                } else {
+                    width=60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                menu.revalidate();
+            }
+
+            @Override
+            public void end() {
+                menu.setShowMenu(!menu.isShowMenu());
+                menu.setEnableMenu(true);
+            }
+        };
+        animator = new Animator(500, target);
+        animator.setResolution(0);
+        animator.setDeceleration(0.5f);
+        animator.setAcceleration(0.5f);
+        header.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               if(!animator.isRunning()){
+                   animator.start();
+               }
+               menu.setEnableMenu(false);
+               
+               if(menu.isShowMenu()){
+                   menu.hideAllMenus();
+               }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +96,7 @@ public class Application extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         bg.setOpaque(true);
 

@@ -4,6 +4,7 @@ whatsender\application\bot\config\logs\LogType.class
 whatsender\application\event\EventMenu.class
 whatsender\application\swing\MenuItem$1.class
 whatsender\application\bot\models\Company.class
+whatsender\application\component\Header$1.class
 whatsender\application\main\Application.class
 whatsender\application\bot\config\boot\SystemFile.class
 whatsender\application\swing\MenuAnimation$1.class
@@ -13,6 +14,7 @@ whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
 whatsender\application\bot\config\logs\ErrorLogs.class
+whatsender\application\main\Application$4.class
 whatsender\application\forms\MainForm.class
 whatsender\application\swing\ProgressBarCustom$1.class
 whatsender\application\bot\config\logs\MessageLogs.class
@@ -24,6 +26,7 @@ whatsender\application\component\Menu$1.class
 whatsender\application\swing\MenuButton.class
 whatsender\application\bot\config\boot\WhatsResponse.class
 whatsender\application\bot\config\utilities\Message.class
+whatsender\application\main\Application$3.class
 whatsender\application\swing\scrollbar\ScrollBarCustom.class
 whatsender\application\swing\MenuItem$2.class
 whatsender\application\event\EventMenuSelected.class

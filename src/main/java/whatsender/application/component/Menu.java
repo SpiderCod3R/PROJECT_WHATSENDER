@@ -32,6 +32,10 @@ public class Menu extends javax.swing.JPanel {
     private EventMenuSelected event;
     private boolean enableMenu = true;
     private boolean showMenu = true;
+
+    public boolean isShowMenu() {
+        return showMenu;
+    }
     
     public Menu() {
         initComponents();
@@ -107,6 +111,15 @@ public class Menu extends javax.swing.JPanel {
         this.showMenu = showMenu;
     }
     
+    public void hideAllMenus(){
+        for (Component com : panel.getComponents()) {
+            MenuItem item = (MenuItem)com;
+            if(item.isOpen()){
+                new MenuAnimation(layout, com, 500).closeMenu();
+                item.setOpaque(false);
+            }
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
