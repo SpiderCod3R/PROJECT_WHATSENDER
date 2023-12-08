@@ -18,7 +18,7 @@ public class Profile extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(243, 250, 253));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ALEXANDRE\\Documents\\NetBeansProjects\\GNS_PROJECT_WHATSENDER\\src\\main\\resources\\icon\\logo2.png")); // NOI18N
         jLabel1.setText("GNS WhatSender");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

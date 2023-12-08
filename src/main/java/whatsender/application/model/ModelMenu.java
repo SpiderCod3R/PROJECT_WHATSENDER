@@ -1,4 +1,4 @@
-package whatsender.application.forms;
+package whatsender.application.model;
 
 import javax.swing.Icon;
 

@@ -1,9 +1,9 @@
-package whatsender.application.bot.models;
+package whatsender.application.entities;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
-public class Client {
+public class Contact {
 
     public String getName() {
         return name;
@@ -53,9 +53,9 @@ public class Client {
     @CsvBindByPosition(position = 3)
     private String appointment_hour;
     
-    public Client() {}
+    public Contact() {}
 
-    public Client(String name, String whatsNumber, String appointment_date, String appointment_hour) {
+    public Contact(String name, String whatsNumber, String appointment_date, String appointment_hour) {
         this.name = name;
         this.whatsNumber = whatsNumber;
         this.appointment_date = appointment_date;
@@ -68,7 +68,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "name=" + getName() + ", whatsNumber=" + getWhatsNumber() + ", service_date=" + getAppointment_date() + ", service_hour=" + getAppointment_hour() + '}';
+        return "Contact{" + "name=" + getName() + ", whatsNumber=" + getWhatsNumber() + ", service_date=" + getAppointment_date() + ", service_hour=" + getAppointment_hour() + '}';
     }
     
     

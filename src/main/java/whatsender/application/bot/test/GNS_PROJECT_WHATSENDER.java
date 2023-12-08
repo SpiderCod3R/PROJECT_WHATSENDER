@@ -18,20 +18,14 @@ public class GNS_PROJECT_WHATSENDER{
     //https://www.contradodigital.com/2021/02/25/how-to-setup-selenium-using-java-and-apache-netbeans-for-automated-web-browser-testing/
     public static void main(String[] args) {
         System.out.println("GNS_PROJECT_WHATSENDER --- started");
-
-
-//        
-        
-        
-        
-//        
-        String mensagem = "olá eu sou uma nova mensagem";
+     
+        String mensagem = "Olá boa tarde eu sou uma mensagem enviada por um Bot --- \nEnviada pelo WhatSender ";
 
         WhatsAppDriver whatsapp = new WhatsAppDriver(Browser.CHROME);
         whatsapp.open();
         whatsapp.waitForConnection();
         
-        whatsapp.abrir_conversa_com_contato("22996072173");
+        whatsapp.abrir_conversa_com_contato("5522998243838");
 //        whatsapp.getCurrentConvImg();
 //        whatsapp.getCurrentConvName();
 //        whatsapp.getVisableMessages();

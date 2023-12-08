@@ -12,7 +12,7 @@ import java.util.Iterator;
 import net.miginfocom.swing.MigLayout;
 import whatsender.application.event.EventMenu;
 import whatsender.application.event.EventMenuSelected;
-import whatsender.application.forms.ModelMenu;
+import whatsender.application.model.ModelMenu;
 
 /**
  *

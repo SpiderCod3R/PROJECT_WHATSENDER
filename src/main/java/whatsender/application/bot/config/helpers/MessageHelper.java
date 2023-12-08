@@ -1,7 +1,7 @@
 package whatsender.application.bot.config.helpers;
 
-import whatsender.application.bot.models.Client;
-import whatsender.application.bot.models.Company;
+import whatsender.application.entities.Contact;
+import whatsender.application.entities.Client;
 
 
 
@@ -17,7 +17,7 @@ public abstract class MessageHelper {
         return DEFAULT_MESSAGE;
     }
     
-    public static String prepareMessage(Client client, Company company){
+    public static String prepareMessage(Contact client, Client company){
         /*SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
         SimpleDateFormat hourFormat = new SimpleDateFormat(hourPattern);
         String dataDeAtendimento = dateFormat.format(client.getAppointment_date());
@@ -29,14 +29,14 @@ public abstract class MessageHelper {
         stringBuilder.replace(85, 89, client.getAppointment_hour());
         stringBuilder.replace(4, 15, client.getName());
         
-        if (company.isNotNull()){
-            stringBuilder.insert(stringBuilder.toString().trim().length(), company.toString());
-        }
+//        if (company.isNotNull()){
+//            stringBuilder.insert(stringBuilder.toString().trim().length(), company.toString());
+//        }
         
         return stringBuilder.toString();
     }
     
-    public static String addCompanyDataToBodyMessage(Company companyData){
+    public static String addCompanyDataToBodyMessage(Client companyData){
         StringBuilder stringBuilder = new StringBuilder(DEFAULT_MESSAGE.trim());
         stringBuilder.insert(DEFAULT_MESSAGE.trim().length(), companyData.toString());
         return stringBuilder.toString();

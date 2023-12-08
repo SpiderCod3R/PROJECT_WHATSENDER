@@ -16,8 +16,9 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.application.event.EventMenu;
 import whatsender.application.event.EventMenuSelected;
-import whatsender.application.forms.ModelMenu;
+import whatsender.application.model.ModelMenu;
 import icon.IconConstants;
+import whatsender.application.event.EventShowPopUpMenu;
 import whatsender.application.swing.MenuAnimation;
 import whatsender.application.swing.MenuItem;
 import whatsender.application.swing.scrollbar.ScrollBarCustom;
@@ -30,6 +31,9 @@ public class Menu extends javax.swing.JPanel {
     private final MigLayout layout;
     private Animator animator;
     private EventMenuSelected event;
+    private EventShowPopUpMenu eventShowPopUpMenu;
+
+    
     private boolean enableMenu = true;
     private boolean showMenu = true;
 
@@ -55,6 +59,10 @@ public class Menu extends javax.swing.JPanel {
         panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()), "h 40!");
     }
     
+    public void addEventShowPopUpMenu(EventShowPopUpMenu eventShowPopUpMenu) {
+        this.eventShowPopUpMenu = eventShowPopUpMenu;
+    }
+    
     private EventMenu getEventMenu(){
         return new EventMenu() {
             @Override
@@ -70,7 +78,8 @@ public class Menu extends javax.swing.JPanel {
                         }
                         return true;
                     }else {
-                        System.err.println("Show pop up menu (Menu is Closed)");
+//                        System.err.println("Show pop up menu (Menu is Closed)");
+                          eventShowPopUpMenu.showPopUp(com);
                     }
                 }
                 return false;
@@ -83,20 +92,13 @@ public class Menu extends javax.swing.JPanel {
     }
     
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img01)), "Dashboard", "Home", "Buttons", "Cards", "Tabs", "Accordions", "Modals"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img02)), "Charts", "Morris", "Flot", "Line"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img03)), "Report", "Income", "Expense", "Profit"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img04)), "Message", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img05)), "Staff", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img06)), "Student", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img07)), "Library", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img08)), "Holiday", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img09)), "Calendar", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img10)), "Chat App", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img11)), "Contace", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img12)), "File Manager", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img13)), "Our Centres"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.img14)), "Gallery"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgDash)), "Painel", "Home", "Buttons", "Cards", "Tabs", "Accordions", "Modals"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgSendMessage)), "Enviar mensagem"));
+        
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgConfig)), "Configurações", "Cliente", "Mensagem", "Arquivos"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgLogs)), "Logs"));
+        
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgExit)), "Fechar"));
     }
 
     public void addEvent(EventMenuSelected event) {
@@ -167,7 +169,7 @@ public class Menu extends javax.swing.JPanel {
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint gra = new GradientPaint(0, 0, new Color(33,105,249), getWidth(), 0 , new Color(93,58,196));
+        GradientPaint gra = new GradientPaint(0, 0, new Color(60,136,162), getWidth(), 0 , new Color(13,127,161));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
