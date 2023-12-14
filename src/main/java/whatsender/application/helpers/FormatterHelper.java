@@ -1,4 +1,4 @@
-package whatsender.application.bot.config.helpers;
+package whatsender.application.helpers;
 
 public abstract class FormatterHelper {
     public static String formatPhoneNumber(String phonenumber){

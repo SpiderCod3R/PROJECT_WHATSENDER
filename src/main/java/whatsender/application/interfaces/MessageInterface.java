@@ -1,4 +1,4 @@
-package whatsender.application.helpers;
+package whatsender.application.interfaces;
 
 import whatsender.application.entities.Client;
 import whatsender.application.entities.Contact;

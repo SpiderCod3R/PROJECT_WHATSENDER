@@ -1,6 +1,6 @@
 package whatsender.application.entities;
 
-import whatsender.application.bot.config.helpers.FormatterHelper;
+import whatsender.application.helpers.FormatterHelper;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -23,6 +23,13 @@ public class Client implements Serializable{
 
     public Client(){
     }
+    
+    public Client(String clientName, String phoneNumber, String whatsApp) {
+        super();
+        this.clientName = clientName;
+        this.phoneNumber = phoneNumber;
+        this.whatsApp = whatsApp;
+    }
 
     public Client(Integer id, String clientName, String phoneNumber, String whatsApp) {
         this.id = id;
@@ -33,7 +40,7 @@ public class Client implements Serializable{
 
     @Override
     public String toString() {
-        return "Client{" + "id=" + id + ", clientName=" + clientName + ", phoneNumber=" + phoneNumber + ", whatsApp=" + whatsApp + '}';
+        return "\n" + phoneNumber + " e " + whatsApp + "\n" + clientName;
     }
 
     public int getId() {
@@ -60,6 +67,14 @@ public class Client implements Serializable{
         this.whatsApp = whatsApp;
     }
     
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Boolean isNull(){
         return (("".equals(getClientName())) || ("".equals(getWhatsApp())));
     }

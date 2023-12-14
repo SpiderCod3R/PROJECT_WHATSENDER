@@ -4,6 +4,31 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
 public class Contact {
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 0)
+    private String name;
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 1)
+    private String whatsNumber;
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 2)
+    private String appointment_date;
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 3)
+    private String appointment_hour;
+    
+    public Contact() {}
+
+    public Contact(String name, String whatsNumber, String appointment_date, String appointment_hour) {
+        this.name = name;
+        this.whatsNumber = whatsNumber;
+        this.appointment_date = appointment_date;
+        this.appointment_hour = appointment_hour;
+    }
 
     public String getName() {
         return name;
@@ -37,31 +62,6 @@ public class Contact {
         this.appointment_hour = appointment_hour;
     }
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 0)
-    private String name;
-    
-    @CsvBindByName
-    @CsvBindByPosition(position = 1)
-    private String whatsNumber;
-    
-    @CsvBindByName
-    @CsvBindByPosition(position = 2)
-    private String appointment_date;
-    
-    @CsvBindByName
-    @CsvBindByPosition(position = 3)
-    private String appointment_hour;
-    
-    public Contact() {}
-
-    public Contact(String name, String whatsNumber, String appointment_date, String appointment_hour) {
-        this.name = name;
-        this.whatsNumber = whatsNumber;
-        this.appointment_date = appointment_date;
-        this.appointment_hour = appointment_hour;
-    }
-    
     public Boolean isNull(){
         return (("".equals(getName())) || ("".equals(getWhatsNumber())));
     }

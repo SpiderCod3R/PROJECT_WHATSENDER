@@ -5,9 +5,11 @@ whatsender\application\filechooser\JnaFileChooser$Mode.class
 whatsender\application\swing\effect\RippleEffect.class
 whatsender\application\main\Application.class
 whatsender\application\bot\config\boot\SystemFile.class
+whatsender\application\entities\Appointment.class
 whatsender\application\filechooser\win32\Shell32$BrowseInfo.class
 whatsender\application\swing\Button$2.class
 whatsender\application\swing\PanelPopUp.class
+whatsender\application\forms\SendMessageForm$5.class
 whatsender\application\event\EventShowPopUpMenu.class
 whatsender\application\filechooser\Action.class
 whatsender\application\main\Application$1.class
@@ -18,8 +20,8 @@ whatsender\application\swing\input\FormatedTextField.class
 whatsender\application\swing\ProgressBarCustom$1.class
 whatsender\application\bot\config\logs\MessageLogs.class
 whatsender\application\bot\config\logs\Log.class
+whatsender\application\helpers\BannerType.class
 whatsender\application\swing\PopUpMenu$3.class
-whatsender\application\bot\config\helpers\FormatterHelper.class
 whatsender\application\filechooser\win32\Shell32.class
 whatsender\application\component\Header.class
 whatsender\application\filechooser\WindowsFileChooser.class
@@ -67,6 +69,7 @@ whatsender\application\filechooser\Mode.class
 whatsender\application\bot\config\logs\ErrorLogs.class
 whatsender\application\forms\MainForm.class
 whatsender\application\forms\FormHome.class
+whatsender\application\interfaces\MessageInterface.class
 whatsender\application\swing\ImageAvatar.class
 whatsender\application\entities\Message.class
 whatsender\application\forms\SendMessageForm$4.class
@@ -74,17 +77,19 @@ whatsender\application\swing\shadow\ShadowRenderer.class
 whatsender\application\forms\SendMessageForm$1.class
 whatsender\application\filechooser\win32\Comdlg32.class
 whatsender\application\filechooser\win32\Ole32.class
+whatsender\application\helpers\LocaleHelper.class
+whatsender\application\helpers\FormatterHelper.class
 whatsender\application\swing\effect\RippleEffect$Effect$1.class
 whatsender\application\swing\input\TextField$TextUI.class
 whatsender\application\main\Application$3.class
 whatsender\application\swing\scrollbar\ScrollBarCustom.class
+whatsender\application\helpers\MessageBuilder.class
 whatsender\application\swing\effect\RippleEffect$1.class
 whatsender\application\forms\SendMessageForm$3.class
 whatsender\application\forms\SendMessageForm$2.class
 whatsender\application\swing\shadow\GraphicsUtilities.class
 whatsender\application\event\EventMenuSelected.class
 whatsender\application\swing\MenuAnimation.class
-whatsender\application\bot\config\helpers\MessageHelper.class
 whatsender\application\model\ModelCard.class
 whatsender\application\main\Application$2.class
 whatsender\application\swing\input\TextArea$TextAreaUI.class
@@ -96,5 +101,3 @@ whatsender\application\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 whatsender\application\bot\config\boot\FileConfig.class
 whatsender\application\forms\LogsForm.class
 whatsender\application\bot\config\boot\MessageInterface.class
-whatsender\application\bot\config\helpers\LocaleHelper.class
-whatsender\application\helpers\MessageInterface.class

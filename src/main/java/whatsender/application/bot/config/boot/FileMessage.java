@@ -1,6 +1,6 @@
 package whatsender.application.bot.config.boot;
 
-import static whatsender.application.bot.config.helpers.MessageHelper.DEFAULT_MESSAGE;
+import static whatsender.application.helpers.MessageBuilder.DEFAULT_MESSAGE;
 import whatsender.application.bot.config.logs.SystemLog;
 
 import java.io.BufferedReader;

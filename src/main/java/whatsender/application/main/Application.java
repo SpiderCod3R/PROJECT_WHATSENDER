@@ -146,7 +146,8 @@ public class Application extends javax.swing.JFrame {
         // INICIALIZANDO FONTES DE ICONES DO GOOGLE
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         // Carregando a tela inicial do APP
-        mainForm.showForm(new FormHome());
+        //mainForm.showForm(new FormHome());
+        mainForm.showForm(new SendMessageForm(mainForm));
     }
 
     @SuppressWarnings("unchecked")

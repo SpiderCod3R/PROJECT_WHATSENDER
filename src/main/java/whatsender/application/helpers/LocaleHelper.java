@@ -1,9 +1,9 @@
-package whatsender.application.bot.config.helpers;
+package whatsender.application.helpers;
 
 
 public abstract class LocaleHelper {
-    public static String COMPANY_DATA_MISSING = "Dados da Empresa não preenchidos.";
-    public static String COMPANY_DATA_CHANGED = "Dados da Empresa alterados.";
+    public static String CLIENT_DATA_MISSING = "Dados do Cliente devem ser preenchidos.";
+    public static String CLIENT_DATA_CHANGED = "Dados do Cliente alterados com sucesso.";
     public static String WHATSAPP_NUMBER_MISSING = "Número do Whatsapp deve ser preenchido.";
     public static String BODY_MESSAGE_MISSING = "Mensagem deve ser preenchida.";
     public static String MESSAGE_DATA_INFO = "Todos os campos devem ser revisados.";
