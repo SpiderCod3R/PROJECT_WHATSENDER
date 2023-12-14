@@ -69,6 +69,7 @@ whatsender\application\forms\MainForm.class
 whatsender\application\forms\FormHome.class
 whatsender\application\swing\ImageAvatar.class
 whatsender\application\entities\Message.class
+whatsender\application\forms\SendMessageForm$4.class
 whatsender\application\swing\shadow\ShadowRenderer.class
 whatsender\application\forms\SendMessageForm$1.class
 whatsender\application\filechooser\win32\Comdlg32.class

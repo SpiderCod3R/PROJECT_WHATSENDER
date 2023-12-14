@@ -4,9 +4,6 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
 import net.miginfocom.swing.MigLayout;
@@ -50,8 +47,8 @@ public class Application extends javax.swing.JFrame {
         header = new Header();
         mainForm = new MainForm();
         
-        WhatsAppDriver whatsapp = new WhatsAppDriver(Browser.CHROME);
-        whatsapp.open();
+        //WhatsAppDriver whatsapp = new WhatsAppDriver(Browser.CHROME);
+        //whatsapp.open();
         
         menu.addEvent(new EventMenuSelected() {
             @Override
@@ -67,7 +64,7 @@ public class Application extends javax.swing.JFrame {
                 switch (menuIndex) {
                     case 1:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new LogsForm());
+                            mainForm.showForm(new SendMessageForm(mainForm));
                         }
                         break;
                     case 2:
@@ -77,12 +74,12 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 3:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new SendMessageForm());
+                            mainForm.showForm(new LogsForm());
                         }
                         break;
                     case 4:
                         if(subMenuIndex==-1){
-                            whatsapp.quit();
+                            //whatsapp.quit();
                             System.exit(0);
                         }
                         break;
@@ -204,6 +201,19 @@ public class Application extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    public void backForm(Component component, Integer indexMenu, Integer oldForm) {
+       mainForm = new MainForm();
+        if( (component == null)){
+            mainForm.showForm(new FormHome());
+            //cardMenu1.selectMenu(indexMenu, oldForm);
+        } else {
+            mainForm.showForm(component);
+            //cardMenu1.selectMenu(indexMenu, oldForm);   
+        }
+        
+        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -18,7 +18,7 @@ public class LogsForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("<< Send Message Form >>");
+        jLabel1.setText("<< Logs Message Form >>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -27,7 +27,7 @@ public class LogsForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(jLabel1)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

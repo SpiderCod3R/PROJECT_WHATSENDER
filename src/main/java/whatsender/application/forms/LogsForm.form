@@ -19,7 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="108" max="32767" attributes="0"/>
+              <EmptySpace pref="111" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,7 +39,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;&lt; Send Message Form &gt;&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;&lt; Logs Message Form &gt;&gt;"/>
       </Properties>
     </Component>
   </SubComponents>
