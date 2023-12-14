@@ -12,11 +12,11 @@ public enum BannerType {
     
     private String value;
 
-    private BannerType(String value) {
+    BannerType(String value) {
         this.value = value;
     }
     
     public String getValue(){
-        return this.getValue();
+        return value;
     }
 }

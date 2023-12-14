@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,33 +34,40 @@ public class SendMessageForm extends javax.swing.JPanel {
     private Message message;
     private Application app;
     private MainForm mainForm;
+    private Boolean messageChanged = false;
     
     List<Contact> lstContacts = new ArrayList<>();
     
-    private void setBannerMessage(String message, BannerType typeMessage){
+    private void setBannerMessage(String message, BannerType bannerType){
         if(!pnBannerMessage.isVisible()){
             pnBannerMessage.setVisible(true);
         }
         
-        if(typeMessage.getValue() == "info"){
-            pnBannerMessage.setBackground(new Color(50,156,237));
-        }
-        
-        if(typeMessage.getValue() == "sucesso"){
-            pnBannerMessage.setBackground(new Color(141,245,208));
-        }
-        
-        if(typeMessage.getValue() == "erro"){
-            pnBannerMessage.setBackground(new Color(245,73,85));
-        }
-        
         lblBannerMessage.setText(message);
+        
+        if(bannerType.getValue() == "info"){
+            pnBannerMessage.setBackground(new Color(60,136,162));
+            lblBannerMessage.setForeground(Color.WHITE);
+        }
+        
+        if(bannerType.getValue() == "sucesso"){
+            pnBannerMessage.setBackground(new Color(141,245,208));
+            lblBannerMessage.setForeground(Color.BLACK);
+        }
+        
+        if(bannerType.getValue() == "erro"){
+            pnBannerMessage.setBackground(new Color(245,73,85));
+            lblBannerMessage.setForeground(Color.WHITE);
+        }
+        
+        if(bannerType.getValue() == "aviso"){
+            pnBannerMessage.setBackground(new Color(237,226,38,93));
+            lblBannerMessage.setForeground(new Color(184,144,70));
+        }
     }
     
     private void closeBannerMessage(){
-        if(pnBannerMessage.isVisible()){
-            pnBannerMessage.setVisible(false);
-        }
+        pnBannerMessage.setVisible(false);
     }
     
     public SendMessageForm(MainForm mainForm) {
@@ -71,10 +79,8 @@ public class SendMessageForm extends javax.swing.JPanel {
         
         mainForm = mainForm;
         
-        rbSingleContact.setSelected(true);
-        inputSingleContact.setVisible(true);
-        inputMultiContacts.setVisible(false);
-        btnInputSearch.setVisible(false);
+        pnContactsList.setVisible(false);
+        btnSendMessage.setVisible(false);
         pnBannerMessage.setVisible(false);
         
         /*
@@ -94,7 +100,9 @@ public class SendMessageForm extends javax.swing.JPanel {
         FINAL DA TRANSAÇÃO PARA LOCALIZAR ITENS OBRIGATORIOS
         */
         
-        if(client==null) {
+        if(client==null) {        
+            setBannerMessage(LocaleHelper.CLIENT_DATA, BannerType.WARNING);
+            
             pnClientData.setVisible(false);
             pnClientForm.setVisible(true);
              
@@ -105,13 +113,21 @@ public class SendMessageForm extends javax.swing.JPanel {
             pnClientData.setVisible(true);
             pnClientForm.setVisible(false);
             loadClientData(em);
+            
+            rbSingleContact.setSelected(true);
+            rbMultiContacts.setSelected(false);
+            
+            btnInputSearch.setVisible(false);
+            inputMultiContacts.setVisible(false);
+            
+            pnContactsList.setVisible(true);
+            btnSendMessage.setVisible(true);
         }
         
         //LOCALIZAR A MENSAGEM PADRÃO NO DATABASE
         if (message==null){
             em.getTransaction().begin();
             messageBuilder = new MessageBuilder();
-            System.out.println("Mensagem \n" + messageBuilder.loadDefaultMessage() );
             Message new_message = new Message(null, messageBuilder.loadDefaultMessage());
             em.persist(new_message);
             em.getTransaction().commit();
@@ -131,7 +147,8 @@ public class SendMessageForm extends javax.swing.JPanel {
         
         inputContactName.setText("Alexandre"); 
         inputSingleContact.setText("(22)999999999");
-        inputDate.setText("12/12/2023");
+        inputDate.setText("14/12/2023");
+        inputDoctor.setText("Arthuro");
         inputHora.setText("15:30");
     }
 
@@ -164,9 +181,9 @@ public class SendMessageForm extends javax.swing.JPanel {
         lblDoctor = new javax.swing.JLabel();
         inputDoctor = new whatsender.application.swing.input.TextField();
         pnMessages = new javax.swing.JPanel();
-        swingCustomButton1 = new whatsender.application.swing.custom_button.SwingCustomButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputMessageArea = new whatsender.application.swing.input.TextArea();
+        btnSendMessage = new whatsender.application.swing.custom_button.SwingCustomButton();
         pnClientForm = new javax.swing.JPanel();
         lblCompanyName1 = new javax.swing.JLabel();
         lblCompanyPhone1 = new javax.swing.JLabel();
@@ -310,24 +327,19 @@ public class SendMessageForm extends javax.swing.JPanel {
                         .addComponent(inputMultiContacts, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
                     .addGroup(pnContactsListLayout.createSequentialGroup()
                         .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnContactsListLayout.createSequentialGroup()
-                                .addComponent(lblContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pnContactsListLayout.createSequentialGroup()
                                 .addComponent(inputSingleContact, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputContactName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnContactsListLayout.createSequentialGroup()
-                                .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblContactname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnContactsListLayout.createSequentialGroup()
-                                            .addComponent(rbSingleContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(68, 68, 68)
-                                            .addComponent(rbMultiContacts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(btnAddToMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(122, 122, 122)))
+                                .addComponent(inputContactName, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblContactname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnContactsListLayout.createSequentialGroup()
+                                        .addComponent(rbSingleContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(68, 68, 68)
+                                        .addComponent(rbMultiContacts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnAddToMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(9, 9, 9))
                     .addGroup(pnContactsListLayout.createSequentialGroup()
                         .addGroup(pnContactsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,29 +392,28 @@ public class SendMessageForm extends javax.swing.JPanel {
 
         pnMessages.setBackground(new java.awt.Color(217, 227, 243));
 
-        swingCustomButton1.setBackground(new java.awt.Color(17, 186, 140));
-        swingCustomButton1.setForeground(new java.awt.Color(250, 250, 250));
-        swingCustomButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/send.png"))); // NOI18N
-        swingCustomButton1.setText("Enviar mensagem");
-        swingCustomButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
         inputMessageArea.setColumns(20);
         inputMessageArea.setLineWrap(true);
         inputMessageArea.setRows(5);
         inputMessageArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(inputMessageArea);
 
+        btnSendMessage.setBackground(new java.awt.Color(1, 155, 155));
+        btnSendMessage.setForeground(new java.awt.Color(228, 255, 254));
+        btnSendMessage.setText("Enviar Mensagem");
+        btnSendMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout pnMessagesLayout = new javax.swing.GroupLayout(pnMessages);
         pnMessages.setLayout(pnMessagesLayout);
         pnMessagesLayout.setHorizontalGroup(
             pnMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMessagesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(swingCustomButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3))
-            .addGroup(pnMessagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(pnMessagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+                    .addGroup(pnMessagesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSendMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnMessagesLayout.setVerticalGroup(
@@ -411,7 +422,7 @@ public class SendMessageForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(swingCustomButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSendMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -572,7 +583,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         btnAddToMessage.setVisible(true);
         
         lblDoctor.setVisible(true);
-        inputDoctor.setVisible(true);
+        inputDoctor.setVisible(true);    
     }//GEN-LAST:event_rbSingleContactActionPerformed
 
     private void rbMultiContactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMultiContactsActionPerformed
@@ -593,6 +604,8 @@ public class SendMessageForm extends javax.swing.JPanel {
         
         lblDoctor.setVisible(false);
         inputDoctor.setVisible(false);
+        
+        inputMessageArea.setText(message.getBodyMessage()); 
     }//GEN-LAST:event_rbMultiContactsActionPerformed
 
     private void btnInputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputSearchActionPerformed
@@ -630,25 +643,27 @@ public class SendMessageForm extends javax.swing.JPanel {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
             EntityManager em = emf.createEntityManager();
 
-            setBannerMessage("Aguarde Dados do Cliente sendo salvos.", BannerType.INFO);
-            
             em.getTransaction().begin();
             Client client = new Client(null, getInputClientName(), getInputClientPhone(), getInputClientWhatsApp());
             em.persist(client);
             em.getTransaction().commit();
             setBannerMessage("Dados do Cliente Salvos com Sucesso", BannerType.SUCCESS);
             
-            try {
-                TimeUnit.SECONDS.sleep(5);
-                closeBannerMessage();
-                pnClientData.setVisible(true);
-                pnClientForm.setVisible(false);
-                
-                loadClientData(em);
-                loadMessageWithClientData(em);
-            } catch (InterruptedException e) {
-                    e.printStackTrace();
-            }
+            loadClientData(em);
+            loadMessageWithClientData(em);
+            
+            pnClientData.setVisible(true);
+            pnClientForm.setVisible(false);
+            
+            rbSingleContact.setSelected(true);
+            rbMultiContacts.setSelected(false);
+            
+            btnInputSearch.setVisible(false);
+            inputMultiContacts.setVisible(false);
+            
+            pnContactsList.setVisible(true);
+            btnSendMessage.setVisible(true);
+            
             em.close();
             emf.close();
         }
@@ -665,19 +680,40 @@ public class SendMessageForm extends javax.swing.JPanel {
             inputDate.getText(),
             inputHora.getText() );
         
-        Appointment appointment = new Appointment(contact, inputDate.getText(), inputHora.getText(), inputDoctor.getText());
-        String messageReloaded = messageBuilder.AddContactToMessage(message, appointment);
+        Appointment appointment = new Appointment(
+                contact, 
+                inputDate.getText(), 
+                inputHora.getText(), 
+                inputDoctor.getText());
         
-        System.out.println("Message \n" + messageReloaded);
-        inputMessageArea.setText(messageReloaded);
+        String messageReloaded;
+        messageChanged = true;
+        try {
+            messageReloaded = messageBuilder.AddContactToMessage(message, appointment);
+            setBannerMessage(LocaleHelper.CLIENT_DATA_ADDED_TO_MESSAGE, BannerType.INFO);
+            inputMessageArea.setText(messageReloaded);  
+        } catch (ParseException ex) {
+            Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddToMessageActionPerformed
 
     public void loadMessageWithClientData(EntityManager manager){
         manager.getTransaction().begin();
         Client client  = manager.find(Client.class, 1);
+        
+        if (messageChanged){
+            message = new Message();
+            message.setBodyMessage(inputMessageArea.getText());
+        }else{
+            message = manager.find(Message.class, 1);
+        }
+        
         manager.getTransaction().commit();
+        
+        System.out.println(message.getBodyMessage());
+        
         messageBuilder = new MessageBuilder();
-        inputMessageArea.setText(messageBuilder.addClientDataToBodyMessage(client));
+        inputMessageArea.setText(messageBuilder.addClientDataToBodyMessage(message.getBodyMessage(), client));
     }
     
     public void loadClientData(EntityManager em){
@@ -706,6 +742,7 @@ public class SendMessageForm extends javax.swing.JPanel {
     private whatsender.application.swing.custom_button.SwingCustomButton btnAddToMessage;
     private whatsender.application.swing.custom_button.SwingCustomButton btnInputSearch;
     private whatsender.application.swing.custom_button.SwingCustomButton btnSaveClient;
+    private whatsender.application.swing.custom_button.SwingCustomButton btnSendMessage;
     private whatsender.application.swing.input.TextField inputClientName;
     private whatsender.application.swing.input.FormatedTextField inputClientPhone;
     private whatsender.application.swing.input.FormatedTextField inputClientWhatsApp;
@@ -740,6 +777,6 @@ public class SendMessageForm extends javax.swing.JPanel {
     private javax.swing.JPanel pnMessages;
     private whatsender.application.swing.JRadioButtonCustom rbMultiContacts;
     private whatsender.application.swing.JRadioButtonCustom rbSingleContact;
-    private whatsender.application.swing.custom_button.SwingCustomButton swingCustomButton1;
     // End of variables declaration//GEN-END:variables
+
 }

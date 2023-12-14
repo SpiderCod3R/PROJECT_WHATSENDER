@@ -172,7 +172,7 @@ public class Application extends javax.swing.JFrame {
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
+            .addGap(0, 905, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");

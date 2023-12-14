@@ -1,7 +1,9 @@
 package whatsender.application.interfaces;
 
+import java.text.ParseException;
+import whatsender.application.entities.Appointment;
 import whatsender.application.entities.Client;
-import whatsender.application.entities.Contact;
+import whatsender.application.entities.Message;
 
 /**
  *
@@ -10,7 +12,7 @@ import whatsender.application.entities.Contact;
 public interface MessageInterface {
     public String loadDefaultMessage();
     
-    public String prepareMessage(Contact contact, Client client);
+    public String AddContactToMessage(Message message, Appointment appointment) throws ParseException;
     
-    public String addClientDataToBodyMessage(Client clientData);
+    public String addClientDataToBodyMessage(String message, Client clientData);
 }
