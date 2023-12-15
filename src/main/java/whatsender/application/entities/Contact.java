@@ -15,19 +15,19 @@ public class Contact {
     
     @CsvBindByName
     @CsvBindByPosition(position = 2)
-    private String appointment_date;
+    private String data;
     
     @CsvBindByName
     @CsvBindByPosition(position = 3)
-    private String appointment_hour;
+    private String hour;
     
     public Contact() {}
 
-    public Contact(String name, String whatsNumber, String appointment_date, String appointment_hour) {
+    public Contact(String name, String whatsNumber, String data, String hour) {
         this.name = name;
         this.whatsNumber = whatsNumber;
-        this.appointment_date = appointment_date;
-        this.appointment_hour = appointment_hour;
+        this.data = data;
+        this.hour = hour;
     }
 
     public String getName() {
@@ -46,30 +46,28 @@ public class Contact {
         this.whatsNumber = whatsNumber;
     }
 
-    public String getAppointment_date() {
-        return appointment_date;
+    public String getData() {
+        return data;
     }
 
-    public void setAppointment_date(String appointment_date) {
-        this.appointment_date = appointment_date;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getAppointment_hour() {
-        return appointment_hour;
+    public String getHour() {
+        return hour;
     }
 
-    public void setAppointment_hour(String appointment_hour) {
-        this.appointment_hour = appointment_hour;
-    }
-
-    public Boolean isNull(){
-        return (("".equals(getName())) || ("".equals(getWhatsNumber())));
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 
     @Override
     public String toString() {
-        return "Contact{" + "name=" + getName() + ", whatsNumber=" + getWhatsNumber() + ", service_date=" + getAppointment_date() + ", service_hour=" + getAppointment_hour() + '}';
+        return "Contact{" + "name=" + name + ", whatsNumber=" + whatsNumber + ", data=" + data + ", hour=" + hour + '}';
     }
+    
+    
     
     
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package whatsender.application.bot.config.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -107,6 +103,7 @@ public class WhatsAppDriver {
 
         searchBar.click();
         searchBar.sendKeys(Keys.ENTER);
+        searchBar.sendKeys("");
             
         try {
             TimeUnit.SECONDS.sleep(3);
@@ -154,27 +151,39 @@ public class WhatsAppDriver {
         try {
             Robot robot = new Robot();
 
-            WebElement input = driver.findElement(By.xpath("//div[contains(@title, \"Digite uma mensagem\")]"));
-            input.click();
-
-            StringSelection stringSelection = new StringSelection(msg);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, stringSelection);
-
-            TimeUnit.SECONDS.sleep(3);
+            WebElement inputMessage = driver.findElement(By.xpath("//div[contains(@title, \"Digite uma mensagem\")]"));
+            inputMessage.clear();
             
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
+            inputMessage.click();
 
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
+//            StringSelection stringSelection = new StringSelection(msg);
+//            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//            clipboard.setContents(stringSelection, stringSelection);
+//
+//            TimeUnit.SECONDS.sleep(3);
+//            
+//            robot.keyPress(KeyEvent.VK_CONTROL);
+//            robot.keyPress(KeyEvent.VK_V);
+//            robot.keyRelease(KeyEvent.VK_V);
+//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//
+//            robot.keyPress(KeyEvent.VK_ENTER);
+//            robot.keyRelease(KeyEvent.VK_ENTER);
+//            
+//            TimeUnit.SECONDS.sleep(3);
             
-            TimeUnit.SECONDS.sleep(3);
+            inputMessage.sendKeys(msg);
+
+            try {
+                    TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                    e.printStackTrace();
+            }
+
+            inputMessage.click();
+            inputMessage.sendKeys(Keys.ENTER);
+            inputMessage.sendKeys("");
         } catch (AWTException e) {
-                e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

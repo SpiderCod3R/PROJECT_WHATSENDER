@@ -13,14 +13,20 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import whatsender.application.bot.config.utilities.WhatsAppDriver;
 import whatsender.application.entities.Appointment;
 import whatsender.application.helpers.LocaleHelper;
 import whatsender.application.entities.Client;
 import whatsender.application.entities.Contact;
 import whatsender.application.entities.Message;
+import whatsender.application.entities.LogMessage;
 import whatsender.application.filechooser.JnaFileChooser;
 import whatsender.application.helpers.BannerType;
+import whatsender.application.helpers.FormatterHelper;
+import whatsender.application.helpers.LogType;
 import whatsender.application.helpers.MessageBuilder;
+import whatsender.application.helpers.MessageType;
 import whatsender.application.main.Application;
 
 
@@ -33,8 +39,14 @@ public class SendMessageForm extends javax.swing.JPanel {
     private MessageBuilder messageBuilder;
     private Message message;
     private Application app;
-    private MainForm mainForm;
     private Boolean messageChanged = false;
+    private Contact contact;
+    private Client client;
+    private Appointment appointment;
+    private WhatsAppDriver whatsappDriver;
+    
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
+    private EntityManager em;
     
     List<Contact> lstContacts = new ArrayList<>();
     
@@ -70,7 +82,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         pnBannerMessage.setVisible(false);
     }
     
-    public SendMessageForm(MainForm mainForm) {
+    public SendMessageForm(MainForm mainForm, WhatsAppDriver whatsappDriver) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
         EntityManager em = emf.createEntityManager();
         
@@ -82,6 +94,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         pnContactsList.setVisible(false);
         btnSendMessage.setVisible(false);
         pnBannerMessage.setVisible(false);
+        inputMessageArea.setEnabled(false);
         
         /*
         INICIANDO TRANSAÇÃO PARA LOCALIZAR ITENS OBRIGATORIOS
@@ -92,7 +105,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         message = em.find(Message.class, 1);
         
         //LOCALIZAR O CLIENTE LOCAL NO DATABASE
-        Client client  = em.find(Client.class, 1);
+        client = em.find(Client.class, 1);
         
         em.getTransaction().commit();
         
@@ -121,7 +134,12 @@ public class SendMessageForm extends javax.swing.JPanel {
             inputMultiContacts.setVisible(false);
             
             pnContactsList.setVisible(true);
-            btnSendMessage.setVisible(true);
+            
+            if(rbSingleContact.isSelected()){
+                if(contact != null){
+                    btnSendMessage.setVisible(true);
+                }
+            }
         }
         
         //LOCALIZAR A MENSAGEM PADRÃO NO DATABASE
@@ -146,10 +164,12 @@ public class SendMessageForm extends javax.swing.JPanel {
         emf.close();
         
         inputContactName.setText("Alexandre"); 
-        inputSingleContact.setText("(22)999999999");
+        inputSingleContact.setText("(22)996072173");
         inputDate.setText("14/12/2023");
-        inputDoctor.setText("Arthuro");
+        inputDoctor.setText("Luciano Borgia");
         inputHora.setText("15:30");
+        
+        this.whatsappDriver = whatsappDriver;
     }
 
     @SuppressWarnings("unchecked")
@@ -402,6 +422,11 @@ public class SendMessageForm extends javax.swing.JPanel {
         btnSendMessage.setForeground(new java.awt.Color(228, 255, 254));
         btnSendMessage.setText("Enviar Mensagem");
         btnSendMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSendMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendMessageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnMessagesLayout = new javax.swing.GroupLayout(pnMessages);
         pnMessages.setLayout(pnMessagesLayout);
@@ -583,7 +608,14 @@ public class SendMessageForm extends javax.swing.JPanel {
         btnAddToMessage.setVisible(true);
         
         lblDoctor.setVisible(true);
-        inputDoctor.setVisible(true);    
+        inputDoctor.setVisible(true); 
+        
+        if(contact != null){
+            btnSendMessage.setVisible(true);
+        }else{
+            btnSendMessage.setVisible(false);
+        }
+        
     }//GEN-LAST:event_rbSingleContactActionPerformed
 
     private void rbMultiContactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMultiContactsActionPerformed
@@ -605,7 +637,15 @@ public class SendMessageForm extends javax.swing.JPanel {
         lblDoctor.setVisible(false);
         inputDoctor.setVisible(false);
         
-        inputMessageArea.setText(message.getBodyMessage()); 
+        messageBuilder = new MessageBuilder();
+        
+        inputMessageArea.setText(messageBuilder.addClientDataToBodyMessage(message.getBodyMessage(), client)); 
+        
+        if(lstContacts.size() != 0){
+            btnSendMessage.setVisible(true);
+        }else{
+            btnSendMessage.setVisible(false);
+        }
     }//GEN-LAST:event_rbMultiContactsActionPerformed
 
     private void btnInputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputSearchActionPerformed
@@ -633,6 +673,12 @@ public class SendMessageForm extends javax.swing.JPanel {
 
             lstContacts.forEach(System.out::println);
         }
+        
+        if(lstContacts.size() != 0){
+            btnSendMessage.setVisible(true);
+        }else{
+            btnSendMessage.setVisible(false);
+        }
     }//GEN-LAST:event_btnInputSearchActionPerformed
 
     private void btnSaveClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveClientActionPerformed
@@ -644,6 +690,7 @@ public class SendMessageForm extends javax.swing.JPanel {
             EntityManager em = emf.createEntityManager();
 
             em.getTransaction().begin();
+            
             Client client = new Client(null, getInputClientName(), getInputClientPhone(), getInputClientWhatsApp());
             em.persist(client);
             em.getTransaction().commit();
@@ -662,8 +709,13 @@ public class SendMessageForm extends javax.swing.JPanel {
             inputMultiContacts.setVisible(false);
             
             pnContactsList.setVisible(true);
-            btnSendMessage.setVisible(true);
             
+            if(contact != null){
+                btnSendMessage.setVisible(true);
+            }else{
+                btnSendMessage.setVisible(false);
+            }
+                
             em.close();
             emf.close();
         }
@@ -671,47 +723,84 @@ public class SendMessageForm extends javax.swing.JPanel {
 
     private void btnAddToMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToMessageActionPerformed
         messageBuilder = new MessageBuilder();
-        Message message = new Message();
-        message.setBodyMessage(inputMessageArea.getText());
         
-        Contact contact = new Contact(
+        contact = new Contact(
             inputContactName.getText(), 
             inputSingleContact.getText(),
             inputDate.getText(),
             inputHora.getText() );
         
-        Appointment appointment = new Appointment(
-                contact, 
-                inputDate.getText(), 
-                inputHora.getText(), 
-                inputDoctor.getText());
+        appointment = new Appointment(
+            contact.getName(), 
+            contact.getWhatsNumber(), 
+            contact.getData(), 
+            contact.getHour(), 
+            inputDoctor.getText());
         
         String messageReloaded;
         messageChanged = true;
+        
         try {
-            messageReloaded = messageBuilder.AddContactToMessage(message, appointment);
+            messageReloaded = messageBuilder.AddContactToMessage(inputMessageArea.getText(), appointment);
             setBannerMessage(LocaleHelper.CLIENT_DATA_ADDED_TO_MESSAGE, BannerType.INFO);
             inputMessageArea.setText(messageReloaded);  
+            btnSendMessage.setVisible(true);
         } catch (ParseException ex) {
             Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        btnAddToMessage.setVisible(false);
     }//GEN-LAST:event_btnAddToMessageActionPerformed
+
+    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
+        if(!emf.isOpen()){
+            emf = Persistence.createEntityManagerFactory("whatsender-jpa");
+            em = emf.createEntityManager();
+        }else{
+            em = emf.createEntityManager();
+        }
+        
+        message = new Message();
+        message.setBodyMessage(inputMessageArea.getText().replace("\n", " ").replace("\r", " "));
+        
+        if(rbSingleContact.isSelected()){
+            if(appointment.getId() == null){
+                em.getTransaction().begin();
+                em.persist(appointment);
+                em.getTransaction().commit();
+            }else{
+                appointment = em.find(Appointment.class, appointment.getId());
+            }
+            
+            LogMessage messageLog = new LogMessage(
+                    null, 
+                    message.getBodyMessage(), 
+                    appointment, 
+                    LogType.SUCCESS, 
+                    MessageType.NORMAL );
+            
+            em.getTransaction().begin();
+            em.persist(messageLog);
+            em.getTransaction().commit();
+            
+            whatsappDriver.waitForConnection();
+            whatsappDriver.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(appointment.getContactPhone()));
+            whatsappDriver.sendMsg(message.getBodyMessage());
+            
+            setBannerMessage(LocaleHelper.MESSAGE_SENDED, BannerType.SUCCESS);
+        }
+
+        em.close();
+        emf.close();
+         btnAddToMessage.setVisible(true);
+    }//GEN-LAST:event_btnSendMessageActionPerformed
 
     public void loadMessageWithClientData(EntityManager manager){
         manager.getTransaction().begin();
-        Client client  = manager.find(Client.class, 1);
-        
-        if (messageChanged){
-            message = new Message();
-            message.setBodyMessage(inputMessageArea.getText());
-        }else{
-            message = manager.find(Message.class, 1);
-        }
-        
+        client  = manager.find(Client.class, 1);  
+        message = manager.find(Message.class, 1);
         manager.getTransaction().commit();
-        
-        System.out.println(message.getBodyMessage());
-        
+
         messageBuilder = new MessageBuilder();
         inputMessageArea.setText(messageBuilder.addClientDataToBodyMessage(message.getBodyMessage(), client));
     }

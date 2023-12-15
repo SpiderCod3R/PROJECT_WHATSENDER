@@ -6,13 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author ALEXANDRE
  */
 @Entity
+@Table(name = Message.TABLE_NAME)
 public class Message implements Serializable {
+    public static final String TABLE_NAME= "tb_mensagem";
     private static final long serialVersionUID = 1L;
     
     @Id

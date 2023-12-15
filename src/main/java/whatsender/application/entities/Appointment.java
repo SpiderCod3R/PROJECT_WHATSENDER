@@ -1,39 +1,63 @@
 package whatsender.application.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author ALEXANDRE
  */
-public class Appointment {
-    private Contact contact;
+@Entity
+@Table(name = Appointment.TABLE_NAME)
+public class Appointment implements Serializable {
+    public static final String TABLE_NAME= "tb_consultas";
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
+    
+    private String contactName;
+    private String contactPhone;
     
     private String data;
     private String hora;
     private String doctor;
 
-    public Appointment(Contact contact, String data, String hora, String doctor) {
-        this.contact = contact;
+    public Appointment(String contactName, String contactPhone, String data, String hora, String doctor) {
+        this.contactName = contactName;
+        this.contactPhone = contactPhone;
         this.data = data;
         this.hora = hora;
         this.doctor = doctor;
     }
 
-    public Contact getContact() {
-        return contact;
+    public Appointment() {
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public Integer getId() {
+        return id;
     }
     
-    public String getDoctor() {
-        return doctor;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public String getData() {
@@ -52,13 +76,23 @@ public class Appointment {
         this.hora = hora;
     }
 
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.contact);
-        hash = 61 * hash + Objects.hashCode(this.data);
-        hash = 61 * hash + Objects.hashCode(this.hora);
-        hash = 61 * hash + Objects.hashCode(this.doctor);
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.contactName);
+        hash = 13 * hash + Objects.hashCode(this.contactPhone);
+        hash = 13 * hash + Objects.hashCode(this.data);
+        hash = 13 * hash + Objects.hashCode(this.hora);
+        hash = 13 * hash + Objects.hashCode(this.doctor);
         return hash;
     }
 
@@ -74,6 +108,12 @@ public class Appointment {
             return false;
         }
         final Appointment other = (Appointment) obj;
+        if (!Objects.equals(this.contactName, other.contactName)) {
+            return false;
+        }
+        if (!Objects.equals(this.contactPhone, other.contactPhone)) {
+            return false;
+        }
         if (!Objects.equals(this.data, other.data)) {
             return false;
         }
@@ -83,10 +123,8 @@ public class Appointment {
         if (!Objects.equals(this.doctor, other.doctor)) {
             return false;
         }
-        return Objects.equals(this.contact, other.contact);
+        return Objects.equals(this.id, other.id);
     }
 
-    
-    
     
 }

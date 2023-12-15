@@ -25,7 +25,7 @@ public class GNS_PROJECT_WHATSENDER{
         whatsapp.open();
         whatsapp.waitForConnection();
         
-        whatsapp.abrir_conversa_com_contato("5522998243838");
+        whatsapp.abrir_conversa_com_contato("5522996072173");
 //        whatsapp.getCurrentConvImg();
 //        whatsapp.getCurrentConvName();
 //        whatsapp.getVisableMessages();

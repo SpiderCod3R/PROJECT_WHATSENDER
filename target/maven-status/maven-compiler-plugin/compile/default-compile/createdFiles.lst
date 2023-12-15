@@ -10,6 +10,7 @@ whatsender\application\filechooser\win32\Shell32$BrowseInfo.class
 whatsender\application\swing\Button$2.class
 whatsender\application\swing\PanelPopUp.class
 whatsender\application\forms\SendMessageForm$5.class
+whatsender\application\main\ConfirmDialog$1.class
 whatsender\application\event\EventShowPopUpMenu.class
 whatsender\application\filechooser\Action.class
 whatsender\application\main\Application$1.class
@@ -25,15 +26,18 @@ whatsender\application\swing\PopUpMenu$3.class
 whatsender\application\filechooser\win32\Shell32.class
 whatsender\application\component\Header.class
 whatsender\application\filechooser\WindowsFileChooser.class
+whatsender\application\main\ConfirmDialog.class
 whatsender\application\component\Menu$1.class
 whatsender\application\swing\MenuButton.class
 whatsender\application\bot\config\boot\WhatsResponse.class
 whatsender\application\entities\Contact.class
 whatsender\application\filechooser\win32\Comdlg32$OpenFileName.class
 whatsender\application\bot\config\utilities\Message.class
+whatsender\application\forms\SendMessageForm$6.class
 whatsender\application\model\ModelMenu.class
 whatsender\application\swing\input\TextField.class
 whatsender\application\swing\MenuItem$2.class
+whatsender\application\main\Application$6.class
 whatsender\application\swing\JRadioButtonCustom.class
 whatsender\application\swing\custom_button\SwingCustomButton.class
 whatsender\application\swing\MenuButton$1.class
@@ -47,6 +51,7 @@ whatsender\application\bot\test\ConnectionDB.class
 whatsender\application\component\Menu$2.class
 whatsender\application\swing\MenuItem.class
 whatsender\application\bot\config\utilities\WhatsAppDriver.class
+whatsender\application\helpers\LogType.class
 whatsender\application\swing\scrollbar\ModernScrollBarUI.class
 whatsender\application\bot\config\utilities\Browser.class
 icon\IconConstants.class
@@ -69,6 +74,7 @@ whatsender\application\filechooser\Mode.class
 whatsender\application\bot\config\logs\ErrorLogs.class
 whatsender\application\forms\MainForm.class
 whatsender\application\forms\FormHome.class
+whatsender\application\main\ConfirmDialog$2.class
 whatsender\application\interfaces\MessageInterface.class
 whatsender\application\swing\ImageAvatar.class
 whatsender\application\entities\Message.class
@@ -83,11 +89,13 @@ whatsender\application\swing\effect\RippleEffect$Effect$1.class
 whatsender\application\swing\input\TextField$TextUI.class
 whatsender\application\main\Application$3.class
 whatsender\application\swing\scrollbar\ScrollBarCustom.class
+whatsender\application\helpers\MessageType.class
 whatsender\application\helpers\MessageBuilder.class
 whatsender\application\swing\effect\RippleEffect$1.class
 whatsender\application\forms\SendMessageForm$3.class
 whatsender\application\forms\SendMessageForm$2.class
 whatsender\application\swing\shadow\GraphicsUtilities.class
+whatsender\application\entities\LogMessage.class
 whatsender\application\event\EventMenuSelected.class
 whatsender\application\swing\MenuAnimation.class
 whatsender\application\model\ModelCard.class

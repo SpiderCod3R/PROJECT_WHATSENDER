@@ -32,15 +32,16 @@ public class MessageBuilder implements MessageInterface {
     }
     
     @Override
-    public String AddContactToMessage(Message message, Appointment appointment) throws ParseException{
+    public String AddContactToMessage(String message, Appointment appointment) throws ParseException{
         String newMessage;
         SimpleDateFormat sdf = new SimpleDateFormat(datePattern, new Locale ("pt", "BR"));
         Date date= sdf.parse(appointment.getData());
         sdf.applyPattern("EEE, d MMM yyyy");  
         String dataFormatada = sdf.format(date);  
         System.out.println("Data Formatada: "+dataFormatada);  
-        newMessage = message.getBodyMessage().
-            replace("[NOME_DO_PACIENTE]", appointment.getContact().getName()).
+        
+        newMessage = message.
+            replace("[NOME_DO_PACIENTE]", appointment.getContactName()).
             replace("[DATA]", dataFormatada).
             replace("[HORA]", appointment.getHora()).
             replace("[NOME_DO_RESPONSAVEL]", appointment.getDoctor());

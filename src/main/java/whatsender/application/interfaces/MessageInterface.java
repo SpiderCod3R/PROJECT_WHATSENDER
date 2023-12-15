@@ -12,7 +12,7 @@ import whatsender.application.entities.Message;
 public interface MessageInterface {
     public String loadDefaultMessage();
     
-    public String AddContactToMessage(Message message, Appointment appointment) throws ParseException;
+    public String AddContactToMessage(String message, Appointment appointment) throws ParseException;
     
     public String addClientDataToBodyMessage(String message, Client clientData);
 }

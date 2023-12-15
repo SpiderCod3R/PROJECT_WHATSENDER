@@ -34,6 +34,7 @@ public class Application extends javax.swing.JFrame {
     private Header header;
     private MainForm mainForm;
     private Animator animator;
+    private WhatsAppDriver whatsapp;
     
     public Application() {
         initComponents();
@@ -47,24 +48,23 @@ public class Application extends javax.swing.JFrame {
         header = new Header();
         mainForm = new MainForm();
         
-        //WhatsAppDriver whatsapp = new WhatsAppDriver(Browser.CHROME);
-        //whatsapp.open();
+        whatsapp = new WhatsAppDriver(Browser.CHROME);
+        whatsapp.open();
         
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu index : " + menuIndex + " SubMenu index " + subMenuIndex);
                 
-                if(menuIndex==0){
-                    if(subMenuIndex==0){
-                        mainForm.showForm(new FormHome());
-                    }
-                }
-                
                 switch (menuIndex) {
+                    case 0:
+                        if(subMenuIndex==-1){
+                            mainForm.showForm(new FormHome());
+                        }
+                        break;
                     case 1:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new SendMessageForm(mainForm));
+                            mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
                         }
                         break;
                     case 2:
@@ -79,12 +79,10 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 4:
                         if(subMenuIndex==-1){
-                            //whatsapp.quit();
+                            whatsapp.quit();
                             System.exit(0);
                         }
                         break;
-                    default:
-                        System.out.println("Menu index : " + menuIndex + " SubMenu index " + subMenuIndex);
                 }
             }
         });
@@ -147,7 +145,7 @@ public class Application extends javax.swing.JFrame {
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         // Carregando a tela inicial do APP
         //mainForm.showForm(new FormHome());
-        mainForm.showForm(new SendMessageForm(mainForm));
+        mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
     }
 
     @SuppressWarnings("unchecked")
@@ -161,6 +159,11 @@ public class Application extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         bg.setOpaque(true);
 
@@ -200,6 +203,10 @@ public class Application extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        whatsapp.quit();
+    }//GEN-LAST:event_formWindowClosed
 
 
     public void backForm(Component component, Integer indexMenu, Integer oldForm) {
