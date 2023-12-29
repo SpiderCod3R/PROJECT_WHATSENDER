@@ -17,6 +17,7 @@ whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
 whatsender\application\main\Application$4.class
+whatsender\application\forms\FormHome$1.class
 whatsender\application\swing\input\FormatedTextField.class
 whatsender\application\swing\ProgressBarCustom$1.class
 whatsender\application\bot\config\logs\MessageLogs.class

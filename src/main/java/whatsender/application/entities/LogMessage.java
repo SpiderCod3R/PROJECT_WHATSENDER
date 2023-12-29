@@ -18,7 +18,7 @@ import whatsender.application.helpers.MessageType;
  */
 @Entity
 @Table(name = LogMessage.TABLE_NAME)
-public class LogMessage implements Serializable {
+public class LogMessage implements Serializable  {
     public static final String TABLE_NAME= "tb_log_de_mensagem";
     
     private static final long serialVersionUID = 1L;
@@ -58,6 +58,24 @@ public class LogMessage implements Serializable {
 
     public LogMessage() {
     }
+
+    public LogType getLogType() {
+        return logType;
+    }
+
+    public void setLogType(LogType logType) {
+        this.logType = logType;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
+    }
+    
+    
     
     public String getMessage() {
         return message;

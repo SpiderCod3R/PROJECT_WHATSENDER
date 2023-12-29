@@ -44,12 +44,14 @@ public class Application extends javax.swing.JFrame {
     public void __init__(){
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
-        menu = new Menu();
-        header = new Header();
-        mainForm = new MainForm();
+        
         
         whatsapp = new WhatsAppDriver(Browser.CHROME);
         whatsapp.open();
+        
+        menu = new Menu(whatsapp);
+        header = new Header();
+        mainForm = new MainForm();
         
         menu.addEvent(new EventMenuSelected() {
             @Override
@@ -74,12 +76,12 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 3:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new LogsForm());
+                           System.exit(0);
+                           // mainForm.showForm(new LogsForm());
                         }
                         break;
                     case 4:
                         if(subMenuIndex==-1){
-                            whatsapp.quit();
                             System.exit(0);
                         }
                         break;
@@ -144,8 +146,8 @@ public class Application extends javax.swing.JFrame {
         // INICIALIZANDO FONTES DE ICONES DO GOOGLE
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         // Carregando a tela inicial do APP
-        //mainForm.showForm(new FormHome());
-        mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
+        mainForm.showForm(new FormHome());
+        //mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
     }
 
     @SuppressWarnings("unchecked")

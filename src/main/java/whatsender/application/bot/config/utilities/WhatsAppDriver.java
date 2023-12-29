@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,7 +36,7 @@ public class WhatsAppDriver {
     WebDriver driver;
     Wait<WebDriver> longWait;
     Wait<WebDriver> shortWait;
-    boolean connected;
+    Boolean connected;
     
     /**
      * 
@@ -69,7 +70,7 @@ public class WhatsAppDriver {
         longWait = new WebDriverWait(driver, 30);
         shortWait = new WebDriverWait(driver, 3);
 
-        connected = false;
+        this.connected = false;
     }
 
     /**
@@ -123,15 +124,21 @@ public class WhatsAppDriver {
     public void waitForConnection() throws TimeoutException {
         try {
             longWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(@class, \"selectable-text copyable-text\")]")));
-            // TimeUnit.SECONDS.sleep(3);
-            connected = true;
+            this.connected = true;
             System.out.println("Connected.");
 
         } catch (TimeoutException t) {
-            connected = false;
-            throw t;
+            this.connected = false;
+            System.err.println("Exceção de Tempo de conexão com o WhatsApp Web");
+            //throw t;
+        } catch (NoSuchWindowException e){
+            System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
         }
 
+    }
+    
+    public Boolean is_connected(){
+        return this.connected;
     }
 
     public String getCurrentConvImg() {

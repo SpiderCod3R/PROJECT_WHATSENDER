@@ -7,20 +7,28 @@ public class Contact {
     
     @CsvBindByName
     @CsvBindByPosition(position = 0)
-    private String name;
+    private String doctor;
     
     @CsvBindByName
     @CsvBindByPosition(position = 1)
-    private String whatsNumber;
-    
-    @CsvBindByName
-    @CsvBindByPosition(position = 2)
     private String data;
     
     @CsvBindByName
-    @CsvBindByPosition(position = 3)
+    @CsvBindByPosition(position = 2)
     private String hour;
     
+    @CsvBindByName
+    @CsvBindByPosition(position = 3)
+    private String dia;
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 4)
+    private String name;
+    
+    @CsvBindByName
+    @CsvBindByPosition(position = 7)
+    private String whatsNumber;
+
     public Contact() {}
 
     public Contact(String name, String whatsNumber, String data, String hour) {
@@ -30,6 +38,16 @@ public class Contact {
         this.hour = hour;
     }
 
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    
+    
     public String getName() {
         return name;
     }

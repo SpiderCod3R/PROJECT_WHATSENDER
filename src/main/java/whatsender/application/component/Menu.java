@@ -18,6 +18,7 @@ import whatsender.application.event.EventMenu;
 import whatsender.application.event.EventMenuSelected;
 import whatsender.application.model.ModelMenu;
 import icon.IconConstants;
+import whatsender.application.bot.config.utilities.WhatsAppDriver;
 import whatsender.application.event.EventShowPopUpMenu;
 import whatsender.application.swing.MenuAnimation;
 import whatsender.application.swing.MenuItem;
@@ -41,22 +42,27 @@ public class Menu extends javax.swing.JPanel {
         return showMenu;
     }
     
-    public Menu() {
+    public Menu(WhatsAppDriver whatsapp) {
         initComponents();
         setOpaque(false);
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
         
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
-        panel.setLayout(layout);
+        panelMenu.setLayout(layout);
         TimingTargetAdapter target = new TimingTargetAdapter(){
         
         };
         
+        if(whatsapp.is_connected()) {
+            btnConnection.setBackground(new Color(121,224,201,88));
+            lblConnection.setText("Conectado");
+        }
+        
     }
     
     public void addMenu(ModelMenu menu){
-        panel.add(new MenuItem(menu, getEventMenu(), event, panel.getComponentCount()), "h 40!");
+        panelMenu.add(new MenuItem(menu, getEventMenu(), event, panelMenu.getComponentCount()), "h 40!");
     }
     
     public void addEventShowPopUpMenu(EventShowPopUpMenu eventShowPopUpMenu) {
@@ -96,7 +102,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgSendMessage)), "Enviar mensagem"));
         
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgConfig)), "Configurações", "Cliente"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgLogs)), "Logs"));
+        //addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgLogs)), "Logs"));
         
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgExit)), "Fechar"));
     }
@@ -114,7 +120,7 @@ public class Menu extends javax.swing.JPanel {
     }
     
     public void hideAllMenus(){
-        for (Component com : panel.getComponents()) {
+        for (Component com : panelMenu.getComponents()) {
             MenuItem item = (MenuItem)com;
             if(item.isOpen()){
                 new MenuAnimation(layout, com, 500).closeMenu();
@@ -128,40 +134,83 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         sp = new javax.swing.JScrollPane();
-        panel = new javax.swing.JPanel();
-        profile1 = new whatsender.application.component.Profile();
+        panelMenu = new javax.swing.JPanel();
+        bannerProfile = new whatsender.application.component.Profile();
+        panelConnection = new javax.swing.JPanel();
+        lblConnection = new javax.swing.JLabel();
+        btnConnection = new whatsender.application.swing.Button();
 
         sp.setBorder(null);
         sp.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        panel.setOpaque(false);
+        panelMenu.setOpaque(false);
 
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 298, Short.MAX_VALUE)
         );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 686, Short.MAX_VALUE)
         );
 
-        sp.setViewportView(panel);
+        sp.setViewportView(panelMenu);
+
+        panelConnection.setOpaque(false);
+
+        lblConnection.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblConnection.setForeground(new java.awt.Color(244, 244, 244));
+        lblConnection.setText("Não Conectado");
+        lblConnection.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+
+        btnConnection.setBackground(new java.awt.Color(230, 147, 147));
+        btnConnection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/wi-fi.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelConnectionLayout = new javax.swing.GroupLayout(panelConnection);
+        panelConnection.setLayout(panelConnectionLayout);
+        panelConnectionLayout.setHorizontalGroup(
+            panelConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConnectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblConnection)
+                .addGap(15, 15, 15))
+        );
+        panelConnectionLayout.setVerticalGroup(
+            panelConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConnectionLayout.createSequentialGroup()
+                .addGroup(panelConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConnectionLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblConnection))
+                    .addGroup(panelConnectionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-            .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(bannerProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(sp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(profile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bannerProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                .addComponent(panelConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,8 +227,11 @@ public class Menu extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel panel;
-    private whatsender.application.component.Profile profile1;
+    private whatsender.application.component.Profile bannerProfile;
+    private whatsender.application.swing.Button btnConnection;
+    private javax.swing.JLabel lblConnection;
+    private javax.swing.JPanel panelConnection;
+    private javax.swing.JPanel panelMenu;
     private javax.swing.JScrollPane sp;
     // End of variables declaration//GEN-END:variables
 }

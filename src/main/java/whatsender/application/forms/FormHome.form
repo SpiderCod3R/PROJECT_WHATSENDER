@@ -19,7 +19,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="cardMessageSended" min="-2" pref="270" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
@@ -27,6 +26,11 @@
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Component id="cardApplicationErrors" min="-2" pref="270" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -43,7 +47,9 @@
                   <Component id="cardMultiMessagesSended" min="-2" max="-2" attributes="0"/>
                   <Component id="cardApplicationErrors" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="445" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,5 +96,27 @@
         </Property>
       </Properties>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tblLog">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="5" rowCount="4">
+                <Column editable="true" title="Id" type="java.lang.String"/>
+                <Column editable="true" title="Data" type="java.lang.String"/>
+                <Column editable="true" title="Hora" type="java.lang.String"/>
+                <Column editable="true" title="WhatsApp" type="java.lang.String"/>
+                <Column editable="true" title="Tipo" type="java.lang.String"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

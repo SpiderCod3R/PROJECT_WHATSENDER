@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.openqa.selenium.NoSuchWindowException;
 
 import whatsender.application.bot.config.utilities.WhatsAppDriver;
 import whatsender.application.entities.Appointment;
@@ -761,33 +762,65 @@ public class SendMessageForm extends javax.swing.JPanel {
         }
         
         message = new Message();
+        messageBuilder = new MessageBuilder();
         message.setBodyMessage(inputMessageArea.getText().replace("\n", " ").replace("\r", " "));
         
         if(rbSingleContact.isSelected()){
-            if(appointment.getId() == null){
-                em.getTransaction().begin();
-                em.persist(appointment);
-                em.getTransaction().commit();
-            }else{
-                appointment = em.find(Appointment.class, appointment.getId());
-            }
-            
-            LogMessage messageLog = new LogMessage(
-                    null, 
-                    message.getBodyMessage(), 
-                    appointment, 
-                    LogType.SUCCESS, 
-                    MessageType.NORMAL );
-            
-            em.getTransaction().begin();
-            em.persist(messageLog);
-            em.getTransaction().commit();
-            
-            whatsappDriver.waitForConnection();
-            whatsappDriver.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(appointment.getContactPhone()));
-            whatsappDriver.sendMsg(message.getBodyMessage());
-            
+            try {
+                whatsappDriver.waitForConnection();
+                
+                if(whatsappDriver.is_connected()){
+                  
+                    whatsappDriver.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(appointment.getContactPhone()));
+                    whatsappDriver.sendMsg(message.getBodyMessage());
+                    
+                    if(appointment.getId() == null){
+                        em.getTransaction().begin();
+                        em.persist(appointment);
+                        em.getTransaction().commit();
+                    }else{
+                        appointment = em.find(Appointment.class, appointment.getId());
+                    }
+
+                    LogMessage messageLog = new LogMessage(
+                            null, 
+                            message.getBodyMessage(), 
+                            appointment, 
+                            LogType.SUCCESS, 
+                            MessageType.NORMAL );
+
+                    em.getTransaction().begin();
+                    em.persist(messageLog);
+                    em.getTransaction().commit();
+                }
+            } catch (org.openqa.selenium.TimeoutException e) {
+                System.out.println("Erro De Time Out");
+            }catch (NoSuchWindowException e){
+                System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
+            } 
+
             setBannerMessage(LocaleHelper.MESSAGE_SENDED, BannerType.SUCCESS);
+        }
+        
+        if(rbMultiContacts.isSelected()){
+            for (Contact contact : this.lstContacts){
+                try {
+                    whatsappDriver.waitForConnection();
+                    if(whatsappDriver.is_connected()){
+                        String messageEmLote = messageBuilder.AddMessage(inputMessageArea.getText(), contact).replace("\n", " ").replace("\r", " ");
+                        
+                        whatsappDriver.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contact.getWhatsNumber()));
+                        whatsappDriver.sendMsg(messageEmLote);
+                    }
+                } catch (org.openqa.selenium.TimeoutException e) {
+                System.out.println("Erro De Time Out");
+                }catch (NoSuchWindowException e){
+                    System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
+                } catch (ParseException ex) {
+                    Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }
+
         }
 
         em.close();

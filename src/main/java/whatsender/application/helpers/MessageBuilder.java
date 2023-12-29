@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import whatsender.application.entities.Contact;
 
 
 
@@ -45,6 +46,23 @@ public class MessageBuilder implements MessageInterface {
             replace("[DATA]", dataFormatada).
             replace("[HORA]", appointment.getHora()).
             replace("[NOME_DO_RESPONSAVEL]", appointment.getDoctor());
+
+        return newMessage;
+    }
+    
+    public String AddMessage(String message, Contact contact) throws ParseException{
+        String newMessage;
+        SimpleDateFormat sdf = new SimpleDateFormat(datePattern, new Locale ("pt", "BR"));
+        Date date= sdf.parse(contact.getData());
+        sdf.applyPattern("EEE, d MMM yyyy");  
+        String dataFormatada = sdf.format(date);  
+        System.out.println("Data Formatada: "+dataFormatada);  
+        
+        newMessage = message.
+            replace("[NOME_DO_PACIENTE]", contact.getName()).
+            replace("[DATA]", dataFormatada).
+            replace("[HORA]", contact.getHour()).
+            replace("[NOME_DO_RESPONSAVEL]", contact.getDoctor());
 
         return newMessage;
     }
