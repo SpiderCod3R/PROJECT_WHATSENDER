@@ -1,11 +1,14 @@
+whatsender\application\splashscreen\SplashScreen.class
 whatsender\application\bot\config\boot\LimitWarning.class
 whatsender\application\swing\effect\RippleEffect$Effect.class
+whatsender\application\splashscreen\ProgressBarCustom$1.class
 whatsender\application\component\Header$1.class
 whatsender\application\filechooser\JnaFileChooser$Mode.class
 whatsender\application\swing\effect\RippleEffect.class
 whatsender\application\main\Application.class
 whatsender\application\bot\config\boot\SystemFile.class
 whatsender\application\entities\Appointment.class
+whatsender\application\splashscreen\ProgressBarCustom.class
 whatsender\application\filechooser\win32\Shell32$BrowseInfo.class
 whatsender\application\swing\Button$2.class
 whatsender\application\swing\PanelPopUp.class
@@ -16,6 +19,7 @@ whatsender\application\filechooser\Action.class
 whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
+whatsender\application\splashscreen\SplashScreen$1$1.class
 whatsender\application\main\Application$4.class
 whatsender\application\forms\FormHome$1.class
 whatsender\application\swing\input\FormatedTextField.class
@@ -70,6 +74,7 @@ whatsender\application\swing\MenuItem$1.class
 whatsender\application\swing\MenuAnimation$1.class
 whatsender\application\swing\PopUpMenu.class
 whatsender\application\filechooser\WindowsFolderBrowser.class
+whatsender\application\splashscreen\CurvesPanel.class
 whatsender\application\component\Profile.class
 whatsender\application\filechooser\Mode.class
 whatsender\application\bot\config\logs\ErrorLogs.class
@@ -89,6 +94,7 @@ whatsender\application\helpers\FormatterHelper.class
 whatsender\application\swing\effect\RippleEffect$Effect$1.class
 whatsender\application\swing\input\TextField$TextUI.class
 whatsender\application\main\Application$3.class
+whatsender\application\splashscreen\GradientPanel.class
 whatsender\application\swing\scrollbar\ScrollBarCustom.class
 whatsender\application\helpers\MessageType.class
 whatsender\application\helpers\MessageBuilder.class
@@ -99,9 +105,11 @@ whatsender\application\swing\shadow\GraphicsUtilities.class
 whatsender\application\entities\LogMessage.class
 whatsender\application\event\EventMenuSelected.class
 whatsender\application\swing\MenuAnimation.class
+whatsender\application\splashscreen\SplashScreen$1.class
 whatsender\application\model\ModelCard.class
 whatsender\application\main\Application$2.class
 whatsender\application\swing\input\TextArea$TextAreaUI.class
+whatsender\application\splashscreen\CurvesPanel$1.class
 whatsender\application\swing\Button.class
 whatsender\application\swing\PopUpMenu$2.class
 whatsender\application\entities\Client.class
