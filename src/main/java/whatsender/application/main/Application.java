@@ -216,9 +216,7 @@ public class Application extends javax.swing.JFrame {
         } else {
             mainForm.showForm(component);
             //cardMenu1.selectMenu(indexMenu, oldForm);   
-        }
-        
-        
+        }  
     }
     
     /* public static void main(String args[]) {

@@ -19,7 +19,6 @@ whatsender\application\filechooser\Action.class
 whatsender\application\main\Application$1.class
 whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
-whatsender\application\splashscreen\SplashScreen$1$1.class
 whatsender\application\main\Application$4.class
 whatsender\application\forms\FormHome$1.class
 whatsender\application\swing\input\FormatedTextField.class
@@ -41,9 +40,10 @@ whatsender\application\bot\config\utilities\Message.class
 whatsender\application\forms\SendMessageForm$6.class
 whatsender\application\model\ModelMenu.class
 whatsender\application\swing\input\TextField.class
+whatsender\application\splashscreen\SplashScreen$4$1.class
 whatsender\application\swing\MenuItem$2.class
-whatsender\application\main\Application$6.class
 whatsender\application\swing\JRadioButtonCustom.class
+whatsender\application\splashscreen\SplashScreen$4.class
 whatsender\application\swing\custom_button\SwingCustomButton.class
 whatsender\application\swing\MenuButton$1.class
 whatsender\application\bot\config\boot\FileMessage.class
@@ -58,12 +58,14 @@ whatsender\application\swing\MenuItem.class
 whatsender\application\bot\config\utilities\WhatsAppDriver.class
 whatsender\application\helpers\LogType.class
 whatsender\application\swing\scrollbar\ModernScrollBarUI.class
+whatsender\application\splashscreen\SplashScreen$3.class
 whatsender\application\bot\config\utilities\Browser.class
 icon\IconConstants.class
 whatsender\application\main\Application$5.class
 whatsender\application\component\Card.class
 whatsender\application\swing\input\TextArea.class
 whatsender\application\forms\SendMessageForm.class
+whatsender\application\splashscreen\SplashScreen$2.class
 whatsender\application\bot\test\GNS_PROJECT_WHATSENDER.class
 whatsender\application\swing\PopUpMenu$1.class
 whatsender\application\forms\ClientForm.class
