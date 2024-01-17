@@ -73,13 +73,8 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 3:
                         if(subMenuIndex==-1){
+                           WHATSAPP.quit();
                            System.exit(0);
-                           // mainForm.showForm(new LogsForm());
-                        }
-                        break;
-                    case 4:
-                        if(subMenuIndex==-1){
-                            System.exit(0);
                         }
                         break;
                 }

@@ -1,6 +1,8 @@
 package whatsender.application.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,12 +48,20 @@ public class LogMessage implements Serializable  {
     @Column(name = "message_type")
     private MessageType messageType;
     
+    
+    
     public LogMessage(Integer id, String message, Appointment contactAppointment, LogType logType, MessageType messageType) {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        String currentDateFormated = dateFormat.format(currentDate);
+        String currentHourFormated = hourFormat.format(currentDate);
+        
         this.id = id;
         this.message = message;
         this.contactAppointment = contactAppointment;
-        this.data = contactAppointment.getData();
-        this.hour = contactAppointment.getHora();
+        this.data = currentDateFormated;
+        this.hour = currentHourFormated;
         this.logType = logType;
         this.messageType = messageType;
     }
