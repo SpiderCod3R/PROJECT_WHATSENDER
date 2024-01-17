@@ -3,8 +3,6 @@ package whatsender.application.splashscreen;
 import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -22,17 +20,11 @@ import whatsender.application.main.Application;
  * @author ALEXANDRE
  */
 public class SplashScreen extends javax.swing.JDialog {
-    private WhatsAppDriver whatsapp;
+    private static WhatsAppDriver WHATSAPP = new WhatsAppDriver(Browser.CHROME);
     private EntityManagerFactory emf;
     private EntityManager em;
-    private boolean running = false;
-    
-    int contadorRegressivo = 60;
-    
-    private int minutes=0;
-    private int seconds=0;
-    private int mili_seconds=0;
-    private Thread tMin, tSec, tMil;
+    private static boolean RUNNING = false;
+    private static int TIMER = 5;
     
     public SplashScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,11 +34,11 @@ public class SplashScreen extends javax.swing.JDialog {
         //  To disable key Alt+F4 to close dialog
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         
-        lblSecCounter.hide();
-        lblConectionMessage.hide();
-        lblSecCounter.hide();
-        
-        
+        lblTimer.setVisible(false);
+        lblConectionTime.setVisible(false);
+        btnConnection.setVisible(false);
+        lblTimer.setVisible(false);
+        lblConnectionMessage.setVisible(false);
     }
 
     private void doTask(String taskName, int progress) throws Exception {
@@ -77,51 +69,51 @@ public class SplashScreen extends javax.swing.JDialog {
                 emf.close();
                 break;
             case 50:
-                //this.whatsapp = new WhatsAppDriver(Browser.CHROME);
-                //this.whatsapp.open();
-                lblConectionMessage.show();
+                WHATSAPP.open();
+                lblConectionTime.setVisible(true);
                 
-                //this.whatsapp.waitForConnection();
                 showTimeForWhatsAppConection();
+                WHATSAPP.waitForConnection();
                 
-                /*if(!this.whatsapp.is_connected()){
-                    lblSecCounter.hide();
-                    lblConectionMessage.setText("Esgotado o tempo para conectar. Por favor aperte no botao vermelho ao lado.");
-                    
-                }
-                if (this.whatsapp.is_connected()){
-                    dispose();
+                if (WHATSAPP.is_connected() == false){
+                    if(RUNNING == false){
+                        lblConectionTime.setText("Tempo esgotado.");
+                        lblConnectionMessage.setVisible(true);
+                        lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
+                        btnConnection.setVisible(true);
+                    }
                     Thread.interrupted();
-                    curvesPanel1.stop();
-                    new Application(this.whatsapp).setVisible(true);
-                }*/
+                }
+                break;
+            case 100:
+                if(WHATSAPP.is_connected() == true){
+                    new Application(WHATSAPP).setVisible(true);
+                    Thread.interrupted();
+                    dispose();
+                }
                 break;
         } 
     }
-    
-    
+     
     //https://www.delftstack.com/pt/howto/java/countdown-timer-java/
     private void showTimeForWhatsAppConection(){
-        lblConectionMessage.setText("Tempo para Conectar o WhatsApp Web:");
-        lblSecCounter.show();
-        
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        this.running = true;
-        
-        final Runnable runnable = new Runnable() {
-          public void run() {
-            lblSecCounter.setText(contadorRegressivo + "s");
-            contadorRegressivo--;
+        lblConectionTime.setText("Tempo para Conectar o WhatsApp Web:");
+        lblTimer.setVisible(true);
+       
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                
+              lblTimer.setText(TIMER + "s");
+              TIMER--;
 
-            if (contadorRegressivo < 0) {
-              lblConectionMessage.setText("Tempo esgotado. Por favor tente novamente no botao vermelho ao lado.");
-              btnConnection.show();
-              scheduler.shutdown();
+              if (TIMER < 0) {
+                 RUNNING = false;
+                timer.cancel();
+              }
             }
-          }
-        };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);    
-
+        }, 0, 1000);
+        
     }
     
 
@@ -133,9 +125,10 @@ public class SplashScreen extends javax.swing.JDialog {
         progressBar = new whatsender.application.splashscreen.ProgressBarCustom();
         lblProgress = new javax.swing.JLabel();
         pnConectionWhatsApp = new javax.swing.JPanel();
-        lblConectionMessage = new javax.swing.JLabel();
+        lblConectionTime = new javax.swing.JLabel();
         btnConnection = new whatsender.application.swing.Button();
-        lblSecCounter = new javax.swing.JLabel();
+        lblTimer = new javax.swing.JLabel();
+        lblConnectionMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -146,7 +139,7 @@ public class SplashScreen extends javax.swing.JDialog {
         });
 
         curvesPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        curvesPanel1.setForeground(new java.awt.Color(51, 51, 51));
+        curvesPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
         lblProgress.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         lblProgress.setForeground(new java.awt.Color(247, 247, 247));
@@ -156,49 +149,58 @@ public class SplashScreen extends javax.swing.JDialog {
         pnConectionWhatsApp.setBackground(new java.awt.Color(225, 222, 222));
         pnConectionWhatsApp.setOpaque(false);
 
-        lblConectionMessage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblConectionMessage.setForeground(new java.awt.Color(255, 255, 255));
-        lblConectionMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblConectionMessage.setText("Tempo para Conectar o WhatsApp Web:");
+        lblConectionTime.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblConectionTime.setForeground(new java.awt.Color(255, 255, 255));
+        lblConectionTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblConectionTime.setText("Tempo para Conectar o WhatsApp Web:");
 
         btnConnection.setBackground(new java.awt.Color(230, 147, 147));
         btnConnection.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/wi-fi.png"))); // NOI18N
+        btnConnection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectionActionPerformed(evt);
+            }
+        });
 
-        lblSecCounter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblSecCounter.setForeground(new java.awt.Color(240, 240, 240));
-        lblSecCounter.setText("0");
+        lblTimer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTimer.setForeground(new java.awt.Color(240, 240, 240));
+        lblTimer.setText("0");
+
+        lblConnectionMessage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblConnectionMessage.setForeground(new java.awt.Color(252, 252, 252));
+        lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
 
         javax.swing.GroupLayout pnConectionWhatsAppLayout = new javax.swing.GroupLayout(pnConectionWhatsApp);
         pnConectionWhatsApp.setLayout(pnConectionWhatsAppLayout);
         pnConectionWhatsAppLayout.setHorizontalGroup(
             pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnConectionWhatsAppLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnConectionWhatsAppLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblConectionMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnConectionWhatsAppLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSecCounter)
-                        .addGap(228, 228, 228)))
+                        .addComponent(lblConectionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTimer)
+                        .addGap(62, 62, 62))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnConectionWhatsAppLayout.createSequentialGroup()
+                        .addComponent(lblConnectionMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(btnConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
         pnConectionWhatsAppLayout.setVerticalGroup(
             pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnConectionWhatsAppLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnConectionWhatsAppLayout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
-                        .addComponent(lblConectionMessage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSecCounter))
+                    .addComponent(btnConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnConectionWhatsAppLayout.createSequentialGroup()
-                        .addComponent(btnConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTimer)
+                            .addComponent(lblConectionTime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblConnectionMessage)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout curvesPanel1Layout = new javax.swing.GroupLayout(curvesPanel1);
@@ -215,7 +217,7 @@ public class SplashScreen extends javax.swing.JDialog {
                             .addGroup(curvesPanel1Layout.createSequentialGroup()
                                 .addGap(109, 109, 109)
                                 .addComponent(lblProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 112, Short.MAX_VALUE))
+                        .addGap(0, 116, Short.MAX_VALUE))
                     .addGroup(curvesPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(pnConectionWhatsApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -224,13 +226,13 @@ public class SplashScreen extends javax.swing.JDialog {
         curvesPanel1Layout.setVerticalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, curvesPanel1Layout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
+                .addContainerGap(192, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProgress)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnConectionWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addGap(70, 70, 70))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,15 +257,43 @@ public class SplashScreen extends javax.swing.JDialog {
                 try {
                     doTask("Verificando arquivo de mensagem ...", 10);
                     doTask("Verificando WhatsApp Web ...", 50);
-                    doTask("Concluído ...", 101);
-                    dispose();
-                    curvesPanel1.stop();
+                    
+                    if(RUNNING == true){
+                        doTask("Conectado. Seja Bem Vindo ...", 100);
+                        dispose();
+                        curvesPanel1.stop();
+                    } 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectionActionPerformed
+        TIMER = 5;
+        RUNNING = true;
+        
+        lblConnectionMessage.setVisible(false);
+        WHATSAPP.waitForConnection();
+        
+        btnConnection.setBackground(new Color(121,224,201,88));
+        lblConectionTime.setText("Conectado...");
+        
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if(RUNNING == true){
+                        doTask("Conectado. Seja Bem Vindo ...", 100);
+                    } 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+         
+    }//GEN-LAST:event_btnConnectionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -307,9 +337,10 @@ public class SplashScreen extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private whatsender.application.swing.Button btnConnection;
     private whatsender.application.splashscreen.CurvesPanel curvesPanel1;
-    private javax.swing.JLabel lblConectionMessage;
+    private javax.swing.JLabel lblConectionTime;
+    private javax.swing.JLabel lblConnectionMessage;
     private javax.swing.JLabel lblProgress;
-    private javax.swing.JLabel lblSecCounter;
+    private javax.swing.JLabel lblTimer;
     private javax.swing.JPanel pnConectionWhatsApp;
     private whatsender.application.splashscreen.ProgressBarCustom progressBar;
     // End of variables declaration//GEN-END:variables

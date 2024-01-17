@@ -18,6 +18,7 @@ import whatsender.application.event.EventMenu;
 import whatsender.application.event.EventMenuSelected;
 import whatsender.application.model.ModelMenu;
 import icon.IconConstants;
+import whatsender.application.bot.config.utilities.Browser;
 import whatsender.application.bot.config.utilities.WhatsAppDriver;
 import whatsender.application.event.EventShowPopUpMenu;
 import whatsender.application.swing.MenuAnimation;
@@ -33,6 +34,7 @@ public class Menu extends javax.swing.JPanel {
     private Animator animator;
     private EventMenuSelected event;
     private EventShowPopUpMenu eventShowPopUpMenu;
+    private static WhatsAppDriver WHATSAPP = null;
 
     
     private boolean enableMenu = true;
@@ -42,19 +44,23 @@ public class Menu extends javax.swing.JPanel {
         return showMenu;
     }
     
-    public Menu(WhatsAppDriver whatsapp) {
+    public Menu(WhatsAppDriver WHATSAPP) {
         initComponents();
         setOpaque(false);
+        
+        WHATSAPP = WHATSAPP;
+        
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
         
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         panelMenu.setLayout(layout);
+
         TimingTargetAdapter target = new TimingTargetAdapter(){
         
         };
         
-        if(whatsapp.is_connected()) {
+        if(WHATSAPP.is_connected()) {
             btnConnection.setBackground(new Color(121,224,201,88));
             lblConnection.setText("Conectado");
         }

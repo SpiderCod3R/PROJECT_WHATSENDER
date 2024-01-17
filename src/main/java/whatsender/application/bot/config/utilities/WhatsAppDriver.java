@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -67,10 +69,14 @@ public class WhatsAppDriver {
             driver = new ChromeDriver(service, options);
         }
 
-        longWait = new WebDriverWait(driver, 60);
-        shortWait = new WebDriverWait(driver, 10);
+        longWait = new WebDriverWait(driver, 5);
+        shortWait = new WebDriverWait(driver, 1);
 
         this.connected = false;
+    }
+    
+    public void resetWaitPeriod(){
+        longWait = new WebDriverWait(driver, 5);
     }
 
     /**
@@ -123,10 +129,9 @@ public class WhatsAppDriver {
 
     public void waitForConnection() throws TimeoutException {
         try {
-            longWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(@class, \"selectable-text copyable-text\")]")));
+           longWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(@class, \"selectable-text copyable-text\")]")));
             this.connected = true;
             System.out.println("Connected.");
-
         } catch (TimeoutException t) {
             this.connected = false;
             System.err.println("Exceção de Tempo de conexão com o WhatsApp Web");
