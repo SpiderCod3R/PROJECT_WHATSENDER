@@ -34,17 +34,17 @@ public class Application extends javax.swing.JFrame {
     private Header header;
     private MainForm mainForm;
     private Animator animator;
-    private final static WhatsAppDriver WHATSAPP = null;
+    private WhatsAppDriver WHATSAPP = null;
     
     public Application(WhatsAppDriver whatsapp) {
         initComponents();
         __init__(whatsapp);
     }
     
-    public void __init__(WhatsAppDriver WHATSAPP){
+    public void __init__(WhatsAppDriver whatsAppDriver){
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
-        WHATSAPP = WHATSAPP;
+        WHATSAPP = whatsAppDriver;
         
         menu = new Menu(WHATSAPP);
         header = new Header();
@@ -58,12 +58,12 @@ public class Application extends javax.swing.JFrame {
                 switch (menuIndex) {
                     case 0:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new FormHome(Application.WHATSAPP));
+                            mainForm.showForm(new FormHome(whatsAppDriver));
                         }
                         break;
                     case 1:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new SendMessageForm(mainForm, Application.WHATSAPP));
+                            mainForm.showForm(new SendMessageForm(whatsAppDriver));
                         }
                         break;
                     case 2:
@@ -204,13 +204,13 @@ public class Application extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        Application.WHATSAPP.quit();
+        WHATSAPP.quit();
     }//GEN-LAST:event_formWindowClosed
 
     public void backForm(Component component, Integer indexMenu, Integer oldForm) {
        mainForm = new MainForm();
         if( (component == null)){
-            mainForm.showForm(new FormHome(Application.WHATSAPP));
+            mainForm.showForm(new FormHome(WHATSAPP));
             //cardMenu1.selectMenu(indexMenu, oldForm);
         } else {
             mainForm.showForm(component);

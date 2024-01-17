@@ -2,6 +2,8 @@ package whatsender.application.entities;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import java.nio.charset.Charset;
+import org.eclipse.persistence.internal.oxm.mappings.Field;
 
 public class Contact {
     
@@ -36,6 +38,8 @@ public class Contact {
         this.whatsNumber = whatsNumber;
         this.data = data;
         this.hour = hour;
+       
+       
     }
 
     public String getDoctor() {
@@ -83,9 +87,5 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" + "name=" + name + ", whatsNumber=" + whatsNumber + ", data=" + data + ", hour=" + hour + '}';
-    }
-    
-    
-    
-    
+    }   
 }
