@@ -5,10 +5,15 @@ import javax.swing.Icon;
 
 public class ModelCard {
     private String title;
+    private String description;
+    private Integer qtdeMessages;
     private double values;
     private int percentage;
     private Icon icon;
 
+    public ModelCard() {
+    }
+    
     public ModelCard(String title, double values, int percentage, Icon icon) {
         this.title = title;
         this.values = values;
@@ -16,9 +21,31 @@ public class ModelCard {
         this.icon = icon;
     }
 
-    public ModelCard() {
+    public ModelCard(String title, String description, Integer qtdeMessages, double values, Icon icon) {
+        this.title = title;
+        this.description = description;
+        this.qtdeMessages = qtdeMessages;
+        this.values = values;
+
+        this.icon = icon;
     }
- 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getQtdeMessages() {
+        return qtdeMessages.toString();
+    }
+
+    public void setQtdeMessages(Integer qtdeMessages) {
+        this.qtdeMessages = qtdeMessages;
+    }
+
     public String getTitle() {
         return title;
     }

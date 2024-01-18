@@ -12,19 +12,23 @@ import javax.swing.JDialog;
 import whatsender.application.bot.config.utilities.Browser;
 import whatsender.application.bot.config.utilities.WhatsAppDriver;
 import whatsender.application.entities.Message;
+import whatsender.application.entities.PacoteContratado;
 import whatsender.application.helpers.MessageBuilder;
 import whatsender.application.main.Application;
+import whatsender.application.main.DefinirPacote;
 
 /**
  *
  * @author ALEXANDRE
  */
 public class SplashScreen extends javax.swing.JDialog {
-    private static WhatsAppDriver WHATSAPP = new WhatsAppDriver(Browser.CHROME);
+    private static WhatsAppDriver WHATSAPP;
     private EntityManagerFactory emf;
     private EntityManager em;
     private static boolean RUNNING = false;
     private static int TIMER = 5;
+    
+    private static DefinirPacote definirPacote;
     
     public SplashScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,44 +49,63 @@ public class SplashScreen extends javax.swing.JDialog {
         lblProgress.setText(taskName);
         Thread.sleep(2000);
         progressBar.setValue(progress);
+        this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
+        this.em = this.emf.createEntityManager();
         
         switch (progress) {
             case 10:
-                this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
-                this.em = this.emf.createEntityManager();
-                
-                em.getTransaction().begin();
-                if (em.isOpen() ) {
+                this.em.getTransaction().begin();
+                if (this.em.isOpen() ) {
                     //LOCALIZAR O MENSAGEM PADRAO NO DATABASE
-                    Message message = em.find(Message.class, 1);
-                    em.getTransaction().commit();
+                    Message message = this.em.find(Message.class, 1);
+                    this.em.getTransaction().commit();
                     
                     if(message == null){
-                        em.getTransaction().begin();
+                        this.em.getTransaction().begin();
                         MessageBuilder messageBuilder = new MessageBuilder();
                         Message new_message = new Message(null, messageBuilder.loadDefaultMessage());
-                        em.persist(new_message);
-                        em.getTransaction().commit();
+                        this.em.persist(new_message);
+                        this.em.getTransaction().commit();
                     }
                 }
-                em.close();
-                emf.close();
+                this.em.close();
+                this.emf.close();
                 break;
             case 50:
-                WHATSAPP.open();
-                lblConectionTime.setVisible(true);
+                //LOCALIZAR O PACOTE CONTRATADO NO DATABASE
+                definirPacote = new DefinirPacote();
                 
-                showTimeForWhatsAppConection();
-                WHATSAPP.waitForConnection();
+                this.em.getTransaction().begin();
+                PacoteContratado pacote = this.em.find(PacoteContratado.class, 1);
+                this.em.getTransaction().commit();
                 
-                if (WHATSAPP.is_connected() == false){
-                    if(RUNNING == false){
-                        lblConectionTime.setText("Tempo esgotado.");
-                        lblConnectionMessage.setVisible(true);
-                        lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
-                        btnConnection.setVisible(true);
-                    }
+                if(pacote == null){
                     Thread.interrupted();
+                    dispose();
+                    definirPacote.setVisible(true);
+                }
+                
+                this.em.close();
+                this.emf.close();
+                break;
+            case 70:
+                if (!definirPacote.isActive() ) {
+                    WHATSAPP = new WhatsAppDriver(Browser.CHROME);
+                    WHATSAPP.open();
+                    lblConectionTime.setVisible(true);
+
+                    showTimeForWhatsAppConection();
+                    WHATSAPP.waitForConnection();
+
+                    if (WHATSAPP.is_connected() == false){
+                        if(RUNNING == false){
+                            lblConectionTime.setText("Tempo esgotado.");
+                            lblConnectionMessage.setVisible(true);
+                            lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
+                            btnConnection.setVisible(true);
+                        }
+                        Thread.interrupted();
+                    }
                 }
                 break;
             case 100:
@@ -256,7 +279,8 @@ public class SplashScreen extends javax.swing.JDialog {
             public void run() {
                 try {
                     doTask("Verificando arquivo de mensagem ...", 10);
-                    doTask("Verificando WhatsApp Web ...", 50);
+                    doTask("Verificando Pacote contratado ...", 50);
+                    doTask("Verificando WhatsApp Web ...", 70);
                     
                     if(RUNNING == true){
                         doTask("Conectado. Seja Bem Vindo ...", 100);

@@ -593,6 +593,7 @@ public class SendMessageForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbSingleContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSingleContactActionPerformed
+        pnBannerMessage.setVisible(false);
         inputSingleContact.setVisible(true);
         inputMultiContacts.setVisible(false);
         btnInputSearch.setVisible(false);
@@ -617,6 +618,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
         EntityManager em = emf.createEntityManager();
 
+        pnBannerMessage.setVisible(false);
         inputSingleContact.setVisible(false);
         rbSingleContact.setSelected(false);
         inputMessageArea.enable(false);

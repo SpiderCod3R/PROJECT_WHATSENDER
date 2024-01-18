@@ -107,7 +107,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgDash)), "Painel"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgSendMessage)), "Enviar mensagem"));
         
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgConfig)), "Configurações", "Cliente"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgConfig)), "Configurações", "Editar Cliente", "Gerenciar Pacote"));
         //addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgLogs)), "Logs"));
         
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgExit)), "Fechar"));
