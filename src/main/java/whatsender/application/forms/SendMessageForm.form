@@ -261,7 +261,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="whatsender.application.swing.JRadioButtonCustom" name="rbSingleContact">
+        <Component class="whatsender.gui.swing.JRadioButtonCustom" name="rbSingleContact">
           <Properties>
             <Property name="text" type="java.lang.String" value="Apenas um contato"/>
           </Properties>
@@ -269,7 +269,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbSingleContactActionPerformed"/>
           </Events>
         </Component>
-        <Component class="whatsender.application.swing.JRadioButtonCustom" name="rbMultiContacts">
+        <Component class="whatsender.gui.swing.JRadioButtonCustom" name="rbMultiContacts">
           <Properties>
             <Property name="text" type="java.lang.String" value="Contatos em Lote"/>
           </Properties>
@@ -277,14 +277,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbMultiContactsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="whatsender.application.swing.input.FormatedTextField" name="inputSingleContact">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputSingleContact">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="(##) #####-####" subtype="-1" type="5"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.custom_button.SwingCustomButton" name="btnInputSearch">
+        <Component class="whatsender.gui.swing.custom_button.SwingCustomButton" name="btnInputSearch">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -301,19 +301,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInputSearchActionPerformed"/>
           </Events>
         </Component>
-        <Component class="whatsender.application.swing.input.TextField" name="inputMultiContacts">
+        <Component class="whatsender.gui.swing.input.TextField" name="inputMultiContacts">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.TextField" name="inputContactName">
+        <Component class="whatsender.gui.swing.input.TextField" name="inputContactName">
         </Component>
         <Component class="javax.swing.JLabel" name="lblContactname">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nome do Contato"/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.FormatedTextField" name="inputDate">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputDate">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##/##/####" subtype="-1" type="5"/>
@@ -325,7 +325,7 @@
             <Property name="text" type="java.lang.String" value="Data da Consulta"/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.FormatedTextField" name="inputHora">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputHora">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="1" type="2"/>
@@ -342,7 +342,7 @@
             <Property name="text" type="java.lang.String" value="N&#xb0; Contato"/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.custom_button.SwingCustomButton" name="btnAddToMessage">
+        <Component class="whatsender.gui.swing.custom_button.SwingCustomButton" name="btnAddToMessage">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9b" green="9b" red="1" type="rgb"/>
@@ -364,7 +364,7 @@
             <Property name="text" type="java.lang.String" value="Nome do M&#xe9;dico"/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.TextField" name="inputDoctor">
+        <Component class="whatsender.gui.swing.input.TextField" name="inputDoctor">
         </Component>
       </SubComponents>
     </Container>
@@ -411,7 +411,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="whatsender.application.swing.input.TextArea" name="inputMessageArea">
+            <Component class="whatsender.gui.swing.input.TextArea" name="inputMessageArea">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
@@ -423,7 +423,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="whatsender.application.swing.custom_button.SwingCustomButton" name="btnSendMessage">
+        <Component class="whatsender.gui.swing.custom_button.SwingCustomButton" name="btnSendMessage">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9b" green="9b" red="1" type="rgb"/>
@@ -524,23 +524,23 @@
             <Property name="text" type="java.lang.String" value="Celular Whatsapp"/>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.TextField" name="inputClientName">
+        <Component class="whatsender.gui.swing.input.TextField" name="inputClientName">
         </Component>
-        <Component class="whatsender.application.swing.input.FormatedTextField" name="inputClientPhone">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputClientPhone">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="(##) #####-####" subtype="-1" type="5"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.input.FormatedTextField" name="inputClientWhatsApp">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputClientWhatsApp">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="(##) #####-####" subtype="-1" type="5"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="whatsender.application.swing.custom_button.SwingCustomButton" name="btnSaveClient">
+        <Component class="whatsender.gui.swing.custom_button.SwingCustomButton" name="btnSaveClient">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>

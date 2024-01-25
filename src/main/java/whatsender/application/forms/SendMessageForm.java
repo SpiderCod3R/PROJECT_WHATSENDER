@@ -17,20 +17,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.openqa.selenium.NoSuchWindowException;
 
-import whatsender.application.bot.config.utilities.WhatsAppDriver;
+import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.application.entities.Consulta;
 import whatsender.application.helpers.LocaleHelper;
 import whatsender.application.entities.Cliente;
 import whatsender.application.entities.Contato;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.LogMessage;
-import whatsender.application.filechooser.JnaFileChooser;
+import whatsender.system.filechooser.JnaFileChooser;
 import whatsender.application.helpers.BannerType;
 import whatsender.application.helpers.FormatterHelper;
-import whatsender.application.helpers.LogType;
+import whatsender.application.logs.LogType;
 import whatsender.application.helpers.MessageBuilder;
 import whatsender.application.helpers.MessageType;
-import whatsender.application.main.Application;
+import whatsender.application.start.Application;
 
 
 
@@ -186,33 +186,33 @@ public class SendMessageForm extends javax.swing.JPanel {
         lblWhatsPhone = new javax.swing.JLabel();
         lblWhatsapp = new javax.swing.JLabel();
         pnContactsList = new javax.swing.JPanel();
-        rbSingleContact = new whatsender.application.swing.JRadioButtonCustom();
-        rbMultiContacts = new whatsender.application.swing.JRadioButtonCustom();
-        inputSingleContact = new whatsender.application.swing.input.FormatedTextField();
-        btnInputSearch = new whatsender.application.swing.custom_button.SwingCustomButton();
-        inputMultiContacts = new whatsender.application.swing.input.TextField();
-        inputContactName = new whatsender.application.swing.input.TextField();
+        rbSingleContact = new whatsender.gui.swing.JRadioButtonCustom();
+        rbMultiContacts = new whatsender.gui.swing.JRadioButtonCustom();
+        inputSingleContact = new whatsender.gui.swing.input.FormatedTextField();
+        btnInputSearch = new whatsender.gui.custom_button.SwingCustomButton();
+        inputMultiContacts = new whatsender.gui.swing.input.TextField();
+        inputContactName = new whatsender.gui.swing.input.TextField();
         lblContactname = new javax.swing.JLabel();
-        inputDate = new whatsender.application.swing.input.FormatedTextField();
+        inputDate = new whatsender.gui.swing.input.FormatedTextField();
         lblDate = new javax.swing.JLabel();
-        inputHora = new whatsender.application.swing.input.FormatedTextField();
+        inputHora = new whatsender.gui.swing.input.FormatedTextField();
         lblHour = new javax.swing.JLabel();
         lblContactNumber = new javax.swing.JLabel();
-        btnAddToMessage = new whatsender.application.swing.custom_button.SwingCustomButton();
+        btnAddToMessage = new whatsender.gui.custom_button.SwingCustomButton();
         lblDoctor = new javax.swing.JLabel();
-        inputDoctor = new whatsender.application.swing.input.TextField();
+        inputDoctor = new whatsender.gui.swing.input.TextField();
         pnMessages = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        inputMessageArea = new whatsender.application.swing.input.TextArea();
-        btnSendMessage = new whatsender.application.swing.custom_button.SwingCustomButton();
+        inputMessageArea = new whatsender.gui.swing.input.TextArea();
+        btnSendMessage = new whatsender.gui.custom_button.SwingCustomButton();
         pnClientForm = new javax.swing.JPanel();
         lblCompanyName1 = new javax.swing.JLabel();
         lblCompanyPhone1 = new javax.swing.JLabel();
         lblWhatsPhone1 = new javax.swing.JLabel();
-        inputClientName = new whatsender.application.swing.input.TextField();
-        inputClientPhone = new whatsender.application.swing.input.FormatedTextField();
-        inputClientWhatsApp = new whatsender.application.swing.input.FormatedTextField();
-        btnSaveClient = new whatsender.application.swing.custom_button.SwingCustomButton();
+        inputClientName = new whatsender.gui.swing.input.TextField();
+        inputClientPhone = new whatsender.gui.swing.input.FormatedTextField();
+        inputClientWhatsApp = new whatsender.gui.swing.input.FormatedTextField();
+        btnSaveClient = new whatsender.gui.custom_button.SwingCustomButton();
         pnBannerMessage = new javax.swing.JPanel();
         lblBannerMessage = new javax.swing.JLabel();
 
@@ -900,20 +900,20 @@ public class SendMessageForm extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.swing.custom_button.SwingCustomButton btnAddToMessage;
-    private whatsender.application.swing.custom_button.SwingCustomButton btnInputSearch;
-    private whatsender.application.swing.custom_button.SwingCustomButton btnSaveClient;
-    private whatsender.application.swing.custom_button.SwingCustomButton btnSendMessage;
-    private whatsender.application.swing.input.TextField inputClientName;
-    private whatsender.application.swing.input.FormatedTextField inputClientPhone;
-    private whatsender.application.swing.input.FormatedTextField inputClientWhatsApp;
-    private whatsender.application.swing.input.TextField inputContactName;
-    private whatsender.application.swing.input.FormatedTextField inputDate;
-    private whatsender.application.swing.input.TextField inputDoctor;
-    private whatsender.application.swing.input.FormatedTextField inputHora;
-    private whatsender.application.swing.input.TextArea inputMessageArea;
-    private whatsender.application.swing.input.TextField inputMultiContacts;
-    private whatsender.application.swing.input.FormatedTextField inputSingleContact;
+    private whatsender.gui.custom_button.SwingCustomButton btnAddToMessage;
+    private whatsender.gui.custom_button.SwingCustomButton btnInputSearch;
+    private whatsender.gui.custom_button.SwingCustomButton btnSaveClient;
+    private whatsender.gui.custom_button.SwingCustomButton btnSendMessage;
+    private whatsender.gui.swing.input.TextField inputClientName;
+    private whatsender.gui.swing.input.FormatedTextField inputClientPhone;
+    private whatsender.gui.swing.input.FormatedTextField inputClientWhatsApp;
+    private whatsender.gui.swing.input.TextField inputContactName;
+    private whatsender.gui.swing.input.FormatedTextField inputDate;
+    private whatsender.gui.swing.input.TextField inputDoctor;
+    private whatsender.gui.swing.input.FormatedTextField inputHora;
+    private whatsender.gui.swing.input.TextArea inputMessageArea;
+    private whatsender.gui.swing.input.TextField inputMultiContacts;
+    private whatsender.gui.swing.input.FormatedTextField inputSingleContact;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBannerMessage;
@@ -936,8 +936,8 @@ public class SendMessageForm extends javax.swing.JPanel {
     private javax.swing.JPanel pnClientForm;
     private javax.swing.JPanel pnContactsList;
     private javax.swing.JPanel pnMessages;
-    private whatsender.application.swing.JRadioButtonCustom rbMultiContacts;
-    private whatsender.application.swing.JRadioButtonCustom rbSingleContact;
+    private whatsender.gui.swing.JRadioButtonCustom rbMultiContacts;
+    private whatsender.gui.swing.JRadioButtonCustom rbSingleContact;
     // End of variables declaration//GEN-END:variables
 
 }

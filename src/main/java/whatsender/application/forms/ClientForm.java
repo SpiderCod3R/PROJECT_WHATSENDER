@@ -17,12 +17,12 @@ public class ClientForm extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inputClientName1 = new whatsender.application.swing.input.TextField();
-        inputWhatsApp = new whatsender.application.swing.input.FormatedTextField();
+        inputClientName1 = new whatsender.gui.swing.input.TextField();
+        inputWhatsApp = new whatsender.gui.swing.input.FormatedTextField();
         jLabel3 = new javax.swing.JLabel();
-        inputComercialPhone = new whatsender.application.swing.input.FormatedTextField();
-        btnSave = new whatsender.application.swing.custom_button.SwingCustomButton();
-        btnSave1 = new whatsender.application.swing.custom_button.SwingCustomButton();
+        inputComercialPhone = new whatsender.gui.swing.input.FormatedTextField();
+        btnSave = new whatsender.gui.custom_button.SwingCustomButton();
+        btnSave1 = new whatsender.gui.custom_button.SwingCustomButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -128,11 +128,11 @@ public class ClientForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.swing.custom_button.SwingCustomButton btnSave;
-    private whatsender.application.swing.custom_button.SwingCustomButton btnSave1;
-    private whatsender.application.swing.input.TextField inputClientName1;
-    private whatsender.application.swing.input.FormatedTextField inputComercialPhone;
-    private whatsender.application.swing.input.FormatedTextField inputWhatsApp;
+    private whatsender.gui.custom_button.SwingCustomButton btnSave;
+    private whatsender.gui.custom_button.SwingCustomButton btnSave1;
+    private whatsender.gui.swing.input.TextField inputClientName1;
+    private whatsender.gui.swing.input.FormatedTextField inputComercialPhone;
+    private whatsender.gui.swing.input.FormatedTextField inputWhatsApp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

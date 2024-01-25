@@ -11,8 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import whatsender.application.helpers.LogType;
+import whatsender.application.logs.LogType;
 import whatsender.application.helpers.MessageType;
+import whatsender.application.logs.LogAnnotation;
 
 /**
  *
@@ -20,7 +21,7 @@ import whatsender.application.helpers.MessageType;
  */
 @Entity
 @Table(name = LogMessage.TABLE_NAME)
-public class LogMessage implements Serializable  {
+public class LogMessage implements Serializable, LogAnnotation  {
     public static final String TABLE_NAME= "tb_log_de_mensagem";
     
     private static final long serialVersionUID = 1L;
@@ -34,7 +35,7 @@ public class LogMessage implements Serializable  {
     
     @ManyToOne
     @JoinColumn(name = "consulta_id")
-    private Consulta contactAppointment;
+    private Consulta dadosConsulta;
     
     @Column(name = "data")
     private String data;
@@ -48,9 +49,9 @@ public class LogMessage implements Serializable  {
     @Column(name = "message_type")
     private MessageType messageType;
     
+    public LogMessage() { }
     
-    
-    public LogMessage(Integer id, String message, Consulta contactAppointment, LogType logType, MessageType messageType) {
+    public LogMessage(Integer id, String message, Consulta dadosConsulta, LogType logType, MessageType messageType) {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
@@ -59,74 +60,78 @@ public class LogMessage implements Serializable  {
         
         this.id = id;
         this.message = message;
-        this.contactAppointment = contactAppointment;
+        this.dadosConsulta = dadosConsulta;
         this.data = currentDateFormated;
         this.hour = currentHourFormated;
         this.logType = logType;
         this.messageType = messageType;
     }
 
-    public LogMessage() {
+    public Consulta getDadosConsulta() {
+        return dadosConsulta;
     }
 
+    public void setConsultaContato(Consulta dadosConsulta) {
+        this.dadosConsulta = dadosConsulta;
+    }
+
+    @Override
     public LogType getLogType() {
         return logType;
     }
-
+    
+    @Override
     public void setLogType(LogType logType) {
         this.logType = logType;
     }
 
+    @Override
     public MessageType getMessageType() {
         return messageType;
     }
 
+    @Override
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
     
-    
-    
-    public String getMessage() {
+    @Override
+    public String getMessageLog() {
         return message;
     }
 
-    public void setMessage(String message) {
+    @Override
+    public void setMessageLog(String message) {
         this.message = message;
     }
 
-    public Consulta getContactAppointment() {
-        return contactAppointment;
-    }
-
-    public void setContactAppointment(Consulta contactAppointment) {
-        this.contactAppointment = contactAppointment;
-    }
-
+    @Override
     public String getData() {
         return data;
     }
 
+    @Override
     public void setData(String data) {
         this.data = data;
     }
 
+    @Override
     public String getHour() {
         return hour;
     }
 
+    @Override
     public void setHour(String hour) {
         this.hour = hour;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-    
-    
-    
+    }  
 }

@@ -166,7 +166,7 @@
                 <Property name="text" type="java.lang.String" value="Tempo para Conectar o WhatsApp Web:"/>
               </Properties>
             </Component>
-            <Component class="whatsender.application.swing.Button" name="btnConnection">
+            <Component class="whatsender.gui.swing.Button" name="btnConnection">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="93" green="93" red="e6" type="rgb"/>

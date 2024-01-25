@@ -62,7 +62,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="whatsender.application.swing.Button" name="cmdButton">
+    <Component class="whatsender.gui.swing.Button" name="cmdButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/menu.png"/>
@@ -72,7 +72,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="whatsender.application.swing.ImageAvatar" name="picture">
+    <Container class="whatsender.gui.swing.ImageAvatar" name="picture">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/logo2.png"/>

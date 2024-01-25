@@ -16,8 +16,8 @@ public class Header extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmdButton = new whatsender.application.swing.Button();
-        picture = new whatsender.application.swing.ImageAvatar();
+        cmdButton = new whatsender.gui.swing.Button();
+        picture = new whatsender.gui.swing.ImageAvatar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -92,10 +92,10 @@ public class Header extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.swing.Button cmdButton;
+    private whatsender.gui.swing.Button cmdButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private whatsender.application.swing.ImageAvatar picture;
+    private whatsender.gui.swing.ImageAvatar picture;
     // End of variables declaration//GEN-END:variables
 }

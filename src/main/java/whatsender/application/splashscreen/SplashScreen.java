@@ -9,13 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JDialog;
-import whatsender.application.bot.config.utilities.Browser;
-import whatsender.application.bot.config.utilities.WhatsAppDriver;
+import whatsender.bot.driver.Browser;
+import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.PacoteContratado;
 import whatsender.application.helpers.MessageBuilder;
-import whatsender.application.main.Application;
-import whatsender.application.main.DefinirPacote;
+import whatsender.application.start.Application;
+import whatsender.application.start.DefinirPacote;
 
 /**
  *
@@ -168,7 +168,7 @@ public class SplashScreen extends javax.swing.JDialog {
         lblProgress = new javax.swing.JLabel();
         pnConectionWhatsApp = new javax.swing.JPanel();
         lblConectionTime = new javax.swing.JLabel();
-        btnConnection = new whatsender.application.swing.Button();
+        btnConnection = new whatsender.gui.swing.Button();
         lblTimer = new javax.swing.JLabel();
         lblConnectionMessage = new javax.swing.JLabel();
 
@@ -378,7 +378,7 @@ public class SplashScreen extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.swing.Button btnConnection;
+    private whatsender.gui.swing.Button btnConnection;
     private whatsender.application.splashscreen.CurvesPanel curvesPanel1;
     private javax.swing.JLabel lblConectionTime;
     private javax.swing.JLabel lblConnectionMessage;

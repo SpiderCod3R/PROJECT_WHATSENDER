@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>whatsender.application.splashscreen2.SplashScreen</exec.mainClass>
+        <exec.mainClass>whatsender.application.start.Start</exec.mainClass>
     </properties>
     <pluginRepositories>
         <pluginRepository>

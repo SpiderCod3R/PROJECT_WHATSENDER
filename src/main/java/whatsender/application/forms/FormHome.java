@@ -11,10 +11,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
-import whatsender.application.bot.config.utilities.WhatsAppDriver;
+import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.application.entities.LogMessage;
-import whatsender.application.main.Application;
-import whatsender.application.model.ModelCard;
+import whatsender.application.start.Application;
+import whatsender.gui.component.card.ModelCard;
 
 /**
  *
@@ -68,11 +68,11 @@ public class FormHome extends javax.swing.JPanel {
         
         if (tblLogModel.getRowCount() == 0){
             for (LogMessage log : lstsNormalLogMessages){
-                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getContactAppointment().getDoctor(), log.getContactAppointment().getContactName() ,log.getContactAppointment().getContactPhone(), log.getMessageType(), log.getLogType()});
+                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getDadosConsulta().getDoctor(), log.getDadosConsulta().getContactName() ,log.getDadosConsulta().getContactPhone(), log.getMessageType(), log.getLogType()});
             }
             
             for (LogMessage log : lstsExtLogMessages){
-                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getContactAppointment().getDoctor(), log.getContactAppointment().getContactName(), log.getContactAppointment().getContactPhone(), log.getMessageType(), log.getLogType()});
+                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getDadosConsulta().getDoctor(), log.getDadosConsulta().getContactName(), log.getDadosConsulta().getContactPhone(), log.getMessageType(), log.getLogType()});
             }
         }
     }
@@ -103,9 +103,9 @@ public class FormHome extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cardMessageSended = new whatsender.application.component.Card();
-        cardMultiMessagesSended = new whatsender.application.component.Card();
-        cardApplicationErrors = new whatsender.application.component.Card();
+        cardMessageSended = new whatsender.gui.component.card.Card();
+        cardMultiMessagesSended = new whatsender.gui.component.card.Card();
+        cardApplicationErrors = new whatsender.gui.component.card.Card();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLog = new javax.swing.JTable();
         pnlWhatsError = new javax.swing.JPanel();
@@ -208,9 +208,9 @@ public class FormHome extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.component.Card cardApplicationErrors;
-    private whatsender.application.component.Card cardMessageSended;
-    private whatsender.application.component.Card cardMultiMessagesSended;
+    private whatsender.gui.component.card.Card cardApplicationErrors;
+    private whatsender.gui.component.card.Card cardMessageSended;
+    private whatsender.gui.component.card.Card cardMultiMessagesSended;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -1,19 +1,11 @@
 package whatsender.application.helpers;
 
-import java.text.DateFormatSymbols;
 import whatsender.application.entities.Consulta;
 import whatsender.application.entities.Cliente;
-import whatsender.application.entities.Message;
-import whatsender.application.interfaces.MessageInterface;
-
-import java.text.Format;  
 import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
-import java.util.Calendar;  
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import whatsender.application.entities.Contato;
 
 
