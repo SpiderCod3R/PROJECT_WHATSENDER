@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import whatsender.application.component.popup.GlassPanePopup;
+import whatsender.gui.modal.popup.GlassPanePopup;
 import whatsender.application.entities.Pacote;
 import whatsender.application.entities.PacoteContratado;
 import whatsender.gui.modal.MessageConfirmationForm;

@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import javax.persistence.Persistence;
-import whatsender.application.component.popup.GlassPanePopup;
+import whatsender.gui.modal.popup.GlassPanePopup;
 import whatsender.application.entities.Pacote;
 
 /**

@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import net.miginfocom.swing.MigLayout;
-import whatsender.application.menu.event_menu.EventMenu;
-import whatsender.application.menu.event_menu.EventMenuSelected;
-import whatsender.application.menu.model_menu.ModelMenu;
+import whatsender.gui.component.menu.event_menu.EventMenu;
+import whatsender.gui.component.menu.event_menu.EventMenuSelected;
+import whatsender.gui.component.menu.ModelMenu;
 
 /**
  *

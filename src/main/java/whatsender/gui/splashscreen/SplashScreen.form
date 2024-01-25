@@ -29,7 +29,7 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Component class="whatsender.application.component.ProgressBarCustom" name="progressBar">
+    <Component class="whatsender.gui.progress_bar_custom.ProgressBarCustom" name="progressBar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="57" green="74" red="9" type="rgb"/>

@@ -1,4 +1,4 @@
-package whatsender.application.menu.event_menu;
+package whatsender.gui.component.menu.event_menu;
 
 import java.awt.Component;
 

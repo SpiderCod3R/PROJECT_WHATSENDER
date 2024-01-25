@@ -12,10 +12,10 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.bot.driver.Browser;
 import whatsender.bot.driver.WhatsAppDriver;
-import whatsender.application.component.Header;
-import whatsender.gui.component.menu.Sidebar;
-import whatsender.application.menu.event_menu.EventMenuSelected;
-import whatsender.application.menu.event_menu.EventShowPopUpMenu;
+import whatsender.gui.component.header.Header;
+import whatsender.gui.component.menu.MenuLateral;
+import whatsender.gui.component.menu.event_menu.EventMenuSelected;
+import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
 import whatsender.application.forms.ClientForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
@@ -30,7 +30,7 @@ import whatsender.gui.swing.PopUpMenu;
  */
 public class Application extends javax.swing.JFrame {
     private MigLayout layout;
-    private Sidebar sidebar;
+    private MenuLateral menuLateral;
     private Header header;
     private MainForm mainForm;
     private Animator animator;
@@ -46,16 +46,16 @@ public class Application extends javax.swing.JFrame {
         bg.setLayout(layout);
         WHATSAPP = whatsAppDriver;
         
-        sidebar = new Sidebar(WHATSAPP);
+        menuLateral = new MenuLateral(WHATSAPP);
         header = new Header();
         mainForm = new MainForm();
         
-        sidebar.addEvent(new EventMenuSelected() {
+        menuLateral.addEvent(new EventMenuSelected() {
             @Override
-            public void menuSelected(int sidebarIndex, int subMenuIndex) {
-                System.out.println("Menu index : " + sidebarIndex + " SubMenu index " + subMenuIndex);
+            public void menuSelected(int menuLateralIndex, int subMenuIndex) {
+                System.out.println("Menu index : " + menuLateralIndex + " SubMenu index " + subMenuIndex);
                 
-                switch (sidebarIndex) {
+                switch (menuLateralIndex) {
                     case 0:
                         if(subMenuIndex==-1){
                             mainForm.showForm(new FormHome(whatsAppDriver));
@@ -86,20 +86,20 @@ public class Application extends javax.swing.JFrame {
             }
         });
         
-        sidebar.addEventShowPopUpMenu(new EventShowPopUpMenu() {
+        menuLateral.addEventShowPopUpMenu(new EventShowPopUpMenu() {
             @Override
             public void showPopUp(Component component) {
-                MenuItem sidebarItem = (MenuItem)component;
-                PopUpMenu popUp = new PopUpMenu(Application.this, sidebarItem.getIndex(), sidebarItem.getEventMenuSelected(), sidebarItem.getMenu().getSubMenu());
+                MenuItem menuLateralItem = (MenuItem)component;
+                PopUpMenu popUp = new PopUpMenu(Application.this, menuLateralItem.getIndex(), menuLateralItem.getEventMenuSelected(), menuLateralItem.getMenu().getSubMenu());
                 int x = Application.this.getX() + 52;
                 int y = Application.this.getY() + component.getY() + 86;
                 popUp.setLocation(x, y);
                 popUp.setVisible(true);
             }
         });
-        sidebar.initMenuItem();
+        menuLateral.initMenuItem();
         
-        bg.add(sidebar, "w 230!, spany 2");
+        bg.add(menuLateral, "w 230!, spany 2");
         bg.add(header, "h 50!, wrap");
         bg.add(mainForm, "w 100%, h 100%");
         
@@ -107,19 +107,19 @@ public class Application extends javax.swing.JFrame {
             @Override
             public void timingEvent(float fraction) {
                 double width;
-                if(sidebar.isShowMenu()){
+                if(menuLateral.isShowMenu()){
                     width=60 + (170 * (1f - fraction));
                 } else {
                     width=60 + (170 * fraction);
                 }
-                layout.setComponentConstraints(sidebar, "w " + width + "!, spany2");
-                sidebar.revalidate();
+                layout.setComponentConstraints(menuLateral, "w " + width + "!, spany2");
+                menuLateral.revalidate();
             }
 
             @Override
             public void end() {
-                sidebar.setShowMenu(!sidebar.isShowMenu());
-                sidebar.setEnableMenu(true);
+                menuLateral.setShowMenu(!menuLateral.isShowMenu());
+                menuLateral.setEnableMenu(true);
             }
         };
         animator = new Animator(500, target);
@@ -132,10 +132,10 @@ public class Application extends javax.swing.JFrame {
                if(!animator.isRunning()){
                    animator.start();
                }
-               sidebar.setEnableMenu(false);
+               menuLateral.setEnableMenu(false);
                
-               if(sidebar.isShowMenu()){
-                   sidebar.hideAllMenus();
+               if(menuLateral.isShowMenu()){
+                   menuLateral.hideAllMenus();
                }
             }
         });

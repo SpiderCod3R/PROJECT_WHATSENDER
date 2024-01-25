@@ -1,4 +1,4 @@
-package whatsender.application.menu.model_menu;
+package whatsender.gui.component.menu;
 
 import javax.swing.Icon;
 

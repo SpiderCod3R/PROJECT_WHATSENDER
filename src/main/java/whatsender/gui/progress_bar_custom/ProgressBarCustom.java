@@ -1,4 +1,4 @@
-package whatsender.application.component;
+package whatsender.gui.progress_bar_custom;
 
 import whatsender.application.splashscreen.*;
 import java.awt.Color;

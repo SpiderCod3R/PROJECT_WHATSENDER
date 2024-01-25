@@ -1,4 +1,4 @@
-package whatsender.application.component.popup;
+package whatsender.gui.modal.popup;
 
 import java.awt.Color;
 import java.awt.Component;

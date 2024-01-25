@@ -50,7 +50,7 @@ public class Card extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblIcon = new javax.swing.JLabel();
         lblPercentage = new javax.swing.JLabel();
-        progBar = new whatsender.application.component.ProgressBarCustom();
+        progBar = new whatsender.gui.progress_bar_custom.ProgressBarCustom();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -126,6 +126,6 @@ public class Card extends javax.swing.JPanel {
     private javax.swing.JLabel lblPercentage;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblValue;
-    private whatsender.application.component.ProgressBarCustom progBar;
+    private whatsender.gui.progress_bar_custom.ProgressBarCustom progBar;
     // End of variables declaration//GEN-END:variables
 }

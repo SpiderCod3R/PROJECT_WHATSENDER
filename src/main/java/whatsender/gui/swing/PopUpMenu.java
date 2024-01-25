@@ -8,7 +8,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import whatsender.application.menu.event_menu.EventMenuSelected;
+import whatsender.gui.component.menu.event_menu.EventMenuSelected;
 
 /**
  *

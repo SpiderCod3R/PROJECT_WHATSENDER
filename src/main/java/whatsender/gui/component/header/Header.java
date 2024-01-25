@@ -1,4 +1,4 @@
-package whatsender.application.component;
+package whatsender.gui.component.header;
 
 import java.awt.event.ActionListener;
 

@@ -64,7 +64,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="whatsender.application.component.ProfileBar" name="bannerProfile">
+    <Component class="whatsender.gui.component.menu.MenuLogo" name="bannerProfile">
     </Component>
     <Container class="javax.swing.JPanel" name="panelConnection">
       <Properties>

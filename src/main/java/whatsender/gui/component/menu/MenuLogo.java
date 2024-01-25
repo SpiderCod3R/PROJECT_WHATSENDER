@@ -1,11 +1,11 @@
-package whatsender.application.component;
+package whatsender.gui.component.menu;
 
 /**
  *
  * @author THE GRAND MASTER
  */
-public class ProfileBar extends javax.swing.JPanel {
-    public ProfileBar() {
+public class MenuLogo extends javax.swing.JPanel {
+    public MenuLogo() {
         initComponents();
         setOpaque(false);
     }

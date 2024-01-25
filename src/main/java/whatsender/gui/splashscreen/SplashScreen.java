@@ -122,7 +122,7 @@ public class SplashScreen extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        progressBar = new whatsender.application.component.ProgressBarCustom();
+        progressBar = new whatsender.gui.progress_bar_custom.ProgressBarCustom();
         lblProgressoMensagem = new javax.swing.JLabel();
         lblConectionTime = new javax.swing.JLabel();
         BackgroundImage = new javax.swing.JLabel();
@@ -185,6 +185,6 @@ public class SplashScreen extends javax.swing.JDialog {
     private javax.swing.JLabel BackgroundImage;
     private javax.swing.JLabel lblConectionTime;
     private javax.swing.JLabel lblProgressoMensagem;
-    private whatsender.application.component.ProgressBarCustom progressBar;
+    private whatsender.gui.progress_bar_custom.ProgressBarCustom progressBar;
     // End of variables declaration//GEN-END:variables
 }

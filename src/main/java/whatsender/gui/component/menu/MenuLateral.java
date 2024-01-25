@@ -14,13 +14,12 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import whatsender.application.menu.event_menu.EventMenu;
-import whatsender.application.menu.event_menu.EventMenuSelected;
-import whatsender.application.menu.model_menu.ModelMenu;
+import whatsender.gui.component.menu.event_menu.EventMenu;
+import whatsender.gui.component.menu.event_menu.EventMenuSelected;
 import icon.IconConstants;
 import whatsender.bot.driver.Browser;
 import whatsender.bot.driver.WhatsAppDriver;
-import whatsender.application.menu.event_menu.EventShowPopUpMenu;
+import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
 import whatsender.gui.swing.MenuAnimation;
 import whatsender.gui.swing.MenuItem;
 import whatsender.gui.scrollbar.ScrollBarCustom;
@@ -29,7 +28,7 @@ import whatsender.gui.scrollbar.ScrollBarCustom;
  *
  * @author THE GRAND MASTER
  */
-public class Sidebar extends javax.swing.JPanel {
+public class MenuLateral extends javax.swing.JPanel {
     private final MigLayout layout;
     private Animator animator;
     private EventMenuSelected event;
@@ -44,7 +43,7 @@ public class Sidebar extends javax.swing.JPanel {
         return showMenu;
     }
     
-    public Sidebar(WhatsAppDriver WHATSAPP) {
+    public MenuLateral(WhatsAppDriver WHATSAPP) {
         initComponents();
         setOpaque(false);
         
@@ -79,7 +78,7 @@ public class Sidebar extends javax.swing.JPanel {
         return new EventMenu() {
             @Override
             public boolean menuPressed(Component com, boolean open) {
-//                System.err.println("Sidebar press");
+//                System.err.println("MenuLateral press");
 //                return true;
                 if(enableMenu){
                     if(showMenu){
@@ -90,7 +89,7 @@ public class Sidebar extends javax.swing.JPanel {
                         }
                         return true;
                     }else {
-//                        System.err.println("Show pop up menu (Sidebar is Closed)");
+//                        System.err.println("Show pop up menu (MenuLateral is Closed)");
                           eventShowPopUpMenu.showPopUp(com);
                     }
                 }
@@ -141,7 +140,7 @@ public class Sidebar extends javax.swing.JPanel {
 
         sp = new javax.swing.JScrollPane();
         panelMenu = new javax.swing.JPanel();
-        bannerProfile = new whatsender.application.component.ProfileBar();
+        bannerProfile = new whatsender.gui.component.menu.MenuLogo();
         panelConnection = new javax.swing.JPanel();
         lblConnection = new javax.swing.JLabel();
         btnConnection = new whatsender.gui.swing.Button();
@@ -230,7 +229,7 @@ public class Sidebar extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.application.component.ProfileBar bannerProfile;
+    private whatsender.gui.component.menu.MenuLogo bannerProfile;
     private whatsender.gui.swing.Button btnConnection;
     private javax.swing.JLabel lblConnection;
     private javax.swing.JPanel panelConnection;
