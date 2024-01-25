@@ -5,7 +5,7 @@ import com.opencsv.bean.CsvBindByPosition;
 import java.nio.charset.Charset;
 import org.eclipse.persistence.internal.oxm.mappings.Field;
 
-public class Contact {
+public class Contato {
     
     @CsvBindByName
     @CsvBindByPosition(position = 0)
@@ -31,9 +31,9 @@ public class Contact {
     @CsvBindByPosition(position = 7)
     private String whatsNumber;
 
-    public Contact() {}
+    public Contato() {}
 
-    public Contact(String name, String whatsNumber, String data, String hour) {
+    public Contato(String name, String whatsNumber, String data, String hour) {
         this.name = name;
         this.whatsNumber = whatsNumber;
         this.data = data;

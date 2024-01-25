@@ -13,8 +13,8 @@ import javax.persistence.Table;
  * @author ALEXANDRE
  */
 @Entity
-@Table(name = Appointment.TABLE_NAME)
-public class Appointment implements Serializable {
+@Table(name = Consulta.TABLE_NAME)
+public class Consulta implements Serializable {
     public static final String TABLE_NAME= "tb_consultas";
     private static final long serialVersionUID = 1L;
     
@@ -29,7 +29,7 @@ public class Appointment implements Serializable {
     private String hora;
     private String doctor;
 
-    public Appointment(String contactName, String contactPhone, String data, String hora, String doctor) {
+    public Consulta(String contactName, String contactPhone, String data, String hora, String doctor) {
         this.contactName = contactName;
         this.contactPhone = contactPhone;
         this.data = data;
@@ -37,7 +37,7 @@ public class Appointment implements Serializable {
         this.doctor = doctor;
     }
 
-    public Appointment() {
+    public Consulta() {
     }
 
     public Integer getId() {
@@ -107,7 +107,7 @@ public class Appointment implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Appointment other = (Appointment) obj;
+        final Consulta other = (Consulta) obj;
         if (!Objects.equals(this.contactName, other.contactName)) {
             return false;
         }

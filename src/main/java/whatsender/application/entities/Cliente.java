@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = Client.TABLE_NAME)
-public class Client implements Serializable{
+@Table(name = Cliente.TABLE_NAME)
+public class Cliente implements Serializable{
     public static final String TABLE_NAME= "tb_clientes";
     
     private static final long serialVersionUID = 1L;
@@ -24,17 +24,17 @@ public class Client implements Serializable{
     private String phoneNumber;
     private String whatsApp;
 
-    public Client(){
+    public Cliente(){
     }
     
-    public Client(String clientName, String phoneNumber, String whatsApp) {
+    public Cliente(String clientName, String phoneNumber, String whatsApp) {
         super();
         this.clientName = clientName;
         this.phoneNumber = phoneNumber;
         this.whatsApp = whatsApp;
     }
 
-    public Client(Integer id, String clientName, String phoneNumber, String whatsApp) {
+    public Cliente(Integer id, String clientName, String phoneNumber, String whatsApp) {
         this.id = id;
         this.clientName = clientName;
         this.phoneNumber = phoneNumber;

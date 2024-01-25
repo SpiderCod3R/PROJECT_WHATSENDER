@@ -70,6 +70,11 @@ public class Application extends javax.swing.JFrame {
                         if(subMenuIndex==0){
                             mainForm.showForm(new ClientForm());
                         }
+                        if(subMenuIndex==1){
+                            mainForm.showForm(new FormHome(whatsAppDriver));
+                            DefinirPacote definirPacote = new DefinirPacote();
+                            definirPacote.setVisible(true);
+                        }
                         break;
                     case 3:
                         if(subMenuIndex==-1){

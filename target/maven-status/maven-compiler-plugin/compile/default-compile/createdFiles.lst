@@ -6,7 +6,6 @@ whatsender\application\component\Header$1.class
 whatsender\application\filechooser\JnaFileChooser$Mode.class
 whatsender\application\swing\effect\RippleEffect.class
 whatsender\application\bot\config\boot\SystemFile.class
-whatsender\application\entities\Appointment.class
 whatsender\application\entities\PacoteContratado.class
 whatsender\application\component\popup\Popup.class
 whatsender\application\main\DefinirPacote$6.class
@@ -25,6 +24,7 @@ whatsender\application\bot\config\logs\SystemLog.class
 whatsender\application\component\Menu.class
 whatsender\application\forms\FormHome$1.class
 whatsender\application\swing\input\FormatedTextField.class
+whatsender\application\entities\Consulta.class
 whatsender\application\swing\ProgressBarCustom$1.class
 whatsender\application\bot\config\logs\MessageLogs.class
 whatsender\application\bot\config\logs\Log.class
@@ -37,7 +37,6 @@ whatsender\application\main\ConfirmDialog.class
 whatsender\application\component\Menu$1.class
 whatsender\application\swing\MenuButton.class
 whatsender\application\component\popup\DefaultOption.class
-whatsender\application\entities\Contact.class
 whatsender\application\filechooser\win32\Comdlg32$OpenFileName.class
 whatsender\application\component\popup\GlassPanePopup$2.class
 whatsender\application\bot\config\utilities\Message.class
@@ -73,6 +72,7 @@ whatsender\application\bot\config\utilities\Browser.class
 icon\IconConstants.class
 whatsender\application\component\Card.class
 whatsender\application\swing\input\TextArea.class
+whatsender\application\forms\MensagemModal.class
 whatsender\application\component\popup\Option.class
 whatsender\application\forms\SendMessageForm.class
 whatsender\application\main\DefinirPacote$2.class
@@ -83,6 +83,7 @@ whatsender\application\main\DefinirPacote.class
 whatsender\application\forms\ClientForm.class
 whatsender\application\bot\config\logs\LogType.class
 whatsender\application\event\EventMenu.class
+whatsender\application\entities\Cliente.class
 whatsender\application\filechooser\JnaFileChooser.class
 whatsender\application\swing\MenuItem$1.class
 whatsender\application\forms\MessageConfirmationForm$1.class
@@ -93,6 +94,7 @@ whatsender\application\splashscreen\CurvesPanel.class
 whatsender\application\component\Profile.class
 whatsender\application\main\DefinirPacote$8.class
 whatsender\application\filechooser\Mode.class
+whatsender\application\entities\Contato.class
 whatsender\application\bot\config\logs\ErrorLogs.class
 whatsender\application\forms\MainForm.class
 whatsender\application\forms\FormHome.class
@@ -132,9 +134,9 @@ whatsender\application\swing\Button.class
 whatsender\application\swing\PopUpMenu$2.class
 whatsender\application\forms\MessageConfirmationForm.class
 whatsender\application\main\DefinirPacote$3.class
-whatsender\application\entities\Client.class
 whatsender\application\swing\Button$1.class
 whatsender\application\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 whatsender\application\bot\config\boot\FileConfig.class
 whatsender\application\forms\LogsForm.class
 whatsender\application\bot\config\boot\MessageInterface.class
+whatsender\application\forms\MensagemModal$1.class

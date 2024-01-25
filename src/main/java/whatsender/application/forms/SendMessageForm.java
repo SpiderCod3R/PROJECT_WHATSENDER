@@ -18,10 +18,10 @@ import javax.persistence.Persistence;
 import org.openqa.selenium.NoSuchWindowException;
 
 import whatsender.application.bot.config.utilities.WhatsAppDriver;
-import whatsender.application.entities.Appointment;
+import whatsender.application.entities.Consulta;
 import whatsender.application.helpers.LocaleHelper;
-import whatsender.application.entities.Client;
-import whatsender.application.entities.Contact;
+import whatsender.application.entities.Cliente;
+import whatsender.application.entities.Contato;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.LogMessage;
 import whatsender.application.filechooser.JnaFileChooser;
@@ -43,15 +43,15 @@ public class SendMessageForm extends javax.swing.JPanel {
     private Message message;
     private Application app;
     private Boolean messageChanged = false;
-    private Contact contact;
-    private Client client;
-    private Appointment appointment;
+    private Contato contato;
+    private Cliente client;
+    private Consulta consulta;
     private static WhatsAppDriver WHATSAPP = null;
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
     private EntityManager em;
     
-    List<Contact> lstContacts = new ArrayList<>();
+    List<Contato> lstContatos = new ArrayList<>();
     
     private void setBannerMessage(String message, BannerType bannerType){
         if(!pnBannerMessage.isVisible()){
@@ -108,7 +108,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         message = em.find(Message.class, 1);
         
         //LOCALIZAR O CLIENTE LOCAL NO DATABASE
-        client = em.find(Client.class, 1);
+        client = em.find(Cliente.class, 1);
         
         em.getTransaction().commit();
         
@@ -139,7 +139,7 @@ public class SendMessageForm extends javax.swing.JPanel {
             pnContactsList.setVisible(true);
             
             if(rbSingleContact.isSelected()){
-                if(contact != null){
+                if(contato != null){
                     btnSendMessage.setVisible(true);
                 }
             }
@@ -642,7 +642,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         loadMessageWithClientData(em);
         //inputMessageArea.setText(messageBuilder.addClientDataToBodyMessage(message.getBodyMessage(), client)); 
         
-        if(lstContacts.size() != 0){
+        if(lstContatos.size() != 0){
             btnSendMessage.setVisible(true);
         }else{
             btnSendMessage.setVisible(false);
@@ -663,9 +663,9 @@ public class SendMessageForm extends javax.swing.JPanel {
             String fileName = ch.getSelectedFile().toString();
             
             try {
-                lstContacts = new CsvToBeanBuilder(new FileReader(fileName, StandardCharsets.UTF_8))
+                lstContatos = new CsvToBeanBuilder(new FileReader(fileName, StandardCharsets.UTF_8))
                         .withSkipLines(1)  
-                        .withType(Contact.class)
+                        .withType(Contato.class)
                         .build()
                         .parse();
             } catch (FileNotFoundException ex) {
@@ -674,10 +674,10 @@ public class SendMessageForm extends javax.swing.JPanel {
                 Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            lstContacts.forEach(System.out::println);
+            lstContatos.forEach(System.out::println);
         }
         
-        if(lstContacts.size() != 0){
+        if(lstContatos.size() != 0){
             btnSendMessage.setVisible(true);
         }else{
             btnSendMessage.setVisible(false);
@@ -697,7 +697,7 @@ public class SendMessageForm extends javax.swing.JPanel {
 
             em.getTransaction().begin();
             
-            Client client = new Client(null, getInputClientName(), getInputClientPhone(), getInputClientWhatsApp());
+            Cliente client = new Cliente(null, getInputClientName(), getInputClientPhone(), getInputClientWhatsApp());
             em.persist(client);
             em.getTransaction().commit();
             setBannerMessage("Dados do Cliente Salvos com Sucesso", BannerType.SUCCESS);
@@ -716,7 +716,7 @@ public class SendMessageForm extends javax.swing.JPanel {
             
             pnContactsList.setVisible(true);
             
-            if(contact != null){
+            if(contato != null){
                 btnSendMessage.setVisible(true);
             }else{
                 btnSendMessage.setVisible(false);
@@ -730,24 +730,24 @@ public class SendMessageForm extends javax.swing.JPanel {
     private void btnAddToMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToMessageActionPerformed
         messageBuilder = new MessageBuilder();
         
-        contact = new Contact(
+        contato = new Contato(
             inputContactName.getText(), 
             inputSingleContact.getText(),
             inputDate.getText(),
             inputHora.getText() );
         
-        appointment = new Appointment(
-            contact.getName(), 
-            contact.getWhatsNumber(), 
-            contact.getData(), 
-            contact.getHour(), 
+        consulta = new Consulta(
+            contato.getName(), 
+            contato.getWhatsNumber(), 
+            contato.getData(), 
+            contato.getHour(), 
             inputDoctor.getText());
         
         String messageReloaded;
         messageChanged = true;
         
         try {
-            messageReloaded = messageBuilder.AddContactToMessage(inputMessageArea.getText(), appointment);
+            messageReloaded = messageBuilder.AddContactToMessage(inputMessageArea.getText(), consulta);
             setBannerMessage(LocaleHelper.CLIENT_DATA_ADDED_TO_MESSAGE, BannerType.INFO);
             inputMessageArea.setText(messageReloaded);  
             btnSendMessage.setVisible(true);
@@ -759,6 +759,11 @@ public class SendMessageForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddToMessageActionPerformed
 
     private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
+        
+        
+        
+        
+        
         if(!emf.isOpen()){
             emf = Persistence.createEntityManagerFactory("whatsender-jpa");
             em = emf.createEntityManager();
@@ -776,21 +781,21 @@ public class SendMessageForm extends javax.swing.JPanel {
                 
                 if(WHATSAPP.is_connected()){
                   
-                    WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(appointment.getContactPhone()));
+                    WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(consulta.getContactPhone()));
                     WHATSAPP.sendMsg(message.getBodyMessage());
                     
-                    if(appointment.getId() == null){
+                    if(consulta.getId() == null){
                         em.getTransaction().begin();
-                        em.persist(appointment);
+                        em.persist(consulta);
                         em.getTransaction().commit();
                     }else{
-                        appointment = em.find(Appointment.class, appointment.getId());
+                        consulta = em.find(Consulta.class, consulta.getId());
                     }
 
                     LogMessage messageLog = new LogMessage(
                             null, 
                             message.getBodyMessage(), 
-                            appointment, 
+                            consulta, 
                             LogType.SUCCESS, 
                             MessageType.NORMAL );
 
@@ -808,27 +813,38 @@ public class SendMessageForm extends javax.swing.JPanel {
         }
         
         if(rbMultiContacts.isSelected()){
-            for (Contact contact : this.lstContacts){
+            for (Contato contato : this.lstContatos){
                 try {
                     WHATSAPP.waitForConnection();
                     if(WHATSAPP.is_connected()){
-                        String messageEmLote = messageBuilder.AddMessage(inputMessageArea.getText(), contact).replace("\n", " ").replace("\r", " ");
+                        String messageEmLote = messageBuilder.AddMessage(inputMessageArea.getText(), contato).replace("\n", " ").replace("\r", " ");
                         
-                        WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contact.getWhatsNumber()));
+                        WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contato.getWhatsNumber()));
                         WHATSAPP.sendMsg(messageEmLote);
+                       
+                        consulta = new Consulta(
+                            contato.getName(), 
+                            contato.getWhatsNumber(), 
+                            contato.getData(), 
+                            contato.getHour(), 
+                            contato.getDoctor());
                         
-                        if(appointment.getId() == null){
-                            em.getTransaction().begin();
-                            em.persist(appointment);
-                            em.getTransaction().commit();
-                        }else{
-                            appointment = em.find(Appointment.class, appointment.getId());
-                        }
+                        em.getTransaction().begin();
+                        em.persist(consulta);
+                        em.getTransaction().commit();
+                        
+//                        if(consulta.getId() == null){
+//                            em.getTransaction().begin();
+//                            em.persist(consulta);
+//                            em.getTransaction().commit();
+//                        }else{
+//                            consulta = em.find(Consulta.class, consulta.getId());
+//                        }
 
                         LogMessage messageLog = new LogMessage(
                                 null, 
-                                message.getBodyMessage(), 
-                                appointment, 
+                                messageEmLote, 
+                                consulta, 
                                 LogType.SUCCESS, 
                                 MessageType.LOTE );
 
@@ -853,7 +869,7 @@ public class SendMessageForm extends javax.swing.JPanel {
 
     public void loadMessageWithClientData(EntityManager manager){
         manager.getTransaction().begin();
-        client  = manager.find(Client.class, 1);  
+        client  = manager.find(Cliente.class, 1);  
         message = manager.find(Message.class, 1);
         manager.getTransaction().commit();
 
@@ -863,7 +879,7 @@ public class SendMessageForm extends javax.swing.JPanel {
     
     public void loadClientData(EntityManager em){
         em.getTransaction().begin();
-        Client client  = em.find(Client.class, 1);
+        Cliente client  = em.find(Cliente.class, 1);
         em.getTransaction().commit();
         
         lblClientName.setText(client.getClientName());

@@ -34,7 +34,7 @@ public class LogMessage implements Serializable  {
     
     @ManyToOne
     @JoinColumn(name = "consulta_id")
-    private Appointment contactAppointment;
+    private Consulta contactAppointment;
     
     @Column(name = "data")
     private String data;
@@ -50,7 +50,7 @@ public class LogMessage implements Serializable  {
     
     
     
-    public LogMessage(Integer id, String message, Appointment contactAppointment, LogType logType, MessageType messageType) {
+    public LogMessage(Integer id, String message, Consulta contactAppointment, LogType logType, MessageType messageType) {
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
@@ -95,11 +95,11 @@ public class LogMessage implements Serializable  {
         this.message = message;
     }
 
-    public Appointment getContactAppointment() {
+    public Consulta getContactAppointment() {
         return contactAppointment;
     }
 
-    public void setContactAppointment(Appointment contactAppointment) {
+    public void setContactAppointment(Consulta contactAppointment) {
         this.contactAppointment = contactAppointment;
     }
 

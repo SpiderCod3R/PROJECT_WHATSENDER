@@ -26,7 +26,7 @@ public class SplashScreen extends javax.swing.JDialog {
     private EntityManagerFactory emf;
     private EntityManager em;
     private static boolean RUNNING = false;
-    private static int TIMER = 5;
+    private static int TIMER = 600; //10 MINUTOS
     
     private static DefinirPacote definirPacote;
     
@@ -54,24 +54,7 @@ public class SplashScreen extends javax.swing.JDialog {
         
         switch (progress) {
             case 10:
-                this.em.getTransaction().begin();
-                if (this.em.isOpen() ) {
-                    //LOCALIZAR O MENSAGEM PADRAO NO DATABASE
-                    Message message = this.em.find(Message.class, 1);
-                    this.em.getTransaction().commit();
-                    
-                    if(message == null){
-                        this.em.getTransaction().begin();
-                        MessageBuilder messageBuilder = new MessageBuilder();
-                        Message new_message = new Message(null, messageBuilder.loadDefaultMessage());
-                        this.em.persist(new_message);
-                        this.em.getTransaction().commit();
-                    }
-                }
-                this.em.close();
-                this.emf.close();
-                break;
-            case 50:
+                
                 //LOCALIZAR O PACOTE CONTRATADO NO DATABASE
                 definirPacote = new DefinirPacote();
                 
@@ -87,8 +70,29 @@ public class SplashScreen extends javax.swing.JDialog {
                 
                 this.em.close();
                 this.emf.close();
+                
                 break;
-            case 70:
+            case 25:
+                //LOCALIZAR O MENSAGEM PADRAO NO DATABASE
+                if (!definirPacote.isActive() ) {
+                    this.em.getTransaction().begin();
+                    if (this.em.isOpen() ) {
+                        Message message = this.em.find(Message.class, 1);
+                        this.em.getTransaction().commit();
+
+                        if(message == null){
+                            this.em.getTransaction().begin();
+                            MessageBuilder messageBuilder = new MessageBuilder();
+                            Message new_message = new Message(null, messageBuilder.loadDefaultMessage());
+                            this.em.persist(new_message);
+                            this.em.getTransaction().commit();
+                        }
+                    }
+                }
+                this.em.close();
+                this.emf.close();
+                break;
+            case 50:
                 if (!definirPacote.isActive() ) {
                     WHATSAPP = new WhatsAppDriver(Browser.CHROME);
                     WHATSAPP.open();
@@ -109,10 +113,12 @@ public class SplashScreen extends javax.swing.JDialog {
                 }
                 break;
             case 100:
-                if(WHATSAPP.is_connected() == true){
-                    new Application(WHATSAPP).setVisible(true);
-                    Thread.interrupted();
-                    dispose();
+                if (!definirPacote.isActive() ) {
+                    if(WHATSAPP.is_connected() == true){
+                        new Application(WHATSAPP).setVisible(true);
+                        Thread.interrupted();
+                        dispose();
+                    }
                 }
                 break;
         } 
@@ -278,9 +284,9 @@ public class SplashScreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 try {
-                    doTask("Verificando arquivo de mensagem ...", 10);
-                    doTask("Verificando Pacote contratado ...", 50);
-                    doTask("Verificando WhatsApp Web ...", 70);
+                    doTask("Verificando Pacote contratado ...", 10);
+                    doTask("Verificando arquivo de mensagem ...", 25);
+                    doTask("Verificando WhatsApp Web ...", 50);
                     
                     if(RUNNING == true){
                         doTask("Conectado. Seja Bem Vindo ...", 100);
@@ -295,7 +301,7 @@ public class SplashScreen extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectionActionPerformed
-        TIMER = 5;
+        TIMER = 600;
         RUNNING = true;
         
         lblConnectionMessage.setVisible(false);

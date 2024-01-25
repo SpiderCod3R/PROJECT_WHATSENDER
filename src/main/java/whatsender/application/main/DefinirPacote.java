@@ -3,6 +3,11 @@ package whatsender.application.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,13 +19,16 @@ import whatsender.application.entities.Pacote;
 import whatsender.application.entities.PacoteContratado;
 import whatsender.application.forms.ClientForm;
 import whatsender.application.forms.MessageConfirmationForm;
+import whatsender.application.forms.MensagemModal;
 import whatsender.application.model.ModelCard;
+import whatsender.application.splashscreen.SplashScreen;
 
 /**
  *
  * @author ALEXANDRE
  */
 public class DefinirPacote extends javax.swing.JFrame {
+
     private EntityManagerFactory emf;
     private EntityManager em;
     private Pacote pacote1, pacote2, pacote3, pacote4;
@@ -89,7 +97,6 @@ public class DefinirPacote extends javax.swing.JFrame {
         cardPackage3 = new whatsender.application.component.CardPackage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(238, 238, 238));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -218,16 +225,66 @@ public class DefinirPacote extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPacoteStandardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteStandardActionPerformed
+    private void aderir_ou_renovar_contrato(Pacote pacote){
         this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
         this.em = this.emf.createEntityManager();
         
-        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote1);
+        this.em.getTransaction().begin();
+        PacoteContratado pacoteContratado = new PacoteContratado(null, pacote, pacote.getQtdeMensagensMensais());        
+        this.em.persist(pacoteContratado);
+        this.em.getTransaction().commit();
+        
+        /***
+         * Verificar funcionalidade de Logs para pacote contratado
+         */
+
+        System.out.println("Contrato 1 SALVO");
+        this.em.close();
+        this.emf.close();
+    }
+    
+    public static void setTimeOut(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
+    }
+    
+    private MensagemModal showMensagemModal(Pacote pacote){
+        MensagemModal mensagemModal = new MensagemModal();
+        mensagemModal.setMenssagemContrato(pacote);
+        mensagemModal.setTitle("Aviso!");
+        mensagemModal.loadProgressBar();
+        
+        return mensagemModal;
+    }
+    
+    public void salvaContrato(Pacote pacote){
+        //aderir_ou_renovar_contrato(pacote);
+        GlassPanePopup.closePopupLast();                
+
+        MensagemModal mensagemModal = showMensagemModal(pacote);
+
+        setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 2000);
+        /***
+         * Fechar janela e voltar para o SplashScreen
+         */
+
+        setTimeOut(() -> dispose(), 5000);
+        setTimeOut(() -> new SplashScreen(null, true).setVisible(true), 7000);
+    }
+    
+    private void btnPacoteStandardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteStandardActionPerformed
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote1);
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Contrato 1 SALVO");
-                GlassPanePopup.closePopupLast();
+                salvaContrato(pacote1);
             }
         });
         GlassPanePopup.showPopup(obj);
@@ -239,8 +296,7 @@ public class DefinirPacote extends javax.swing.JFrame {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Contrato 2 SALVO");
-                GlassPanePopup.closePopupLast();
+                salvaContrato(pacote2);
             }
         });
         GlassPanePopup.showPopup(obj);
@@ -251,8 +307,7 @@ public class DefinirPacote extends javax.swing.JFrame {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Contrato 3 SALVO");
-                GlassPanePopup.closePopupLast();
+                salvaContrato(pacote3);
             }
         });
         GlassPanePopup.showPopup(obj);
@@ -263,8 +318,7 @@ public class DefinirPacote extends javax.swing.JFrame {
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Contrato 4 SALVO");
-                GlassPanePopup.closePopupLast();
+                salvaContrato(pacote4);
             }
         });
         GlassPanePopup.showPopup(obj);

@@ -1,8 +1,8 @@
 package whatsender.application.helpers;
 
 import java.text.DateFormatSymbols;
-import whatsender.application.entities.Appointment;
-import whatsender.application.entities.Client;
+import whatsender.application.entities.Consulta;
+import whatsender.application.entities.Cliente;
 import whatsender.application.entities.Message;
 import whatsender.application.interfaces.MessageInterface;
 
@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import whatsender.application.entities.Contact;
+import whatsender.application.entities.Contato;
 
 
 
@@ -33,7 +33,7 @@ public class MessageBuilder implements MessageInterface {
     }
     
     @Override
-    public String AddContactToMessage(String message, Appointment appointment) throws ParseException{
+    public String AddContactToMessage(String message, Consulta appointment) throws ParseException{
         String newMessage;
         SimpleDateFormat sdf = new SimpleDateFormat(datePattern, new Locale ("pt", "BR"));
         Date date= sdf.parse(appointment.getData());
@@ -50,7 +50,7 @@ public class MessageBuilder implements MessageInterface {
         return newMessage;
     }
     
-    public String AddMessage(String message, Contact contact) throws ParseException{
+    public String AddMessage(String message, Contato contact) throws ParseException{
         String newMessage;
         SimpleDateFormat sdf = new SimpleDateFormat(datePattern, new Locale ("pt", "BR"));
         Date date= sdf.parse(contact.getData());
@@ -68,7 +68,7 @@ public class MessageBuilder implements MessageInterface {
     }
 
     @Override
-    public String addClientDataToBodyMessage(String message, Client client) {
+    public String addClientDataToBodyMessage(String message, Cliente client) {
         StringBuilder stringBuilder = new StringBuilder(message.trim());
         stringBuilder.insert(DEFAULT_MESSAGE.trim().length(), client.toString());
         return stringBuilder.toString();

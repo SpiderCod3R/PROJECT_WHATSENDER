@@ -29,12 +29,17 @@ public class PacoteContratado implements Serializable{
     @JoinColumn(name = "pacote_id")
     private Pacote pacote;
     
+    private Integer mensagensContratada;
+    private Integer mensagensDisponiveis;
+    private Integer mensagensEnviadas;
+    
 
     public PacoteContratado() {}
 
-    public PacoteContratado(Integer id, Pacote pacote) {
+    public PacoteContratado(Integer id, Pacote pacote, Integer mensagensContratada) {
         this.id = id;
         this.pacote = pacote;
+        this.mensagensContratada = mensagensContratada;
     }
 
     public Integer getId() {
@@ -53,10 +58,35 @@ public class PacoteContratado implements Serializable{
         this.pacote = pacote;
     }
 
+    public Integer getMensagensContratada() {
+        return mensagensContratada;
+    }
+
+    public void setMensagensContratada(Integer mensagensContratada) {
+        this.mensagensContratada = mensagensContratada;
+    }
+
+    public Integer getMensagensDisponiveis() {
+        return mensagensDisponiveis;
+    }
+
+    public void setMensagensDisponiveis(Integer mensagensDisponiveis) {
+        this.mensagensDisponiveis = mensagensDisponiveis;
+    }
+
+    public Integer getMensagensEnviadas() {
+        return mensagensEnviadas;
+    }
+
+    public void setMensagensEnviadas(Integer mensagensEnviadas) {
+        this.mensagensEnviadas = mensagensEnviadas;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.pacote);
         return hash;
     }
 
@@ -75,11 +105,22 @@ public class PacoteContratado implements Serializable{
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        return Objects.equals(this.pacote, other.pacote);
+        if (!Objects.equals(this.pacote, other.pacote)) {
+            return false;
+        }
+        if (!Objects.equals(this.mensagensContratada, other.mensagensContratada)) {
+            return false;
+        }
+        if (!Objects.equals(this.mensagensDisponiveis, other.mensagensDisponiveis)) {
+            return false;
+        }
+        return Objects.equals(this.mensagensEnviadas, other.mensagensEnviadas);
     }
 
     @Override
     public String toString() {
-        return "PacoteContratado{" + "id=" + id + ", pacote=" + pacote + '}';
-    } 
+        return "PacoteContratado{" + "id=" + id + ", pacote=" + pacote + ", mensagensContratada=" + mensagensContratada + ", mensagensDisponiveis=" + mensagensDisponiveis + ", mensagensEnviadas=" + mensagensEnviadas + '}';
+    }
+
+    
 }

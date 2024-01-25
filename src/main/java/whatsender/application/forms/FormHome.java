@@ -68,7 +68,11 @@ public class FormHome extends javax.swing.JPanel {
         
         if (tblLogModel.getRowCount() == 0){
             for (LogMessage log : lstsNormalLogMessages){
-                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getContactAppointment().getContactPhone(), log.getMessageType(), log.getLogType()});
+                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getContactAppointment().getDoctor(), log.getContactAppointment().getContactName() ,log.getContactAppointment().getContactPhone(), log.getMessageType(), log.getLogType()});
+            }
+            
+            for (LogMessage log : lstsExtLogMessages){
+                tblLogModel.addRow(new Object[]{log.getId(), log.getData(), log.getHour(), log.getContactAppointment().getDoctor(), log.getContactAppointment().getContactName(), log.getContactAppointment().getContactPhone(), log.getMessageType(), log.getLogType()});
             }
         }
     }
@@ -117,22 +121,22 @@ public class FormHome extends javax.swing.JPanel {
         cardMultiMessagesSended.setBackground(new java.awt.Color(43, 83, 204));
         cardMultiMessagesSended.setColorGradient(new java.awt.Color(153, 204, 255));
 
-        cardApplicationErrors.setBackground(new java.awt.Color(255, 51, 51));
-        cardApplicationErrors.setColorGradient(new java.awt.Color(51, 0, 51));
+        cardApplicationErrors.setBackground(new java.awt.Color(255, 177, 177));
+        cardApplicationErrors.setColorGradient(new java.awt.Color(131, 30, 54));
 
         tblLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Data", "Hora", "WhatsApp", "Tipo"
+                "Id", "Data", "Hora", "Médico", "Paciente", "WhatsApp", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -196,8 +200,8 @@ public class FormHome extends javax.swing.JPanel {
                     .addComponent(cardMessageSended, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardMultiMessagesSended, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardApplicationErrors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
