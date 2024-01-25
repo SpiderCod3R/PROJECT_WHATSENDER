@@ -25,8 +25,8 @@ public class SplashScreen extends javax.swing.JDialog {
     private static WhatsAppDriver WHATSAPP;
     private EntityManagerFactory emf;
     private EntityManager em;
-    private static boolean RUNNING = false;
-    private static int TIMER = 600; //10 MINUTOS
+    private static boolean CONNECTED = true;
+    private static int TIMER = 300; //5 MINUTOS
     
     private static DefinirPacote definirPacote;
     
@@ -53,7 +53,7 @@ public class SplashScreen extends javax.swing.JDialog {
         this.em = this.emf.createEntityManager();
         
         switch (progress) {
-            case 10:
+            case 25:
                 
                 //LOCALIZAR O PACOTE CONTRATADO NO DATABASE
                 definirPacote = new DefinirPacote();
@@ -72,7 +72,7 @@ public class SplashScreen extends javax.swing.JDialog {
                 this.emf.close();
                 
                 break;
-            case 25:
+            case 50:
                 //LOCALIZAR O MENSAGEM PADRAO NO DATABASE
                 if (!definirPacote.isActive() ) {
                     this.em.getTransaction().begin();
@@ -92,24 +92,28 @@ public class SplashScreen extends javax.swing.JDialog {
                 this.em.close();
                 this.emf.close();
                 break;
-            case 50:
+            case 95:
                 if (!definirPacote.isActive() ) {
                     WHATSAPP = new WhatsAppDriver(Browser.CHROME);
                     WHATSAPP.open();
                     lblConectionTime.setVisible(true);
 
-                    showTimeForWhatsAppConection();
+                    lblConectionTime.setText("Aguardando Conexão com o WhatsApp Web.");
                     WHATSAPP.waitForConnection();
+                    //showTimeForWhatsAppConection();
+                    
+                    if (WHATSAPP.is_connected() != CONNECTED){
 
-                    if (WHATSAPP.is_connected() == false){
-                        if(RUNNING == false){
-                            lblConectionTime.setText("Tempo esgotado.");
-                            lblConnectionMessage.setVisible(true);
-                            lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
-                            btnConnection.setVisible(true);
-                        }
+                        lblConectionTime.setText("Tempo esgotado.");
+                        lblConnectionMessage.setVisible(true);
+                        lblConnectionMessage.setText("Por favor tente novamente no botao vermelho ao lado.");
+                        btnConnection.setVisible(true);
+
                         Thread.interrupted();
+                    } else {
+                       
                     }
+                    
                 }
                 break;
             case 100:
@@ -128,18 +132,27 @@ public class SplashScreen extends javax.swing.JDialog {
     private void showTimeForWhatsAppConection(){
         lblConectionTime.setText("Tempo para Conectar o WhatsApp Web:");
         lblTimer.setVisible(true);
-       
+        
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
+            
             public void run() {
                 
               lblTimer.setText(TIMER + "s");
-              TIMER--;
-
-              if (TIMER < 0) {
-                 RUNNING = false;
+              
+              
+              WHATSAPP.waitForConnection();
+              if (WHATSAPP.is_connected() == true){
+                CONNECTED = false;
                 timer.cancel();
               }
+
+              if (TIMER < 0) {
+                 CONNECTED = false;
+                timer.cancel();
+              }
+              
+              TIMER--;
             }
         }, 0, 1000);
         
@@ -284,11 +297,11 @@ public class SplashScreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 try {
-                    doTask("Verificando Pacote contratado ...", 10);
-                    doTask("Verificando arquivo de mensagem ...", 25);
-                    doTask("Verificando WhatsApp Web ...", 50);
+                    doTask("Verificando Pacote contratado ...", 25);
+                    doTask("Verificando arquivo de mensagem ...", 50);
+                    doTask("Verificando WhatsApp Web ...", 95);
                     
-                    if(RUNNING == true){
+                    if(CONNECTED == true){
                         doTask("Conectado. Seja Bem Vindo ...", 100);
                         dispose();
                         curvesPanel1.stop();
@@ -302,7 +315,7 @@ public class SplashScreen extends javax.swing.JDialog {
 
     private void btnConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectionActionPerformed
         TIMER = 600;
-        RUNNING = true;
+        CONNECTED = true;
         
         lblConnectionMessage.setVisible(false);
         WHATSAPP.waitForConnection();
@@ -314,7 +327,7 @@ public class SplashScreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 try {
-                    if(RUNNING == true){
+                    if(CONNECTED == true){
                         doTask("Conectado. Seja Bem Vindo ...", 100);
                     } 
                 } catch (Exception e) {

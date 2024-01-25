@@ -69,8 +69,8 @@ public class WhatsAppDriver {
             driver = new ChromeDriver(service, options);
         }
 
-        longWait = new WebDriverWait(driver, 600);
-        shortWait = new WebDriverWait(driver, 300);
+        longWait = new WebDriverWait(driver, 300);
+        shortWait = new WebDriverWait(driver, 200);
 
         this.connected = false;
     }
