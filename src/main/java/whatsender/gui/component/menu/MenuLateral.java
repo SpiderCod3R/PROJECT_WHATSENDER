@@ -16,7 +16,6 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.gui.component.menu.event_menu.EventMenu;
 import whatsender.gui.component.menu.event_menu.EventMenuSelected;
-import icon.IconConstants;
 import whatsender.bot.driver.Browser;
 import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
@@ -103,13 +102,13 @@ public class MenuLateral extends javax.swing.JPanel {
     }
     
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgDash)), "Painel"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgSendMessage)), "Enviar mensagem"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgDash)), "Painel"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgSendMessage)), "Enviar mensagem"));
         
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgConfig)), "Configurações", "Editar Cliente", "Gerenciar Pacote"));
-        //addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgLogs)), "Logs"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgConfig)), "Configurações", "Editar Cliente", "Gerenciar Pacote"));
+        //addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgLogs)), "Logs"));
         
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(IconConstants.imgExit)), "Fechar"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgExit)), "Fechar"));
     }
 
     public void addEvent(EventMenuSelected event) {
