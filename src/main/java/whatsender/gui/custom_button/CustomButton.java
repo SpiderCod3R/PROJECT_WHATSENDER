@@ -14,14 +14,14 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
-public class SwingCustomButton extends JButton{
+public class CustomButton extends JButton{
     private int ROUND=5;
     private Color shadowColor = new Color(170,170,170);
     private BufferedImage imageShadow;
     private final Insets shadowSize = new Insets(2,5,8,5);
     private final RippleEffect rippleEffect = new RippleEffect(this);
         
-    public SwingCustomButton() {
+    public CustomButton() {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBorder(new EmptyBorder(10, 12,15,12));
         setContentAreaFilled(false);

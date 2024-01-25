@@ -11,12 +11,15 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\popup\GlassPanePopup.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\PacoteContratado.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\SendMessageForm.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\PanelSlide.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\LogsForm.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\card\Card.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\MenuLogo.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\custom_button\CustomButton.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\progress_bar_custom\ProgressBarCustom.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\PopUpMenu.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\FormHome.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\component\ModernTextField.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\Button.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\PanelPopUp.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Cliente.java
@@ -29,7 +32,6 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\splashscreen\GradientPanel.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\ModelMenu.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\input\TextArea.java
-C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\IconConstants.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\system\filechooser\Mode.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Contato.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\system\filechooser\win32\Comdlg32.java
@@ -39,7 +41,9 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\helpers\BannerType.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\MenuItem.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\logs\LogType.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\component\ModernPasswordField.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\card\ModelCard.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\LoginScreen.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\event_menu\EventShowPopUpMenu.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Message.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\bot\test_bot\ConnectionDB.java
@@ -50,7 +54,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\card\CardPackage.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\system\filechooser\win32\Shell32.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\start\Start.java
-C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\custom_button\SwingCustomButton.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\PanelLoading.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\ClientForm.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\popup\Popup.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\JRadioButtonCustom.java
@@ -60,8 +64,10 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\start\DefinirPacote.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\header\Header.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\start\Application.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\Icones.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\effect\RippleEffect.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\helpers\MessageInterface.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\PanelLogin.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\event_menu\EventMenu.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\splashscreen\CurvesPanel.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\component\menu\event_menu\EventMenuSelected.java
@@ -72,6 +78,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\splashscreen\ProgressBarCustom.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Consulta.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\popup\DefaultOption.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\PanelTransparent.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\MainForm.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\popup\WindowSnapshots.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\MensagemModal.java

@@ -139,7 +139,7 @@
         </Component>
         <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputComercialPhone">
         </Component>
-        <Component class="whatsender.gui.custom_button.SwingCustomButton" name="btnSave">
+        <Component class="whatsender.gui.custom_button.CustomButton" name="btnSave">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -153,7 +153,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="whatsender.gui.custom_button.SwingCustomButton" name="btnSave1">
+        <Component class="whatsender.gui.custom_button.CustomButton" name="btnSave1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="ff" type="rgb"/>
