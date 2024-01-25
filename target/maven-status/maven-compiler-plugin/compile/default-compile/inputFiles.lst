@@ -25,6 +25,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\swing\ImageAvatar.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\component\popup\GlassPanePopup.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Cliente.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\component\ProgressBarCustom.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\main\DefinirPacote.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\bot\config\utilities\WhatsAppDriver.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\event\EventMenu.java
@@ -58,6 +59,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\interfaces\MessageInterface.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\bot\config\boot\WhatsResponse.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\helpers\FormatterHelper.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\splashscreen2\SplashScreen.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\bot\test\GNS_PROJECT_WHATSENDER.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\swing\input\TextArea.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\ClientForm.java

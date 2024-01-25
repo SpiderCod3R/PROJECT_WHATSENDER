@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>whatsender.application.splashscreen.SplashScreen</exec.mainClass>
+        <exec.mainClass>whatsender.application.splashscreen2.SplashScreen</exec.mainClass>
     </properties>
     <pluginRepositories>
         <pluginRepository>
@@ -166,6 +166,11 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE190</version>
         </dependency>
     </dependencies>
 </project>

@@ -217,7 +217,7 @@ public class SplashScreen extends javax.swing.JDialog {
         pnConectionWhatsAppLayout.setHorizontalGroup(
             pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnConectionWhatsAppLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(pnConectionWhatsAppLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnConectionWhatsAppLayout.createSequentialGroup()
                         .addComponent(lblConectionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +259,7 @@ public class SplashScreen extends javax.swing.JDialog {
                             .addGroup(curvesPanel1Layout.createSequentialGroup()
                                 .addGap(109, 109, 109)
                                 .addComponent(lblProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 116, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(curvesPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(pnConectionWhatsApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
