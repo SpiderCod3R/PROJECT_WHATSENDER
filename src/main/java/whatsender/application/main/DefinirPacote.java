@@ -238,7 +238,6 @@ public class DefinirPacote extends javax.swing.JFrame {
          * Verificar funcionalidade de Logs para pacote contratado
          */
 
-        System.out.println("Contrato 1 SALVO");
         this.em.close();
         this.emf.close();
     }
@@ -265,7 +264,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }
     
     public void salvaContrato(Pacote pacote){
-        //aderir_ou_renovar_contrato(pacote);
+        aderir_ou_renovar_contrato(pacote);
         GlassPanePopup.closePopupLast();                
 
         MensagemModal mensagemModal = showMensagemModal(pacote);
