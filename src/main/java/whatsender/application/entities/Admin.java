@@ -1,23 +1,48 @@
 package whatsender.application.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-/**
- *
- * @author ALEXANDRE
- */
-public class Admin {
+@Entity
+@Table(name = Admin.TABLE_NAME)
+public class Admin implements Serializable {
+    public static final String TABLE_NAME= "tb_admin_user";
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int adminId;
+    
     private String admin_name;
+    private String password;
 
     public Admin() {
+        super();
     }
 
-    public Admin(int adminId, String admin_name) {
+    public Admin(int adminId, String admin_name, String hashKey) {
+        super();
         this.adminId = adminId;
         this.admin_name = admin_name;
+        this.password = hashKey;
+    }
+    
+    public Boolean isNull(){
+        return (("".equals(getAdmin_name())) || ("".equals(getPassword())));
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public int getAdminId() {
         return adminId;
     }
@@ -32,6 +57,15 @@ public class Admin {
 
     public void setAdmin_name(String admin_name) {
         this.admin_name = admin_name;
+    }
+    
+    public boolean check_login(){
+        System.out.println(this.getAdmin_name());
+        System.out.println(this.getPassword());
+        if ( (this.getAdmin_name().equals("GlobalnetsisAdmin")) && (this.getPassword().equals("d68a34c7d9dc69b57fb93db459b1b4ac67b11aea7df4ff851124e0c2b2aa9e88"))){
+            return true;
+        }
+        return false;
     }
 
     @Override

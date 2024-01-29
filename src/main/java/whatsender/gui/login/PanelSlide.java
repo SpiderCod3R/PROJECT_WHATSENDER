@@ -8,9 +8,13 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
+import org.hibernate.SessionFactory;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -24,6 +28,8 @@ public class PanelSlide extends javax.swing.JLayeredPane {
     private boolean slideLeft;
     private final PanelLogin panelLogin;
     private final PanelLoading panelLoading;
+    private EntityManagerFactory emf;
+    private EntityManager em;
     
     private Thread th;
     private JFrame jFrame;
@@ -131,7 +137,13 @@ public class PanelSlide extends javax.swing.JLayeredPane {
             public void run() {
                 try{
                     Thread.sleep(2000);
-                    panelLoading.doneLogin(new Admin(1, "Globalnetsis"));
+                    Admin loginData = new Admin(1, userName, password);
+                    
+                    if(loginData.check_login()){
+                        panelLoading.doneLogin(loginData);
+                    } else {
+                        panelLoading.showError("Usuário ou senha incorreta.");
+                    } 
                 }catch(InterruptedException e){
                     panelLoading.showError("Erro interno da Aplicação.");
                 }catch(Exception e){
