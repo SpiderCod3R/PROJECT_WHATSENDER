@@ -91,6 +91,7 @@ whatsender\application\start\DefinirPacote$8.class
 whatsender\gui\swing\MenuButton$1.class
 whatsender\application\splashscreen\SplashScreen$6.class
 whatsender\application\forms\SendMessageForm$5.class
+whatsender\gui\login\PanelSlide$4.class
 whatsender\system\filechooser\Action.class
 whatsender\application\forms\FormHome$1.class
 whatsender\gui\modal\popup\DefaultLayoutCallBack.class
@@ -106,12 +107,14 @@ whatsender\gui\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 whatsender\application\forms\SendMessageForm$6.class
 whatsender\gui\modal\MessageConfirmationForm.class
 whatsender\gui\swing\MenuItem$2.class
+whatsender\gui\login\PanelLoading$1.class
 whatsender\gui\swing\MenuButton$2.class
 whatsender\gui\login\component\ModernTextField$3.class
 whatsender\gui\login\component\ModernTextField.class
 whatsender\gui\modal\popup\Option.class
 whatsender\bot\test_bot\ConnectionDB.class
 whatsender\gui\swing\MenuItem$1.class
+whatsender\application\entities\Admin.class
 whatsender\application\start\DefinirPacote$1.class
 whatsender\application\start\DefinirPacote$7.class
 whatsender\gui\swing\JRadioButtonCustom.class
@@ -131,7 +134,9 @@ whatsender\application\start\DefinirPacote$6.class
 whatsender\application\splashscreen\SplashScreen$5.class
 whatsender\gui\swing\effect\RippleEffect$Effect.class
 whatsender\gui\swing\MenuButton.class
+whatsender\gui\login\PanelSlide$5.class
 whatsender\application\entities\Message.class
+whatsender\gui\login\component\ImageAvatar.class
 whatsender\gui\component\menu\MenuLogo.class
 whatsender\gui\login\PanelSlide$3.class
 whatsender\gui\modal\MensagemModal.class

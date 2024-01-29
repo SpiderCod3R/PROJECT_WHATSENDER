@@ -84,6 +84,18 @@ public class PanelLogin extends javax.swing.JPanel {
     public void addEventLogin(ActionListener event){
         btnLogin.addActionListener(event);
     }
+    
+    public boolean checkLogin(){
+        return !(txtUser.getText().trim().equals("") || String.valueOf(txtPassword.getPassword()).trim().equals(""));
+    }
+    
+    public String getUserName(){
+        return txtUser.getText().trim();
+    }
+    
+    public String getPassword(){
+        return String.valueOf(txtPassword.getPassword());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private whatsender.gui.custom_button.CustomButton btnLogin;

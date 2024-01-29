@@ -8,10 +8,14 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import whatsender.application.entities.Admin;
+import whatsender.application.start.DefinirPacote;
 
 
 public class PanelSlide extends javax.swing.JLayeredPane {
@@ -21,14 +25,21 @@ public class PanelSlide extends javax.swing.JLayeredPane {
     private final PanelLogin panelLogin;
     private final PanelLoading panelLoading;
     
+    private Thread th;
+    private JFrame jFrame;
+    
     private MigLayout layout;
+
+    public void setFram(JFrame jFrame) {
+        this.jFrame = jFrame;
+    }
 
     public PanelSlide() {
         initComponents();
         Color color = new Color(67,99,132);
         layout = new MigLayout("inset 0", "[fill]", "[fill]");
         
-        setPreferredSize(new Dimension(350,450));
+        setPreferredSize(new Dimension(369, 511));
         setBackground(color);
         setLayout(layout);
         
@@ -65,7 +76,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                     panelLogin.setVisible(false);
                 }else {
                     panelLoading.setVisible(false);
-                    //panelLoading.reset();
+                    panelLoading.reset();
                 }
             }
         };
@@ -80,15 +91,29 @@ public class PanelSlide extends javax.swing.JLayeredPane {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!animator.isRunning()){
-                    showSlide(true);
+                    if(panelLogin.checkLogin()){
+                        showSlide(true); 
+                        login(panelLogin.getUserName(), panelLogin.getPassword());
+                    }
                 }
             }
+        });
+        
+        panelLoading.addEventContinuarParaPacote(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefinirPacote telaDePacotes = new DefinirPacote();
+                telaDePacotes.setVisible(true);
+                jFrame.dispose();
+            }
+            
         });
         
         panelLoading.addEventBack(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!animator.isRunning()){
+                    th.interrupt();
                     showSlide(false);
                 }
             }
@@ -99,7 +124,27 @@ public class PanelSlide extends javax.swing.JLayeredPane {
         slideLeft = show;
         animator.start();
     }
+    
+    private void login(String userName, String password){
+        th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(2000);
+                    panelLoading.doneLogin(new Admin(1, "Globalnetsis"));
+                }catch(InterruptedException e){
+                    panelLoading.showError("Erro interno da Aplicação.");
+                }catch(Exception e){
+                    panelLoading.showError(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        });
+        th.start();
+    }
 
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,7 +157,7 @@ public class PanelSlide extends javax.swing.JLayeredPane {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -6,12 +6,13 @@ import java.awt.Color;
  *
  * @author ALEXANDRE
  */
-public class LoginScreen extends javax.swing.JDialog {
+public class LoginScreen extends javax.swing.JFrame {
 
     public LoginScreen(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        //super(parent, modal);
         initComponents();
         getContentPane().setBackground(new Color(255,255,255));
+        panelSlide.setFram(LoginScreen.this);
     }
 
     @SuppressWarnings("unchecked")
@@ -35,9 +36,7 @@ public class LoginScreen extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 505, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 511, Short.MAX_VALUE)
         );
 
         pack();
