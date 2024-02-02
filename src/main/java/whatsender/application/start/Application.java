@@ -10,7 +10,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import whatsender.bot.driver.Browser;
+
 import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.gui.component.header.Header;
 import whatsender.gui.component.menu.MenuLateral;
@@ -20,9 +20,12 @@ import whatsender.application.forms.ClientForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
 import whatsender.application.forms.SendMessageForm;
-import whatsender.application.forms.LogsForm;
+import whatsender.gui.login.LoginScreen;
+import whatsender.gui.modal.MessageConfirmationForm;
 import whatsender.gui.swing.MenuItem;
 import whatsender.gui.swing.PopUpMenu;
+
+import whatsender.gui.modal.popup.GlassPanePopup;
 
 /**
  *
@@ -38,6 +41,7 @@ public class Application extends javax.swing.JFrame {
     
     public Application(WhatsAppDriver whatsapp) {
         initComponents();
+        GlassPanePopup.install(this);
         __init__(whatsapp);
     }
     
@@ -68,12 +72,32 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 2:
                         if(subMenuIndex==0){
-                            mainForm.showForm(new ClientForm());
+                           MessageConfirmationForm obj = new MessageConfirmationForm("Aviso!", "Deseja entrar nas configurações do Cliente?");
+                            obj.eventOK(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent ae) {
+                                    mainForm.showForm(new ClientForm());
+                                    //dispose();
+                                }
+                            });
+                            GlassPanePopup.showPopup(obj); 
+                            
                         }
                         if(subMenuIndex==1){
-                            mainForm.showForm(new FormHome(whatsAppDriver));
-                            DefinirPacote definirPacote = new DefinirPacote();
-                            definirPacote.setVisible(true);
+                            
+                            MessageConfirmationForm obj = new MessageConfirmationForm("Aviso!", "Deseja Fechar a aplicação e entrar nas configurações de Pacote?");
+                            obj.eventOK(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent ae) {
+//                                    mainForm.showForm(new FormHome(whatsAppDriver));
+//                                    DefinirPacote definirPacote = new DefinirPacote();
+//                                    definirPacote.setVisible(true);
+                                    LoginScreen telaLogin = new LoginScreen(new javax.swing.JFrame(), true);
+                                    telaLogin.setVisible(true);
+                                    dispose();
+                                }
+                            });
+                            GlassPanePopup.showPopup(obj); 
                         }
                         break;
                     case 3:

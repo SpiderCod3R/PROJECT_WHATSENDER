@@ -32,14 +32,16 @@ public class PacoteContratado implements Serializable{
     private Integer mensagensContratada;
     private Integer mensagensDisponiveis;
     private Integer mensagensEnviadas;
+    private String tipoPacote;
     
 
     public PacoteContratado() {}
 
-    public PacoteContratado(Integer id, Pacote pacote, Integer mensagensContratada) {
+    public PacoteContratado(Integer id, Pacote pacote, Integer mensagensContratada, String tipoPacote) {
         this.id = id;
         this.pacote = pacote;
         this.mensagensContratada = mensagensContratada;
+        this.tipoPacote = tipoPacote;
     }
 
     public Integer getId() {
@@ -80,6 +82,14 @@ public class PacoteContratado implements Serializable{
 
     public void setMensagensEnviadas(Integer mensagensEnviadas) {
         this.mensagensEnviadas = mensagensEnviadas;
+    }
+
+    public String getTipoPacote() {
+        return tipoPacote;
+    }
+
+    public void setTipoPacote(String tipoPacote) {
+        this.tipoPacote = tipoPacote;
     }
 
     @Override

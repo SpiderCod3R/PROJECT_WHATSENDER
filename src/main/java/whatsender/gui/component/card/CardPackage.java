@@ -35,9 +35,13 @@ public class CardPackage extends javax.swing.JPanel {
         DecimalFormat df= new DecimalFormat("#, ##0.##");
         lblTitle.setText(cardData.getTitle());
         lblDescricao.setText(cardData.getDescription().stripLeading());
-        lblValue.setText("Valor: " + df.format(cardData.getValues()) + " R$");
-        lblQtdMensagens.setText("Mensagens: " + cardData.getQtdeMessages());
-        //lblIcon.setIcon(cardData.getIcon());
+        lblValue.setText("Valor: R$ " + df.format(cardData.getValues()));
+        
+        if(cardData.getQtdeMessages().contains("9999")){
+            lblQtdMensagens.setText("Mensagens: INFINITAS");
+        }else{
+          lblQtdMensagens.setText("Mensagens: " + cardData.getQtdeMessages());  
+        }
     }
     
     @SuppressWarnings("unchecked")

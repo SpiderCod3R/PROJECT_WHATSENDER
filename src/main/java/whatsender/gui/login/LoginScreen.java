@@ -26,6 +26,8 @@ public class LoginScreen extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        panelSlide.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -36,7 +38,7 @@ public class LoginScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 511, Short.MAX_VALUE)
+            .addComponent(panelSlide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

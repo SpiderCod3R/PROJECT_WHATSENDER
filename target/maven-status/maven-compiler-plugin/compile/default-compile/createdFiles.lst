@@ -1,4 +1,5 @@
 whatsender\application\splashscreen\SplashScreen.class
+whatsender\application\start\DefinirPacote$10.class
 whatsender\application\start\Start$1.class
 whatsender\gui\swing\effect\RippleEffect$1.class
 whatsender\application\splashscreen\ProgressBarCustom$1.class
@@ -22,12 +23,15 @@ whatsender\system\filechooser\win32\Comdlg32.class
 whatsender\application\start\Start.class
 whatsender\gui\component\header\Header$1.class
 whatsender\gui\progress_bar_custom\ProgressBarCustom.class
+whatsender\application\start\DefinirPacote$15.class
 whatsender\gui\swing\MenuAnimation$1.class
 whatsender\application\splashscreen\SplashScreen$4.class
 whatsender\application\start\Application.class
 whatsender\application\start\Start$1$1.class
+whatsender\application\start\DefinirPacote$16.class
 whatsender\gui\swing\shadow\ShadowRenderer.class
 whatsender\application\splashscreen\SplashScreen$3.class
+whatsender\gui\login\PanelSlide$6.class
 whatsender\bot\test_bot\GNS_PROJECT_WHATSENDER.class
 whatsender\gui\modal\popup\GlassPanePopup.class
 whatsender\gui\modal\popup\Popup.class
@@ -59,6 +63,7 @@ whatsender\gui\login\component\ModernTextField$2.class
 whatsender\application\forms\SendMessageForm$4.class
 whatsender\application\start\DefinirPacote$9.class
 whatsender\application\forms\SendMessageForm$1.class
+whatsender\application\start\DefinirPacote$17.class
 whatsender\application\helpers\LocaleHelper.class
 whatsender\application\helpers\FormatterHelper.class
 whatsender\system\filechooser\JnaFileChooser$Action.class
@@ -86,10 +91,12 @@ whatsender\gui\swing\input\TextArea$TextAreaUI.class
 whatsender\gui\login\component\ModernPasswordField.class
 whatsender\application\start\Application$1.class
 whatsender\gui\login\component\ModernPasswordField$3.class
+whatsender\application\start\DefinirPacote$13.class
 whatsender\gui\component\header\Header.class
 whatsender\application\start\DefinirPacote$8.class
 whatsender\gui\swing\MenuButton$1.class
 whatsender\application\splashscreen\SplashScreen$6.class
+whatsender\application\start\Application$1$2.class
 whatsender\application\forms\SendMessageForm$5.class
 whatsender\gui\login\PanelSlide$4.class
 whatsender\system\filechooser\Action.class
@@ -130,12 +137,15 @@ whatsender\gui\swing\PanelPopUp.class
 whatsender\gui\modal\MensagemModal$1.class
 whatsender\gui\modal\popup\Popup$1.class
 whatsender\gui\login\PanelSlide$2.class
+whatsender\application\start\DefinirPacote$11.class
 whatsender\application\start\DefinirPacote$6.class
 whatsender\application\splashscreen\SplashScreen$5.class
 whatsender\gui\swing\effect\RippleEffect$Effect.class
+whatsender\application\start\DefinirPacote$14.class
 whatsender\gui\swing\MenuButton.class
 whatsender\gui\login\PanelSlide$5.class
 whatsender\application\entities\Message.class
+whatsender\application\start\Application$1$1.class
 whatsender\gui\login\component\ImageAvatar.class
 whatsender\gui\component\menu\MenuLogo.class
 whatsender\gui\login\PanelSlide$3.class
@@ -163,6 +173,7 @@ whatsender\system\filechooser\JnaFileChooser.class
 whatsender\application\forms\LogsForm.class
 whatsender\gui\splashscreen\SplashScreen$2.class
 whatsender\gui\component\card\CardPackage.class
+whatsender\application\start\DefinirPacote$12.class
 whatsender\gui\swing\input\FormatedTextField$TextUI.class
 whatsender\application\helpers\MessageInterface.class
 whatsender\application\start\DefinirPacote$4.class

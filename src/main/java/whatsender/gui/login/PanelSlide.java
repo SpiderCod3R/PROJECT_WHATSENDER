@@ -115,6 +115,14 @@ public class PanelSlide extends javax.swing.JLayeredPane {
             
         });
         
+        panelLoading.addEventContinuarParaDadosCliente(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                jFrame.dispose();
+            }
+        });
+        
         panelLoading.addEventBack(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
 import whatsender.gui.modal.popup.GlassPanePopup;
 import whatsender.application.entities.Pacote;
 
@@ -23,6 +25,13 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
     public MessageConfirmationForm() {
     }
     
+    public MessageConfirmationForm(String title, String messageBox) {
+        initComponents();
+        setOpaque(false);
+        setTxtPacote(messageBox);
+        setLblTitle(title);
+    }
+    
     public MessageConfirmationForm( Pacote pacote) {
         initComponents();
         setOpaque(false);
@@ -38,6 +47,22 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
 
         
         txtPacote.setText(messageBox);
+    }
+
+    public String getLblTitle() {
+        return lblTitle.getText();
+    }
+
+    public void setLblTitle(String title) {
+        this.lblTitle.setText(title);
+    }
+    
+    public String getTxtPacote() {
+        return txtPacote.getText();
+    }
+
+    public void setTxtPacote(String txtPacote) {
+        this.txtPacote.setText(txtPacote);
     }
     
     @Override
@@ -60,7 +85,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPacote = new javax.swing.JTextPane();
         btnCancelar = new whatsender.gui.swing.Button();
@@ -69,8 +94,8 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Deseja contratar esse pacote?");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitle.setText("Deseja contratar esse pacote?");
 
         txtPacote.setText("TESTE");
         jScrollPane1.setViewportView(txtPacote);
@@ -100,7 +125,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 130, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -112,7 +137,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -134,8 +159,8 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private whatsender.gui.swing.Button btnCancelar;
     private whatsender.gui.swing.Button btnOK;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextPane txtPacote;
     // End of variables declaration//GEN-END:variables
 }
