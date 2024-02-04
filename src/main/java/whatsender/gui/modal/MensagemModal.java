@@ -22,6 +22,8 @@ public class MensagemModal extends javax.swing.JPanel {
         + "Contratado com Sucesso.";
 
     private String title = "";
+    private String progressMessage = "";
+    private boolean ferramenta_de_enviar_mensagem_sendo_executada = false;
     
     public MensagemModal() {
         initComponents();
@@ -32,6 +34,20 @@ public class MensagemModal extends javax.swing.JPanel {
         
     }
     
+    public void ferramenta_de_enviar_mensagem_executando(Boolean value){
+        this.ferramenta_de_enviar_mensagem_sendo_executada = value;
+    }
+    
+    public void setProgressMessage(String progressMessage){
+        this.progressMessage = progressMessage;
+        lblProgressMessage.setText(this.progressMessage);
+    }
+    
+    public void setMenssagem(String mensagem) {
+        this.messageBox = mensagem;
+        txtPacote.setText(this.messageBox);
+    }
+    
     public void setMenssagemContrato(Pacote pacote) {
         this.messageBox = messageBox.
             replace("[PACOTE]", pacote.getPacoteNome()).
@@ -40,14 +56,22 @@ public class MensagemModal extends javax.swing.JPanel {
         
         txtPacote.setText(this.messageBox);
     }
-    
+
     public void loadProgressBar(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    doTask("Salvando Pacote contratado ...", 50);
-                    doTask("Pacote Salvo com sucesso ...", 100);                   
+                    
+                    if(ferramenta_de_enviar_mensagem_sendo_executada){
+                        doTask("Verificando Conexao ...", 25);
+                        doTask("Preparando mensagens ...", 50);
+                        doTask("Enviando mensagens ...", 75);
+                        doTask("Mensagens Enviadas .", 100);
+                    } else{
+                        doTask("Salvando Pacote contratado ...", 50);
+                        doTask("Pacote Salvo com sucesso ...", 100);
+                    }                   
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -61,7 +85,7 @@ public class MensagemModal extends javax.swing.JPanel {
     }
     
     private void doTask(String progressMessage, int progress) throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         progressBar1.setValue(progress);
         lblProgressMessage.setText(progressMessage);
     }

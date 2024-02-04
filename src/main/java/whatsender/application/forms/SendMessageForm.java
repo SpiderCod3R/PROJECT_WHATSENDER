@@ -2,6 +2,8 @@ package whatsender.application.forms;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -24,6 +25,7 @@ import whatsender.application.entities.Cliente;
 import whatsender.application.entities.Contato;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.LogMessage;
+import whatsender.application.entities.Pacote;
 import whatsender.system.filechooser.JnaFileChooser;
 import whatsender.application.helpers.BannerType;
 import whatsender.application.helpers.FormatterHelper;
@@ -31,6 +33,9 @@ import whatsender.application.logs.LogType;
 import whatsender.application.helpers.MessageBuilder;
 import whatsender.application.helpers.MessageType;
 import whatsender.application.start.Application;
+import whatsender.gui.modal.MensagemModal;
+import whatsender.gui.modal.MessageConfirmationForm;
+import whatsender.gui.modal.popup.GlassPanePopup;
 
 
 
@@ -47,6 +52,7 @@ public class SendMessageForm extends javax.swing.JPanel {
     private Cliente client;
     private Consulta consulta;
     private static WhatsAppDriver WHATSAPP = null;
+    private static MessageConfirmationForm obj;
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
     private EntityManager em;
@@ -758,113 +764,152 @@ public class SendMessageForm extends javax.swing.JPanel {
         btnAddToMessage.setVisible(false);
     }//GEN-LAST:event_btnAddToMessageActionPerformed
 
-    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
-        
-        
-        
-        
-        
+    private void inicilizaEntityManagerFactory(){
         if(!emf.isOpen()){
             emf = Persistence.createEntityManagerFactory("whatsender-jpa");
             em = emf.createEntityManager();
         }else{
             em = emf.createEntityManager();
         }
-        
+    }
+    
+    private void preparaMensagemParaEnvio(){
         message = new Message();
         messageBuilder = new MessageBuilder();
         message.setBodyMessage(inputMessageArea.getText().replace("\n", " ").replace("\r", " "));
+    }
+    
+    private void enviarMensagemUnica(){
+        inicilizaEntityManagerFactory();
+        preparaMensagemParaEnvio();
         
-        if(rbSingleContact.isSelected()){
+        try {
+            WHATSAPP.waitForConnection();
+
+            if(WHATSAPP.is_connected()){
+
+                WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(consulta.getContactPhone()));
+                WHATSAPP.sendMsg(message.getBodyMessage());
+
+                if(consulta.getId() == null){
+                    em.getTransaction().begin();
+                    em.persist(consulta);
+                    em.getTransaction().commit();
+                }else{
+                    consulta = em.find(Consulta.class, consulta.getId());
+                }
+
+                LogMessage messageLog = new LogMessage(
+                        null, 
+                        message.getBodyMessage(), 
+                        consulta, 
+                        LogType.SUCCESS, 
+                        MessageType.NORMAL );
+
+                em.getTransaction().begin();
+                em.persist(messageLog);
+                em.getTransaction().commit();
+                
+                
+                if(emf.isOpen()){
+                    em.close();
+                    emf.close();
+                }
+                
+            }
+            
+            setBannerMessage(LocaleHelper.MESSAGE_SENDED, BannerType.SUCCESS);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.out.println("Erro De Time Out");
+        }catch (NoSuchWindowException e){
+            System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
+        }  
+    }
+    
+    public void enviarVariasMensagens(){
+        inicilizaEntityManagerFactory();
+        preparaMensagemParaEnvio();
+        
+        
+        for (Contato contato : this.lstContatos){
             try {
                 WHATSAPP.waitForConnection();
-                
                 if(WHATSAPP.is_connected()){
-                  
-                    WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(consulta.getContactPhone()));
-                    WHATSAPP.sendMsg(message.getBodyMessage());
-                    
-                    if(consulta.getId() == null){
-                        em.getTransaction().begin();
-                        em.persist(consulta);
-                        em.getTransaction().commit();
-                    }else{
-                        consulta = em.find(Consulta.class, consulta.getId());
-                    }
+                    String messageEmLote = messageBuilder.
+                            AddMessage(
+                                    inputMessageArea.getText(), 
+                                    contato).
+                            replace("\n", " ").
+                            replace("\r", " ");
+
+                    WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contato.getWhatsNumber()));
+                    WHATSAPP.sendMsg(messageEmLote);
+
+                    consulta = new Consulta(
+                        contato.getName(), 
+                        contato.getWhatsNumber(), 
+                        contato.getData(), 
+                        contato.getHour(), 
+                        contato.getDoctor());
+
+                    em.getTransaction().begin();
+                    em.persist(consulta);
+                    em.getTransaction().commit();
 
                     LogMessage messageLog = new LogMessage(
                             null, 
-                            message.getBodyMessage(), 
+                            messageEmLote, 
                             consulta, 
                             LogType.SUCCESS, 
-                            MessageType.NORMAL );
+                            MessageType.LOTE );
 
                     em.getTransaction().begin();
                     em.persist(messageLog);
                     em.getTransaction().commit();
+                    
+                    if(emf.isOpen()){
+                        em.close();
+                        emf.close();
+                    }
                 }
             } catch (org.openqa.selenium.TimeoutException e) {
                 System.out.println("Erro De Time Out");
             }catch (NoSuchWindowException e){
                 System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
+            } catch (ParseException ex) {
+                Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
             } 
-
-            setBannerMessage(LocaleHelper.MESSAGE_SENDED, BannerType.SUCCESS);
         }
-        
-        if(rbMultiContacts.isSelected()){
-            for (Contato contato : this.lstContatos){
-                try {
-                    WHATSAPP.waitForConnection();
-                    if(WHATSAPP.is_connected()){
-                        String messageEmLote = messageBuilder.AddMessage(inputMessageArea.getText(), contato).replace("\n", " ").replace("\r", " ");
-                        
-                        WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contato.getWhatsNumber()));
-                        WHATSAPP.sendMsg(messageEmLote);
-                       
-                        consulta = new Consulta(
-                            contato.getName(), 
-                            contato.getWhatsNumber(), 
-                            contato.getData(), 
-                            contato.getHour(), 
-                            contato.getDoctor());
-                        
-                        em.getTransaction().begin();
-                        em.persist(consulta);
-                        em.getTransaction().commit();
-                        
-//                        if(consulta.getId() == null){
-//                            em.getTransaction().begin();
-//                            em.persist(consulta);
-//                            em.getTransaction().commit();
-//                        }else{
-//                            consulta = em.find(Consulta.class, consulta.getId());
-//                        }
-
-                        LogMessage messageLog = new LogMessage(
-                                null, 
-                                messageEmLote, 
-                                consulta, 
-                                LogType.SUCCESS, 
-                                MessageType.LOTE );
-
-                        em.getTransaction().begin();
-                        em.persist(messageLog);
-                        em.getTransaction().commit();
-                        }
-                } catch (org.openqa.selenium.TimeoutException e) {
-                System.out.println("Erro De Time Out");
-                }catch (NoSuchWindowException e){
-                    System.err.println("Janela do Chrome Controlada pela Aplicação foi Fechada");
-                } catch (ParseException ex) {
-                    Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+    }
+    
+    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
+        if(rbSingleContact.isSelected()){
+            obj = new MessageConfirmationForm("Atenção!", "Deseja enviar esta mensagem?");
+        } else{
+            if (rbMultiContacts.isSelected()){
+                obj = new MessageConfirmationForm("Atenção!", "Deseja enviar estas mensagens?");
             }
-
         }
-
-        em.close();
-        emf.close();
+        GlassPanePopup.showPopup(obj); 
+        obj.eventOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if(rbSingleContact.isSelected()){
+                    MensagemModal mensagemModal = showProgressoMensagemModal();
+                    setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                    GlassPanePopup.closePopupLast();
+                    setTimeOut(() -> enviarMensagemUnica(), 3000);
+                }
+                if (rbMultiContacts.isSelected()){
+                    
+                    MensagemModal mensagemModal = showProgressoMensagemModal();
+                    setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                    GlassPanePopup.closePopupLast();
+                    setTimeOut(() -> enviarVariasMensagens(), 3000);
+                }
+            }
+        });
+        
     }//GEN-LAST:event_btnSendMessageActionPerformed
 
     public void loadMessageWithClientData(EntityManager manager){
@@ -897,6 +942,27 @@ public class SendMessageForm extends javax.swing.JPanel {
 
     public String getInputClientPhone() {
         return this.inputClientPhone.getText();
+    }
+    
+    public static void setTimeOut(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
+    }
+    
+    private MensagemModal showProgressoMensagemModal(){
+        MensagemModal mensagemModal = new MensagemModal();
+        mensagemModal.setTitle("Aviso!");
+        mensagemModal.setMenssagem("Aguarde enquanto a aplicação envia as mensagens.");
+        mensagemModal.ferramenta_de_enviar_mensagem_executando(true);
+        mensagemModal.loadProgressBar();
+        return mensagemModal;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

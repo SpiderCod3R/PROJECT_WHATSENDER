@@ -20,6 +20,7 @@ import whatsender.application.forms.ClientForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
 import whatsender.application.forms.SendMessageForm;
+import whatsender.bot.driver.Browser;
 import whatsender.gui.login.LoginScreen;
 import whatsender.gui.modal.MessageConfirmationForm;
 import whatsender.gui.swing.MenuItem;
@@ -252,7 +253,7 @@ public class Application extends javax.swing.JFrame {
         }  
     }
     
-    /* public static void main(String args[]) {
+    public static void main(String args[]) {
        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -271,15 +272,15 @@ public class Application extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        WhatsAppDriver WHATSAPP = new WhatsAppDriver(Browser.CHROME);
         FlatIntelliJLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Application().setVisible(true);
+                new Application(WHATSAPP).setVisible(true);
             }
         });
     }
-    */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;

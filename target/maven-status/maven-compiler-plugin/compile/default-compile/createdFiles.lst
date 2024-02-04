@@ -118,6 +118,7 @@ whatsender\gui\swing\MenuItem$2.class
 whatsender\gui\login\PanelLoading$1.class
 whatsender\gui\swing\MenuButton$2.class
 whatsender\gui\login\component\ModernTextField$3.class
+whatsender\application\start\Application$7.class
 whatsender\gui\login\component\ModernTextField.class
 whatsender\gui\modal\popup\Option.class
 whatsender\bot\test_bot\ConnectionDB.class
@@ -140,6 +141,7 @@ whatsender\gui\modal\popup\Popup$1.class
 whatsender\gui\login\PanelSlide$2.class
 whatsender\application\start\DefinirPacote$11.class
 whatsender\application\start\DefinirPacote$6.class
+whatsender\application\forms\SendMessageForm$7.class
 whatsender\application\splashscreen\SplashScreen$5.class
 whatsender\gui\swing\effect\RippleEffect$Effect.class
 whatsender\application\start\DefinirPacote$14.class

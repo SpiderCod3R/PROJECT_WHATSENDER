@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -72,7 +73,7 @@ public class GlassPanePopup {
             }
         });
     }
-
+    
     public static void showPopup(Component component, Option option, String name) {
         if (component.getMouseListeners().length == 0) {
             component.addMouseListener(new MouseAdapter() {

@@ -107,7 +107,7 @@ public class SplashScreen extends javax.swing.JDialog {
                     lblConectionTime.setVisible(true);
 
                     lblConectionTime.setText("Aguardando Conexão com o WhatsApp Web.");
-                    WHATSAPP.waitForConnection();
+                    //WHATSAPP.waitForConnection();
                     //showTimeForWhatsAppConection();
                     
                     if (WHATSAPP.is_connected() != CONNECTED){
@@ -121,11 +121,11 @@ public class SplashScreen extends javax.swing.JDialog {
                 break;
             case 100:
                 if (!definirPacote.isActive() ) {
-                    if(WHATSAPP.is_connected() == true){
+                    //if(WHATSAPP.is_connected() == true){
                         new Application(WHATSAPP).setVisible(true);
                         Thread.interrupted();
                         dispose();
-                    }
+                    //}
                 }
                 break;
         } 
