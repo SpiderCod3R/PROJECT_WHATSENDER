@@ -26,6 +26,7 @@ import whatsender.application.entities.Contato;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.LogMessage;
 import whatsender.application.entities.Pacote;
+import whatsender.application.entities.PacoteContratado;
 import whatsender.system.filechooser.JnaFileChooser;
 import whatsender.application.helpers.BannerType;
 import whatsender.application.helpers.FormatterHelper;
@@ -53,6 +54,7 @@ public class SendMessageForm extends javax.swing.JPanel {
     private Consulta consulta;
     private static WhatsAppDriver WHATSAPP = null;
     private static MessageConfirmationForm obj;
+    private PacoteContratado pacoteContratado;
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
     private EntityManager em;
@@ -883,33 +885,56 @@ public class SendMessageForm extends javax.swing.JPanel {
     }
     
     private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
-        if(rbSingleContact.isSelected()){
-            obj = new MessageConfirmationForm("Atenção!", "Deseja enviar esta mensagem?");
-        } else{
-            if (rbMultiContacts.isSelected()){
-                obj = new MessageConfirmationForm("Atenção!", "Deseja enviar estas mensagens?");
+        /***
+         * VERIFICAR PRIMEIRAMENTE O PACOTE CONTRATADO
+         */
+        inicilizaEntityManagerFactory();
+        this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
+        
+        /***
+         * VERIFICAR QUANTIDADE DE MENSAGENS DISPONÍVEIS
+         * {
+         *  CASO 1: SOMENTE PODE ENVIAR MENSAGENS SE TIVER MENSAGENS DISPONIVEIS
+         *          MAIOR OU IGUAL A 1 MENSAGEM
+         * 
+         *  CASO 2: NÃO PODE ENVIAR CASO TENHO ZERO MENSAGENS DISPONIVEIS 
+         *          PARA ESSE CASO DEVE-SE PEDIR PARA ENTRAR EM CONTATO COM O
+         *          FORNECEDOR DO APLICATIVO.
+         * }
+         */
+        if(this.pacoteContratado != null){
+            if(this.pacoteContratado.getMensagensDisponiveis() >=1){
+                if(rbSingleContact.isSelected()){
+                    obj = new MessageConfirmationForm("Atenção!", "Deseja enviar esta mensagem?");
+                } else{
+                    if (rbMultiContacts.isSelected()){
+                        obj = new MessageConfirmationForm("Atenção!", "Deseja enviar estas mensagens?");
+                    }
+                }
+                GlassPanePopup.showPopup(obj); 
+                obj.eventOK(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if(rbSingleContact.isSelected()){
+                            MensagemModal mensagemModal = showProgressoMensagemModal();
+                            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                            GlassPanePopup.closePopupLast();
+                            setTimeOut(() -> enviarMensagemUnica(), 3000);
+                        }
+                        if (rbMultiContacts.isSelected()){
+                            MensagemModal mensagemModal = showProgressoMensagemModal();
+                            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                            GlassPanePopup.closePopupLast();
+                            setTimeOut(() -> enviarVariasMensagens(), 3000);
+                        }
+                    }
+                });
+            } else {
+                MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
+                setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
             }
         }
-        GlassPanePopup.showPopup(obj); 
-        obj.eventOK(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if(rbSingleContact.isSelected()){
-                    MensagemModal mensagemModal = showProgressoMensagemModal();
-                    setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
-                    GlassPanePopup.closePopupLast();
-                    setTimeOut(() -> enviarMensagemUnica(), 3000);
-                }
-                if (rbMultiContacts.isSelected()){
-                    
-                    MensagemModal mensagemModal = showProgressoMensagemModal();
-                    setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
-                    GlassPanePopup.closePopupLast();
-                    setTimeOut(() -> enviarVariasMensagens(), 3000);
-                }
-            }
-        });
-        
+ 
     }//GEN-LAST:event_btnSendMessageActionPerformed
 
     public void loadMessageWithClientData(EntityManager manager){
@@ -959,9 +984,21 @@ public class SendMessageForm extends javax.swing.JPanel {
     private MensagemModal showProgressoMensagemModal(){
         MensagemModal mensagemModal = new MensagemModal();
         mensagemModal.setTitle("Aviso!");
-        mensagemModal.setMenssagem("Aguarde enquanto a aplicação envia as mensagens.");
+        mensagemModal.setMenssagem(
+                "Aguarde enquanto a "
+                + "aplicação envia as mensagens.");
         mensagemModal.ferramenta_de_enviar_mensagem_executando(true);
         mensagemModal.loadProgressBar();
+        return mensagemModal;
+    }
+    
+    private MensagemModal exibirMensagemPacoteExpirado(){
+        MensagemModal mensagemModal = new MensagemModal();
+        mensagemModal.setTitle("Aviso!");
+        mensagemModal.setMenssagem("Seu pacote de mensagens expirou. "
+                                + "\nEntre em contato com o "
+                                + "fornecedor do Sistema.");
+        mensagemModal.setInvisible();
         return mensagemModal;
     }
 

@@ -89,6 +89,11 @@ public class MensagemModal extends javax.swing.JPanel {
         progressBar1.setValue(progress);
         lblProgressMessage.setText(progressMessage);
     }
+    
+    public void setInvisible() {
+        progressBar1.setVisible(false);
+        lblProgressMessage.setVisible(false);
+    }
 
     @Override
     protected void paintComponent(Graphics grphcs) {

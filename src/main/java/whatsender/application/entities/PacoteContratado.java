@@ -41,6 +41,8 @@ public class PacoteContratado implements Serializable{
         this.id = id;
         this.pacote = pacote;
         this.mensagensContratada = mensagensContratada;
+        this.mensagensDisponiveis = mensagensContratada;
+        this.mensagensEnviadas = 0;
         this.tipoPacote = tipoPacote;
     }
 
