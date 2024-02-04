@@ -26,6 +26,7 @@ whatsender\gui\progress_bar_custom\ProgressBarCustom.class
 whatsender\application\start\DefinirPacote$15.class
 whatsender\gui\swing\MenuAnimation$1.class
 whatsender\application\splashscreen\SplashScreen$4.class
+whatsender\gui\swing\custom_button\SwingCustomButton.class
 whatsender\application\start\Application.class
 whatsender\application\start\Start$1$1.class
 whatsender\application\start\DefinirPacote$16.class
