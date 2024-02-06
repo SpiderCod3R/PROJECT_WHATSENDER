@@ -3,6 +3,8 @@ package whatsender.application.start;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -66,65 +68,95 @@ public class DefinirPacote extends javax.swing.JFrame {
 
         this.em.getTransaction().commit();
         
-        if(this.pacoteContratado.getPacote().getId().equals(1)){
-            btnPacote1.setText("Pacote Contratado");
+        if(this.pacoteContratado != null){
+            Date data_do_dia = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+
+
+            System.out.println(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
+            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
+            }else {
+                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
+            }
+        }
+                     
+    }
+    
+    private void exibe_pacote_contratado(String texto_botao, PacoteContratado pacoteContratado, Boolean renovar){
+        if(pacoteContratado.getPacote().getId().equals(1)){
+            btnPacote1.setText(texto_botao);
             btnPacote1.setBackground(new Color(18,84,102));
             btnPacote1.setForeground(new Color(252,246,246));
-            btnPacote1.setEnabled(false);
             
+            if(renovar != true){
+                btnPacote1.setEnabled(false);
+            }
+
             btnPacoteAvulso1.setVisible(false);
             btnPacoteAvulso2.setVisible(true);
             btnPacoteAvulso3.setVisible(true);
             btnPacoteAvulso4.setVisible(true);
-            
+
             btnPacote2.setEnabled(true);
             btnPacote3.setEnabled(true);
             btnPacote4.setEnabled(true);
         }
-        if(this.pacoteContratado.getPacote().getId().equals(2)){
-            btnPacote2.setText("Pacote Contratado");
+        if(pacoteContratado.getPacote().getId().equals(2)){
+            btnPacote2.setText(texto_botao);
             btnPacote2.setBackground(new Color(18,84,102));
             btnPacote2.setForeground(new Color(252,246,246));
-            btnPacote2.setEnabled(false);
+            
+            if(renovar != true){
+                btnPacote2.setEnabled(false);
+            }
 
             btnPacoteAvulso1.setVisible(true);
             btnPacoteAvulso2.setVisible(false);
             btnPacoteAvulso3.setVisible(true);
             btnPacoteAvulso4.setVisible(true);
-            
+
             btnPacote1.setEnabled(true);
             btnPacote3.setEnabled(true);
             btnPacote4.setEnabled(true);
         }
-        if(this.pacoteContratado.getPacote().getId().equals(3)){
-            btnPacote3.setText("Pacote Contratado");
+        if(pacoteContratado.getPacote().getId().equals(3)){
+            btnPacote3.setText(texto_botao);
             btnPacote3.setBackground(new Color(18,84,102));
             btnPacote3.setForeground(new Color(252,246,246));
-            btnPacote3.setEnabled(false);
-            
+
+            if(renovar != true){
+                btnPacote3.setEnabled(false);
+            }
+
             btnPacoteAvulso1.setVisible(true);
             btnPacoteAvulso2.setVisible(true);
             btnPacoteAvulso3.setVisible(false);
             btnPacoteAvulso4.setVisible(true);
-            
+
             btnPacote1.setEnabled(true);
             btnPacote2.setEnabled(true);
             btnPacote4.setEnabled(true);
         }
-        if(this.pacoteContratado.getPacote().getId().equals(4)){
-            btnPacote4.setText("Pacote Contratado");
+        if(pacoteContratado.getPacote().getId().equals(4)){
+            btnPacote4.setText(texto_botao);
             btnPacote4.setBackground(new Color(18,84,102));
             btnPacote4.setForeground(new Color(252,246,246));
-            btnPacote4.setEnabled(false);
+
+            if(renovar != true){
+                btnPacote4.setEnabled(false);
+            }
+
             btnPacoteAvulso4.setVisible(false);
-            
+
             btnPacoteAvulso1.setVisible(true);
             btnPacoteAvulso2.setVisible(true);
-            
+
             btnPacote1.setEnabled(true);
             btnPacote2.setEnabled(true);
             btnPacote3.setEnabled(true);
-        }            
+        }
     }
     
     private void initCardData(){
@@ -345,6 +377,12 @@ public class DefinirPacote extends javax.swing.JFrame {
         this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
         this.em = this.emf.createEntityManager();
         
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        String data_formatada = dateFormat.format(currentDate);
+        String hora_formatada = hourFormat.format(currentDate);
+        
         this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
         if(this.pacoteContratado == null){
             this.em.getTransaction().begin();
@@ -355,7 +393,10 @@ public class DefinirPacote extends javax.swing.JFrame {
             this.em.getTransaction().begin();
             this.pacoteContratado.setPacote(pacote);
             this.pacoteContratado.setMensagensContratada(pacote.getQtdeMensagensMensais());
+            this.pacoteContratado.setMensagensDisponiveis(pacote.getQtdeMensagensMensais());
             this.pacoteContratado.setTipoPacote(tipoPacote);
+            this.pacoteContratado.setDt_renovacao_contrato(data_formatada);
+            this.pacoteContratado.setHr_renovacao_contrato(hora_formatada);
             this.em.merge(this.pacoteContratado);
             this.em.getTransaction().commit();
         }

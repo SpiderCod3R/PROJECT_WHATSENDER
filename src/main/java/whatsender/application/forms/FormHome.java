@@ -1,6 +1,8 @@
 package whatsender.application.forms;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,8 +15,11 @@ import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
 import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.application.entities.LogMessage;
+import whatsender.application.entities.PacoteContratado;
 import whatsender.application.start.Application;
 import whatsender.gui.component.card.ModelCard;
+import whatsender.gui.modal.MensagemModal;
+import whatsender.gui.modal.popup.GlassPanePopup;
 
 /**
  *
@@ -25,7 +30,10 @@ public class FormHome extends javax.swing.JPanel {
     private EntityManager em;
     private List<LogMessage> lstsNormalLogMessages;
     private List<LogMessage> lstsExtLogMessages;
+    private PacoteContratado pacoteContratado;
 
+    Date data_do_dia = new Date();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     public FormHome(WhatsAppDriver whatsappDriver) {
         initComponents();
@@ -38,6 +46,35 @@ public class FormHome extends javax.swing.JPanel {
         } 
         
         initData(); 
+        
+        this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
+        
+        if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+            MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
+            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+        }
+    }
+    
+    public static void setTimeOut(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
+    }
+    
+    private MensagemModal exibirMensagemPacoteExpirado(){
+        MensagemModal mensagemModal = new MensagemModal();
+        mensagemModal.setTitle("Aviso!");
+        mensagemModal.setMenssagem("Seu pacote de mensagens expirou. "
+                                + "\nEntre em contato com o "
+                                + "fornecedor do Sistema.");
+        mensagemModal.setInvisible();
+        return mensagemModal;
     }
     
     public List<LogMessage> listAllNormalLogMessages() {

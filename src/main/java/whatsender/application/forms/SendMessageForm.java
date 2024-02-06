@@ -9,7 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +57,8 @@ public class SendMessageForm extends javax.swing.JPanel {
     private static WhatsAppDriver WHATSAPP = null;
     private static MessageConfirmationForm obj;
     private PacoteContratado pacoteContratado;
+    private Integer mensagensDisponiveis;
+    private Integer mensagensEnviadas;
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("whatsender-jpa");
     private EntityManager em;
@@ -813,6 +817,24 @@ public class SendMessageForm extends javax.swing.JPanel {
                 em.getTransaction().commit();
                 
                 
+                /***
+                 * APOS ENVIAR A MENSAGEM DEVE SER FEITA UMA ATUALIZAÇÃO NO 
+                 * PACOTE CONTRATADO NO CAMPO DE MENSAGENS DISPONIVEIS
+                 * 
+                 * DEVE-SE DECREMENTAR UMA UNIDADE
+                 * .
+                 */
+                
+                this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
+                mensagensDisponiveis = this.pacoteContratado.getMensagensDisponiveis();
+                mensagensEnviadas = this.pacoteContratado.getMensagensEnviadas();
+                this.pacoteContratado.setMensagensDisponiveis(mensagensDisponiveis - 1);
+                this.pacoteContratado.setMensagensEnviadas(mensagensEnviadas + 1);
+                
+                if(this.pacoteContratado.getTipoPacote() == "CONTRATO AVULSO"){
+            
+                }
+                
                 if(emf.isOpen()){
                     em.close();
                     emf.close();
@@ -890,6 +912,8 @@ public class SendMessageForm extends javax.swing.JPanel {
          */
         inicilizaEntityManagerFactory();
         this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
+        Date data_do_dia = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
         /***
          * VERIFICAR QUANTIDADE DE MENSAGENS DISPONÍVEIS
@@ -903,36 +927,42 @@ public class SendMessageForm extends javax.swing.JPanel {
          * }
          */
         if(this.pacoteContratado != null){
-            if(this.pacoteContratado.getMensagensDisponiveis() >=1){
-                if(rbSingleContact.isSelected()){
-                    obj = new MessageConfirmationForm("Atenção!", "Deseja enviar esta mensagem?");
-                } else{
-                    if (rbMultiContacts.isSelected()){
-                        obj = new MessageConfirmationForm("Atenção!", "Deseja enviar estas mensagens?");
-                    }
-                }
-                GlassPanePopup.showPopup(obj); 
-                obj.eventOK(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        if(rbSingleContact.isSelected()){
-                            MensagemModal mensagemModal = showProgressoMensagemModal();
-                            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
-                            GlassPanePopup.closePopupLast();
-                            setTimeOut(() -> enviarMensagemUnica(), 3000);
-                        }
-                        if (rbMultiContacts.isSelected()){
-                            MensagemModal mensagemModal = showProgressoMensagemModal();
-                            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
-                            GlassPanePopup.closePopupLast();
-                            setTimeOut(() -> enviarVariasMensagens(), 3000);
-                        }
-                    }
-                });
-            } else {
+            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia) )) {
                 MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
                 setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+            }else{
+                if( (this.pacoteContratado.getMensagensDisponiveis() >=1) ){
+                    if(rbSingleContact.isSelected()){
+                        obj = new MessageConfirmationForm("Atenção!", "Deseja enviar esta mensagem?");
+                    } else{
+                        if (rbMultiContacts.isSelected()){
+                            obj = new MessageConfirmationForm("Atenção!", "Deseja enviar estas mensagens?");
+                        }
+                    }
+                    GlassPanePopup.showPopup(obj); 
+                    obj.eventOK(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            if(rbSingleContact.isSelected()){
+                                MensagemModal mensagemModal = showProgressoMensagemModal();
+                                setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                                GlassPanePopup.closePopupLast();
+                                setTimeOut(() -> enviarMensagemUnica(), 3000);
+                            }
+                            if (rbMultiContacts.isSelected()){
+                                MensagemModal mensagemModal = showProgressoMensagemModal();
+                                setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                                GlassPanePopup.closePopupLast();
+                                setTimeOut(() -> enviarVariasMensagens(), 3000);
+                            }
+                        }
+                    });
+                } else {
+                    MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
+                    setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+                }
             }
+            
         }
  
     }//GEN-LAST:event_btnSendMessageActionPerformed

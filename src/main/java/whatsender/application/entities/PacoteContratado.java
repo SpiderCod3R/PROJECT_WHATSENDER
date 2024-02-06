@@ -1,6 +1,8 @@
 package whatsender.application.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +36,15 @@ public class PacoteContratado implements Serializable{
     private Integer mensagensEnviadas;
     private String tipoPacote;
     
+    private String dt_contrato;
+    private String hr_contrato;
+    private String dt_renovacao_contrato;
+    private String hr_renovacao_contrato;
+    
+    private String dt_expiracao_contrato;
+    
+    
+    
 
     public PacoteContratado() {}
 
@@ -44,8 +55,19 @@ public class PacoteContratado implements Serializable{
         this.mensagensDisponiveis = mensagensContratada;
         this.mensagensEnviadas = 0;
         this.tipoPacote = tipoPacote;
-    }
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        
+        String data_formatada = dateFormat.format(currentDate);
+        String hora_formatada = hourFormat.format(currentDate);
+        
+        this.dt_contrato = data_formatada;
+        this.hr_contrato = hora_formatada;
+        
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -94,6 +116,48 @@ public class PacoteContratado implements Serializable{
         this.tipoPacote = tipoPacote;
     }
 
+    public String getDt_contrato() {
+        return dt_contrato;
+    }
+
+    public void setDt_contrato(String dt_contrato) {
+        this.dt_contrato = dt_contrato;
+    }
+
+    public String getHr_contrato() {
+        return hr_contrato;
+    }
+
+    public void setHr_contrato(String hr_contrato) {
+        this.hr_contrato = hr_contrato;
+    }
+
+    public String getDt_renovacao_contrato() {
+        return dt_renovacao_contrato;
+    }
+
+    public void setDt_renovacao_contrato(String dt_renovacao_contrato) {
+        this.dt_renovacao_contrato = dt_renovacao_contrato;
+    }
+
+    public String getHr_renovacao_contrato() {
+        return hr_renovacao_contrato;
+    }
+
+    public void setHr_renovacao_contrato(String hr_renovacao_contrato) {
+        this.hr_renovacao_contrato = hr_renovacao_contrato;
+    }
+
+    public String getDt_expiracao_contrato() {
+        return dt_expiracao_contrato;
+    }
+
+    public void setDt_expiracao_contrato(String dt_expiracao_contrato) {
+        this.dt_expiracao_contrato = dt_expiracao_contrato;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -114,6 +178,24 @@ public class PacoteContratado implements Serializable{
             return false;
         }
         final PacoteContratado other = (PacoteContratado) obj;
+        if (!Objects.equals(this.tipoPacote, other.tipoPacote)) {
+            return false;
+        }
+        if (!Objects.equals(this.dt_contrato, other.dt_contrato)) {
+            return false;
+        }
+        if (!Objects.equals(this.hr_contrato, other.hr_contrato)) {
+            return false;
+        }
+        if (!Objects.equals(this.dt_renovacao_contrato, other.dt_renovacao_contrato)) {
+            return false;
+        }
+        if (!Objects.equals(this.hr_renovacao_contrato, other.hr_renovacao_contrato)) {
+            return false;
+        }
+        if (!Objects.equals(this.dt_expiracao_contrato, other.dt_expiracao_contrato)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -128,6 +210,10 @@ public class PacoteContratado implements Serializable{
         }
         return Objects.equals(this.mensagensEnviadas, other.mensagensEnviadas);
     }
+
+    
+
+    
 
     @Override
     public String toString() {
