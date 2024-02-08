@@ -859,42 +859,39 @@ public class SendMessageForm extends javax.swing.JPanel {
             try {
                 WHATSAPP.waitForConnection();
                 if(WHATSAPP.is_connected()){
-                    String messageEmLote = messageBuilder.
+                    if(contato != null) {
+                        String messageEmLote = messageBuilder.
                             AddMessage(
                                     inputMessageArea.getText(), 
                                     contato).
                             replace("\n", " ").
                             replace("\r", " ");
 
-                    WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contato.getWhatsNumber()));
-                    WHATSAPP.sendMsg(messageEmLote);
+                        WHATSAPP.abrir_conversa_com_contato(FormatterHelper.formatPhoneNumber(contato.getWhatsNumber()));
+                        WHATSAPP.sendMsg(messageEmLote);
 
-                    consulta = new Consulta(
-                        contato.getName(), 
-                        contato.getWhatsNumber(), 
-                        contato.getData(), 
-                        contato.getHour(), 
-                        contato.getDoctor());
+                        consulta = new Consulta(
+                            contato.getName(), 
+                            contato.getWhatsNumber(), 
+                            contato.getData(), 
+                            contato.getHour(), 
+                            contato.getDoctor());
 
-                    em.getTransaction().begin();
-                    em.persist(consulta);
-                    em.getTransaction().commit();
+                        em.getTransaction().begin();
+                        em.persist(consulta);
+                        em.getTransaction().commit();
 
-                    LogMessage messageLog = new LogMessage(
-                            null, 
-                            messageEmLote, 
-                            consulta, 
-                            LogType.SUCCESS, 
-                            MessageType.LOTE );
+                        LogMessage messageLog = new LogMessage(
+                                null, 
+                                messageEmLote, 
+                                consulta, 
+                                LogType.SUCCESS, 
+                                MessageType.LOTE );
 
-                    em.getTransaction().begin();
-                    em.persist(messageLog);
-                    em.getTransaction().commit();
-                    
-                    if(emf.isOpen()){
-                        em.close();
-                        emf.close();
-                    }
+                        em.getTransaction().begin();
+                        em.persist(messageLog);
+                        em.getTransaction().commit();
+                    } 
                 }
             } catch (org.openqa.selenium.TimeoutException e) {
                 System.out.println("Erro De Time Out");
@@ -903,6 +900,13 @@ public class SendMessageForm extends javax.swing.JPanel {
             } catch (ParseException ex) {
                 Logger.getLogger(SendMessageForm.class.getName()).log(Level.SEVERE, null, ex);
             } 
+        }
+        /**
+         * CASO A CONEXAO ESTIVER ABERTA ELE FECHARÁ A FACTORY
+         */
+        if(emf.isOpen()){
+            em.close();
+            emf.close();
         }
     }
     

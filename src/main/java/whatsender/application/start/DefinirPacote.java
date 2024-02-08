@@ -74,12 +74,12 @@ public class DefinirPacote extends javax.swing.JFrame {
             SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 
 
-            System.out.println(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
-            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
-                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
-            }else {
-                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
-            }
+//            System.out.println(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
+//            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+//                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
+//            }else {
+//                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
+//            }
         }
                      
     }

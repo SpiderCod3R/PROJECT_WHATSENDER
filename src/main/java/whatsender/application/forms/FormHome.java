@@ -49,10 +49,10 @@ public class FormHome extends javax.swing.JPanel {
         
         this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
         
-        if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
-            MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
-            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
-        }
+//        if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+//            MensagemModal mensagemModal = exibirMensagemPacoteExpirado();
+//            setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 1500);
+//        }
     }
     
     public static void setTimeOut(Runnable runnable, int delay){

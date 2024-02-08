@@ -187,9 +187,9 @@ public class WhatsAppDriver {
             inputMessage.sendKeys(msg);
 
             try {
-                    TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
 
             inputMessage.click();

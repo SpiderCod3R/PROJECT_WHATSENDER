@@ -19,6 +19,9 @@ public class MessageBuilder implements MessageInterface {
                                             " Se houver qualquer dúvida, entre em contato pelos telefones:";
     
 
+    private String newMessage;
+    private String dataFormatada;
+    
     @Override
     public String loadDefaultMessage(){
         return DEFAULT_MESSAGE;
@@ -43,19 +46,20 @@ public class MessageBuilder implements MessageInterface {
     }
     
     public String AddMessage(String message, Contato contact) throws ParseException{
-        String newMessage;
         SimpleDateFormat sdf = new SimpleDateFormat(datePattern, new Locale ("pt", "BR"));
-        Date date= sdf.parse(contact.getData());
-        sdf.applyPattern("EEE, d MMM yyyy");  
-        String dataFormatada = sdf.format(date);  
-        System.out.println("Data Formatada: "+dataFormatada);  
-        
-        newMessage = message.
-            replace("[NOME_DO_PACIENTE]", contact.getName()).
-            replace("[DATA]", dataFormatada).
-            replace("[HORA]", contact.getHour()).
-            replace("[NOME_DO_RESPONSAVEL]", contact.getDoctor());
-
+        if(contact.getData() != "") {
+            Date date= sdf.parse(contact.getData());
+            sdf.applyPattern("EEE, d MMM yyyy");  
+            dataFormatada = sdf.format(date);  
+            System.out.println("Data Formatada: "+dataFormatada);
+            
+            newMessage = message.
+                replace("[NOME_DO_PACIENTE]", contact.getName()).
+                replace("[DATA]", dataFormatada).
+                replace("[HORA]", contact.getHour()).
+                replace("[NOME_DO_RESPONSAVEL]", contact.getDoctor());
+        }
+  
         return newMessage;
     }
 
