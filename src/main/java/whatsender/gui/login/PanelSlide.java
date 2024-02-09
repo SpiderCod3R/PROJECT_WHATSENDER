@@ -19,6 +19,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.application.entities.Admin;
+import whatsender.application.start.Configuracoes;
 import whatsender.application.start.DefinirPacote;
 
 
@@ -149,6 +150,9 @@ public class PanelSlide extends javax.swing.JLayeredPane {
                     
                     if(loginData.check_login()){
                         panelLoading.doneLogin(loginData);
+                        Thread.sleep(2000);
+                        jFrame.dispose();
+                        new Configuracoes().setVisible(true);
                     } else {
                         panelLoading.showError("Usuário ou senha incorreta.");
                     } 

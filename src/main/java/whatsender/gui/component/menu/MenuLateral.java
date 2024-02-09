@@ -42,6 +42,20 @@ public class MenuLateral extends javax.swing.JPanel {
         return showMenu;
     }
     
+    public MenuLateral(){
+        initComponents();
+        setOpaque(false);
+        sp.getViewport().setOpaque(false);
+        sp.setVerticalScrollBar(new ScrollBarCustom());
+        
+        layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
+        panelMenu.setLayout(layout);
+
+        TimingTargetAdapter target = new TimingTargetAdapter(){
+        
+        };
+    }
+    
     public MenuLateral(WhatsAppDriver WHATSAPP) {
         initComponents();
         setOpaque(false);
@@ -58,11 +72,12 @@ public class MenuLateral extends javax.swing.JPanel {
         
         };
         
-        if(WHATSAPP.is_connected()) {
-            btnConnection.setBackground(new Color(121,224,201,88));
-            lblConnection.setText("Conectado");
+        if(WHATSAPP != null) {
+            if(WHATSAPP.is_connected()) {
+                btnConnection.setBackground(new Color(121,224,201,88));
+                lblConnection.setText("Conectado");
+            }
         }
-        
     }
     
     public void addMenu(ModelMenu menu){
@@ -104,12 +119,18 @@ public class MenuLateral extends javax.swing.JPanel {
     public void initMenuItem() {
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgDash)), "Painel"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgSendMessage)), "Enviar mensagem"));
-        
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgConfig)), "Configurações", "Editar Cliente", "Gerenciar Pacote"));
-        //addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgLogs)), "Logs"));
-        
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgConfig)), "Configurações"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgExit)), "Fechar"));
     }
+    
+    public void initMenuConfiguracoes() {
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgDash)), "Pacotes", "Renovar ou contratar pacote", "Editar Pacote 1", "Editar Pacote 2", "Editar Pacote 3", "Editar Pacote 4"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgSendMessage)), "Editar  Dados Cliente"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgLogs)), "Logs"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgExit)), "Fechar e Voltar"));
+    }
+    
+    
 
     public void addEvent(EventMenuSelected event) {
         this.event = event;

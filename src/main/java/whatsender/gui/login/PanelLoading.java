@@ -33,7 +33,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
                 if(isMessage){
                     messagePanel.setVisible(true);
                 }else{
-                    configPanel.setVisible(true);
+                    //configPanel.setVisible(true);
                 }
             }
 
@@ -43,7 +43,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
                     messagePanel.setAlpha(fraction);
                     loadingPanel.setAlpha(1f - fraction);
                 }else{
-                    configPanel.setAlpha(fraction);
+                    //configPanel.setAlpha(fraction);
                     loadingPanel.setAlpha(1f - fraction);
                 }
                 repaint();
@@ -75,8 +75,8 @@ public class PanelLoading extends javax.swing.JLayeredPane {
     public void doneLogin(Admin admin_model){
         isMessage = false;
         this.admin_model = admin_model;
-        configPanel.setVisible(true);
-        loadingPanel.setVisible(false);
+        //configPanel.setVisible(false);
+        //loadingPanel.setVisible(false);
         animator.start();
     }
     
@@ -89,7 +89,7 @@ public class PanelLoading extends javax.swing.JLayeredPane {
     public void reset(){
         loadingPanel.setAlpha(1f);
         loadingPanel.setVisible(true);
-        configPanel.setVisible(false);
+        //configPanel.setVisible(false);
         messagePanel.setVisible(false);
     }
     

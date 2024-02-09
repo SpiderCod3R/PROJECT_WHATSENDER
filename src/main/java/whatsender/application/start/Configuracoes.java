@@ -10,6 +10,8 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
+import whatsender.application.configuracoes.DefinirPacoteForm;
+import whatsender.application.entities.Cliente;
 
 import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.gui.component.header.Header;
@@ -27,31 +29,30 @@ import whatsender.gui.swing.MenuItem;
 import whatsender.gui.swing.PopUpMenu;
 
 import whatsender.gui.modal.popup.GlassPanePopup;
+import whatsender.gui.splashscreen.SplashScreen;
 
 /**
  *
  * @author ALEXANDRE (THE GRAND MASTER)
  */
-public class Application extends javax.swing.JFrame {
+public class Configuracoes extends javax.swing.JFrame {
     private MigLayout layout;
     private MenuLateral menuLateral;
     private Header header;
     private MainForm mainForm;
     private Animator animator;
-    private WhatsAppDriver WHATSAPP = null;
     
-    public Application(WhatsAppDriver whatsapp) {
+    public Configuracoes() {
         initComponents();
         GlassPanePopup.install(this);
-        __init__(whatsapp);
+        __init__();
     }
     
-    public void __init__(WhatsAppDriver whatsAppDriver){
+    public void __init__(){
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
-        WHATSAPP = whatsAppDriver;
         
-        menuLateral = new MenuLateral(WHATSAPP);
+        menuLateral = new MenuLateral();
         header = new Header();
         mainForm = new MainForm();
         
@@ -62,13 +63,33 @@ public class Application extends javax.swing.JFrame {
                 
                 switch (menuLateralIndex) {
                     case 0:
-                        if(subMenuIndex==-1){
-                            mainForm.showForm(new FormHome(whatsAppDriver));
+                        if(subMenuIndex==1){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
+                        if(subMenuIndex==2){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
+                        if(subMenuIndex==2){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
+                        if(subMenuIndex==3){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
+                        if(subMenuIndex==4){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
+                        if(subMenuIndex==5){
+                            mainForm.showForm(new DefinirPacoteForm());
                         }
                         break;
                     case 1:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new SendMessageForm(whatsAppDriver));
+                            mainForm.showForm(new ClientForm());
                         }
                         break;
                     case 2:
@@ -88,8 +109,9 @@ public class Application extends javax.swing.JFrame {
                         break;
                     case 3:
                         if(subMenuIndex==-1){
-                           WHATSAPP.quit();
-                           System.exit(0);
+                            dispose();
+                            Thread.interrupted();
+                            new SplashScreen(null, true).setVisible(true);
                         }
                         break;
                 }
@@ -100,14 +122,14 @@ public class Application extends javax.swing.JFrame {
             @Override
             public void showPopUp(Component component) {
                 MenuItem menuLateralItem = (MenuItem)component;
-                PopUpMenu popUp = new PopUpMenu(Application.this, menuLateralItem.getIndex(), menuLateralItem.getEventMenuSelected(), menuLateralItem.getMenu().getSubMenu());
-                int x = Application.this.getX() + 52;
-                int y = Application.this.getY() + component.getY() + 86;
+                PopUpMenu popUp = new PopUpMenu(Configuracoes.this, menuLateralItem.getIndex(), menuLateralItem.getEventMenuSelected(), menuLateralItem.getMenu().getSubMenu());
+                int x = Configuracoes.this.getX() + 52;
+                int y = Configuracoes.this.getY() + component.getY() + 86;
                 popUp.setLocation(x, y);
                 popUp.setVisible(true);
             }
         });
-        menuLateral.initMenuItem();
+        menuLateral.initMenuConfiguracoes();
         
         bg.add(menuLateral, "w 230!, spany 2");
         bg.add(header, "h 50!, wrap");
@@ -153,7 +175,7 @@ public class Application extends javax.swing.JFrame {
         // INICIALIZANDO FONTES DE ICONES DO GOOGLE
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         // Carregando a tela inicial do APP
-        mainForm.showForm(new FormHome(WHATSAPP));
+        mainForm.showForm(new DefinirPacoteForm());
         //mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
     }
 
@@ -162,10 +184,6 @@ public class Application extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JLayeredPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -180,29 +198,12 @@ public class Application extends javax.swing.JFrame {
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1168, Short.MAX_VALUE)
+            .addGap(0, 1076, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 905, Short.MAX_VALUE)
+            .addGap(0, 644, Short.MAX_VALUE)
         );
-
-        jMenu2.setText("Configurações");
-
-        jMenuItem1.setText("Editar Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Opções");
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,24 +221,9 @@ public class Application extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        WHATSAPP.quit();
+        //WHATSAPP.quit();
     }//GEN-LAST:event_formWindowClosed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    public void backForm(Component component, Integer indexMenu, Integer oldForm) {
-       mainForm = new MainForm();
-        if( (component == null)){
-            mainForm.showForm(new FormHome(WHATSAPP));
-            //cardMenu1.selectMenu(indexMenu, oldForm);
-        } else {
-            mainForm.showForm(component);
-            //cardMenu1.selectMenu(indexMenu, oldForm);   
-        }  
-    }
-    
     public static void main(String args[]) {
        
         try {
@@ -248,20 +234,19 @@ public class Application extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Configuracoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Configuracoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Configuracoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Configuracoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        WhatsAppDriver WHATSAPP = new WhatsAppDriver(Browser.CHROME);
         FlatIntelliJLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Application(WHATSAPP).setVisible(true);
+                new Configuracoes().setVisible(true);
             }
         });
     }
@@ -269,9 +254,5 @@ public class Application extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
