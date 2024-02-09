@@ -14,7 +14,6 @@ import whatsender.gui.component.card.ModelCard;
 import whatsender.gui.modal.MensagemModal;
 import whatsender.gui.modal.MessageConfirmationForm;
 import whatsender.gui.modal.popup.GlassPanePopup;
-import whatsender.gui.splashscreen.SplashScreen;
 
 public class DefinirPacoteForm extends javax.swing.JPanel {
     private EntityManagerFactory emf;
@@ -35,10 +34,25 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         this.pacote2 = this.em.find(Pacote.class, 2);
         this.pacote3 = this.em.find(Pacote.class, 3);
         this.pacote4 = this.em.find(Pacote.class, 4);
+        
+        this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
         this.em.getTransaction().commit();
         
         
         initCardData();
+        
+        if(this.pacoteContratado != null){
+            Date data_do_dia = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+
+            System.out.println("PACOTE EXPIRADO" + this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
+            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
+            }else {
+                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
+            }
+        }
     }
     
     private void exibe_pacote_contratado(String texto_botao, PacoteContratado pacoteContratado, Boolean renovar){

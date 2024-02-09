@@ -11,6 +11,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import whatsender.application.configuracoes.DefinirPacoteForm;
+import whatsender.application.configuracoes.EditorDePacoteForm;
 import whatsender.application.entities.Cliente;
 
 import whatsender.bot.driver.WhatsAppDriver;
@@ -63,29 +64,26 @@ public class Configuracoes extends javax.swing.JFrame {
                 
                 switch (menuLateralIndex) {
                     case 0:
+                        if(subMenuIndex==0){
+                            mainForm.showForm(new DefinirPacoteForm());
+                        }
+                        
                         if(subMenuIndex==1){
-                            mainForm.showForm(new DefinirPacoteForm());
+                            mainForm.showForm(new EditorDePacoteForm(1));
                         }
-                        
+                                               
                         if(subMenuIndex==2){
-                            mainForm.showForm(new DefinirPacoteForm());
-                        }
-                        
-                        if(subMenuIndex==2){
-                            mainForm.showForm(new DefinirPacoteForm());
+                            mainForm.showForm(new EditorDePacoteForm(2));
                         }
                         
                         if(subMenuIndex==3){
-                            mainForm.showForm(new DefinirPacoteForm());
+                            mainForm.showForm(new EditorDePacoteForm(3));
                         }
                         
                         if(subMenuIndex==4){
-                            mainForm.showForm(new DefinirPacoteForm());
+                            mainForm.showForm(new EditorDePacoteForm(4));
                         }
                         
-                        if(subMenuIndex==5){
-                            mainForm.showForm(new DefinirPacoteForm());
-                        }
                         break;
                     case 1:
                         if(subMenuIndex==-1){
