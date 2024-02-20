@@ -41,10 +41,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="customButton1" alignment="0" pref="296" max="32767" attributes="0"/>
+                                  <Component id="btnAtualizarPacote" alignment="0" pref="296" max="32767" attributes="0"/>
                                   <Component id="txtQuantidadeMensagens" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="textField4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tctIndicadoPara" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtValorPacote" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtIndicadoPara" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtNomePacote" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jLabel2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
@@ -73,11 +73,11 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                          <Component id="tctIndicadoPara" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIndicadoPara" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textField4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtValorPacote" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -86,14 +86,14 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
-                  <Component id="customButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAtualizarPacote" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="whatsender.gui.custom_button.CustomButton" name="customButton1">
+        <Component class="whatsender.gui.custom_button.CustomButton" name="btnAtualizarPacote">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="99" red="0" type="rgb"/>
@@ -107,16 +107,28 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarPacoteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="whatsender.gui.swing.input.TextField" name="tctIndicadoPara">
+        <Component class="whatsender.gui.swing.input.TextField" name="txtIndicadoPara">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtIndicadoParaKeyReleased"/>
+          </Events>
         </Component>
         <Component class="whatsender.gui.swing.input.TextField" name="txtNomePacote">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomePacoteKeyReleased"/>
+          </Events>
         </Component>
         <Component class="whatsender.gui.swing.input.TextField" name="txtQuantidadeMensagens">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQuantidadeMensagensKeyReleased"/>
+          </Events>
         </Component>
-        <Component class="whatsender.gui.swing.input.TextField" name="textField4">
+        <Component class="whatsender.gui.swing.input.TextField" name="txtValorPacote">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtValorPacoteKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

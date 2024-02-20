@@ -38,12 +38,11 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         txtPacote.setBackground(new Color(0, 0, 0, 0));
         txtPacote.setSelectionColor(new Color(48, 170, 63, 200));
         txtPacote.setOpaque(false);
-        
-        
+
         messageBox = messageBox.
                 replace("[PACOTE]", pacote.getPacoteNome()).
                 replace("[INDICADO]", pacote.getPacoteDescricao()).
-                replace("[VALOR]", "R$: " + pacote.getValor());
+                replace("[VALOR]", "R$: " + pacote.getValorPacote());
 
         
         txtPacote.setText(messageBox);
@@ -88,8 +87,8 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPacote = new javax.swing.JTextPane();
-        btnCancelar = new whatsender.gui.swing.Button();
-        btnOK = new whatsender.gui.swing.Button();
+        btnCancelar = new whatsender.gui.swing.custom_button.SwingCustomButton();
+        btnOK = new whatsender.gui.swing.custom_button.SwingCustomButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25));
@@ -100,8 +99,8 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         txtPacote.setText("TESTE");
         jScrollPane1.setViewportView(txtPacote);
 
-        btnCancelar.setBackground(new java.awt.Color(248, 165, 165));
-        btnCancelar.setForeground(new java.awt.Color(146, 23, 23));
+        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("NÃO");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,10 +108,9 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
             }
         });
 
-        btnOK.setBackground(new java.awt.Color(131, 255, 105));
-        btnOK.setForeground(new java.awt.Color(3, 75, 27));
+        btnOK.setBackground(new java.awt.Color(0, 204, 0));
+        btnOK.setForeground(new java.awt.Color(255, 255, 255));
         btnOK.setText("SIM");
-        btnOK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,15 +121,13 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 130, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 130, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,7 +136,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,8 +153,8 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.gui.swing.Button btnCancelar;
-    private whatsender.gui.swing.Button btnOK;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnCancelar;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnOK;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextPane txtPacote;

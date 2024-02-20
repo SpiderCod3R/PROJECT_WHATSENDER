@@ -160,10 +160,10 @@ public class DefinirPacote extends javax.swing.JFrame {
     }
     
     private void initCardData(){
-        cardPackage1.setData(new ModelCard(this.pacote1.getPacoteNome(), this.pacote1.getPacoteDescricao(), this.pacote1.getQtdeMensagensMensais(), this.pacote1.getValor() , null));
-        cardPackage2.setData(new ModelCard(this.pacote2.getPacoteNome(), this.pacote2.getPacoteDescricao(), this.pacote2.getQtdeMensagensMensais(), this.pacote2.getValor() , null));
-        cardPackage3.setData(new ModelCard(this.pacote3.getPacoteNome(), this.pacote3.getPacoteDescricao(), this.pacote3.getQtdeMensagensMensais(), this.pacote3.getValor() , null));
-        cardPackage4.setData(new ModelCard(this.pacote4.getPacoteNome(), this.pacote4.getPacoteDescricao(), this.pacote4.getQtdeMensagensMensais(), this.pacote4.getValor() , null));
+        cardPackage1.setData(new ModelCard(this.pacote1.getPacoteNome(), this.pacote1.getPacoteDescricao(), this.pacote1.getQtdeMensagensMensais(), this.pacote1.getValorPacote(), null));
+        cardPackage2.setData(new ModelCard(this.pacote2.getPacoteNome(), this.pacote2.getPacoteDescricao(), this.pacote2.getQtdeMensagensMensais(), this.pacote2.getValorPacote(), null));
+        cardPackage3.setData(new ModelCard(this.pacote3.getPacoteNome(), this.pacote3.getPacoteDescricao(), this.pacote3.getQtdeMensagensMensais(), this.pacote3.getValorPacote(), null));
+        cardPackage4.setData(new ModelCard(this.pacote4.getPacoteNome(), this.pacote4.getPacoteDescricao(), this.pacote4.getQtdeMensagensMensais(), this.pacote4.getValorPacote(), null));
     }
 
     @SuppressWarnings("unchecked")

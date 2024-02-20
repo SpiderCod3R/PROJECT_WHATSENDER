@@ -7,6 +7,7 @@ whatsender\application\splashscreen\ProgressBarCustom$1.class
 whatsender\application\start\DefinirPacote$5.class
 whatsender\gui\component\menu\MenuLateral$3.class
 whatsender\gui\scrollbar\ScrollBarCustom.class
+whatsender\application\configuracoes\EditorDePacoteForm$5.class
 whatsender\gui\swing\input\TextArea.class
 whatsender\system\filechooser\win32\Shell32$BrowseInfo.class
 whatsender\application\entities\PacoteContratado.class
@@ -75,6 +76,7 @@ whatsender\application\forms\SendMessageForm$4.class
 whatsender\application\start\DefinirPacote$9.class
 whatsender\application\forms\SendMessageForm$1.class
 whatsender\application\start\DefinirPacote$17.class
+whatsender\application\configuracoes\EditorDePacoteForm$3.class
 whatsender\application\helpers\LocaleHelper.class
 whatsender\application\helpers\FormatterHelper.class
 whatsender\system\filechooser\JnaFileChooser$Action.class
@@ -82,6 +84,7 @@ whatsender\application\helpers\MessageType.class
 whatsender\gui\swing\PopUpMenu$2.class
 whatsender\application\forms\SendMessageForm$3.class
 whatsender\application\forms\SendMessageForm$2.class
+whatsender\application\configuracoes\EditorDePacoteForm$4.class
 whatsender\application\entities\LogMessage.class
 whatsender\gui\component\menu\MenuLateral.class
 whatsender\bot\driver\Message.class
@@ -110,6 +113,7 @@ whatsender\gui\component\header\Header.class
 whatsender\application\configuracoes\DefinirPacoteForm$15.class
 whatsender\application\start\DefinirPacote$8.class
 whatsender\gui\swing\MenuButton$1.class
+whatsender\application\configuracoes\EditorDePacoteForm$2.class
 whatsender\application\splashscreen\SplashScreen$6.class
 whatsender\application\forms\SendMessageForm$5.class
 whatsender\gui\login\PanelSlide$4.class

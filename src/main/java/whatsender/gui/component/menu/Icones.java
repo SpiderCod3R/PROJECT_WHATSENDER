@@ -10,4 +10,6 @@ public abstract class Icones {
     public final static String imgConfig      = "icon/5s.png";
     public final static String imgLogs        = "icon/3s.png";
     public final static String imgExit        = "icon/logout2.png";
+    public final static String imgUser        = "icon/user_icon.png";
+    public final static String imgPacote      = "icon/pacote (2).png";
 }

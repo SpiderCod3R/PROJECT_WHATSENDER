@@ -124,8 +124,8 @@ public class MenuLateral extends javax.swing.JPanel {
     }
     
     public void initMenuConfiguracoes() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgDash)), "Pacotes", "Renovar ou contratar pacote", "Editar Pacote 1", "Editar Pacote 2", "Editar Pacote 3", "Editar Pacote 4"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgSendMessage)), "Editar  Dados Cliente"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgPacote)), "Pacotes", "Renovar ou contratar pacote", "Editar Pacote 1", "Editar Pacote 2", "Editar Pacote 3", "Editar Pacote 4"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgUser)), "Editar  Dados Cliente"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgLogs)), "Logs"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getClassLoader().getResource(Icones.imgExit)), "Fechar e Voltar"));
     }

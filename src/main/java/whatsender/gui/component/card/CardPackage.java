@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.text.DecimalFormat;
+import javax.swing.JLabel;
 
 /**
  *
@@ -43,6 +44,42 @@ public class CardPackage extends javax.swing.JPanel {
           lblQtdMensagens.setText("Mensagens: " + cardData.getQtdeMessages());  
         }
     }
+    
+    
+
+    public String getLblDescricao() {
+        return lblDescricao.getText();
+    }
+
+    public void setLblDescricao(String lblDescricao) {
+        this.lblDescricao.setText(lblDescricao);
+    }
+
+    public String getLblTitle() {
+        return lblTitle.getText();
+    }
+
+    public void setLblTitle(String title) {
+        this.lblTitle.setText(title);
+    }
+
+    public String getLblValue() {
+        return lblValue.getText();
+    }
+
+    public void setLblValue(String valorPacote) {
+        this.lblValue.setText("Valor: R$ " + valorPacote);
+    }
+
+    public String getLblQtdMensagens() {
+        return lblQtdMensagens.getText();
+    }
+
+    public void setLblQtdMensagens(String QtdMensagens) {
+        this.lblQtdMensagens.setText("Mensagens: " + QtdMensagens);
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

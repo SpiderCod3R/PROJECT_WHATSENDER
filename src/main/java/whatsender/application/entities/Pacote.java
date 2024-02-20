@@ -102,11 +102,11 @@ public class Pacote implements Serializable{
         this.qtdeMensagensMensais = qtdeMensagensMensais;
     }
 
-    public float getValor() {
+    public float getValorPacote() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValorPacote(float valor) {
         this.valor = valor;
     }
 
