@@ -24,7 +24,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
     
     public DefinirPacoteForm() {
         initComponents();
-        setOpaque(true);
+        
         
         this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
         this.em = this.emf.createEntityManager();
@@ -37,8 +37,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         
         this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
         this.em.getTransaction().commit();
-        
-        
+
         initCardData();
         
         if(this.pacoteContratado != null){
@@ -46,7 +45,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 
-            System.out.println("PACOTE EXPIRADO" + this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
+            System.out.println("PACOTE EXPIRADO " + this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
             if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
                 exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
             }else {
@@ -57,63 +56,134 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
     
     private void exibe_pacote_contratado(String texto_botao, PacoteContratado pacoteContratado, Boolean renovar){
         if(pacoteContratado.getPacote().getId().equals(1)){
-            btnPacote1.setText(texto_botao);
-            btnPacote1.setBackground(new Color(18,84,102));
-            btnPacote1.setForeground(new Color(252,246,246));
-            
             if(renovar != true){
                 btnPacote1.setEnabled(false);
             }
+            
+            btnPacote1.setText(texto_botao);
+            btnPacote1.setBackground(new Color(18,84,102));
+            btnPacote1.setForeground(new Color(255,255,255));
+            
+            btnPacote2.setBackground(new Color(111,111,249));
+            btnPacote2.setForeground(new Color(251,251,251));
+            
+            btnPacote3.setBackground(new Color(111,111,249));
+            btnPacote3.setForeground(new Color(251,251,251));
+            
+            btnPacote4.setBackground(new Color(111,111,249));
+            btnPacote4.setForeground(new Color(251,251,251));
+
+            
 
             btnPacoteAvulso1.setVisible(false);
+            
             btnPacoteAvulso2.setVisible(true);
+            btnPacoteAvulso2.setText("Contratar Avulso");
+            
             btnPacoteAvulso3.setVisible(true);
+            btnPacoteAvulso3.setText("Contratar Avulso");
+            
             btnPacoteAvulso4.setVisible(true);
+            btnPacoteAvulso4.setText("Contratar Avulso");
 
             btnPacote2.setEnabled(true);
+            btnPacote2.setText("Contratar Mensal");
+            
             btnPacote3.setEnabled(true);
+            btnPacote3.setText("Contratar Mensal");
+            
             btnPacote4.setEnabled(true);
+            btnPacote4.setText("Contratar Mensal");
         }
         if(pacoteContratado.getPacote().getId().equals(2)){
             btnPacote2.setText(texto_botao);
             btnPacote2.setBackground(new Color(18,84,102));
-            btnPacote2.setForeground(new Color(252,246,246));
+            btnPacote2.setForeground(new Color(86,240,196, 94));
+            
+            btnPacote1.setBackground(new Color(111,111,249));
+            btnPacote1.setForeground(new Color(251,251,251));
+            
+            btnPacote3.setBackground(new Color(111,111,249));
+            btnPacote3.setForeground(new Color(251,251,251));
+            
+            btnPacote4.setBackground(new Color(111,111,249));
+            btnPacote4.setForeground(new Color(251,251,251));
             
             if(renovar != true){
                 btnPacote2.setEnabled(false);
             }
 
-            btnPacoteAvulso1.setVisible(true);
             btnPacoteAvulso2.setVisible(false);
+            
+            btnPacoteAvulso1.setVisible(true);
+            btnPacoteAvulso1.setText("Contratar Avulso");
+            
             btnPacoteAvulso3.setVisible(true);
+            btnPacoteAvulso3.setText("Contratar Avulso");
+            
             btnPacoteAvulso4.setVisible(true);
+            btnPacoteAvulso4.setText("Contratar Avulso");
 
             btnPacote1.setEnabled(true);
+            btnPacote1.setText("Contratar Mensal");
+            
             btnPacote3.setEnabled(true);
+            btnPacote3.setText("Contratar Mensal");
+            
             btnPacote4.setEnabled(true);
+            btnPacote4.setText("Contratar Mensal");
         }
         if(pacoteContratado.getPacote().getId().equals(3)){
             btnPacote3.setText(texto_botao);
             btnPacote3.setBackground(new Color(18,84,102));
-            btnPacote3.setForeground(new Color(252,246,246));
+            btnPacote3.setForeground(Color.WHITE);
+            
+            btnPacote2.setBackground(new Color(111,111,249));
+            btnPacote2.setForeground(new Color(251,251,251));
+            
+            btnPacote1.setBackground(new Color(111,111,249));
+            btnPacote1.setForeground(new Color(251,251,251));
+            
+            btnPacote4.setBackground(new Color(111,111,249));
+            btnPacote4.setForeground(new Color(251,251,251));
 
             if(renovar != true){
                 btnPacote3.setEnabled(false);
             }
 
             btnPacoteAvulso1.setVisible(true);
+            btnPacoteAvulso1.setText("Contratar Avulso");
+            
             btnPacoteAvulso2.setVisible(true);
+            btnPacoteAvulso2.setText("Contratar Avulso");
+            
             btnPacoteAvulso3.setVisible(false);
+            
             btnPacoteAvulso4.setVisible(true);
+            btnPacoteAvulso4.setText("Contratar Avulso");
 
             btnPacote1.setEnabled(true);
+            btnPacote1.setText("Contratar Mensal");
+            
             btnPacote2.setEnabled(true);
+            btnPacote2.setText("Contratar Mensal");
+            
             btnPacote4.setEnabled(true);
+            btnPacote4.setText("Contratar Mensal");
         }
         if(pacoteContratado.getPacote().getId().equals(4)){
             btnPacote4.setText(texto_botao);
             btnPacote4.setBackground(new Color(18,84,102));
-            btnPacote4.setForeground(new Color(252,246,246));
+            btnPacote4.setForeground(Color.WHITE);
+            
+            btnPacote2.setBackground(new Color(111,111,249));
+            btnPacote2.setForeground(new Color(251,251,251));
+            
+            btnPacote3.setBackground(new Color(111,111,249));
+            btnPacote3.setForeground(new Color(251,251,251));
+            
+            btnPacote1.setBackground(new Color(111,111,249));
+            btnPacote1.setForeground(new Color(251,251,251));
 
             if(renovar != true){
                 btnPacote4.setEnabled(false);
@@ -122,11 +192,22 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
             btnPacoteAvulso4.setVisible(false);
 
             btnPacoteAvulso1.setVisible(true);
+            btnPacoteAvulso1.setText("Contratar Avulso");
+            
             btnPacoteAvulso2.setVisible(true);
+            btnPacoteAvulso2.setText("Contratar Avulso");
+            
+            btnPacoteAvulso3.setVisible(true);
+            btnPacoteAvulso3.setText("Contratar Avulso");
 
             btnPacote1.setEnabled(true);
+            btnPacote1.setText("Contratar Mensal");
+            
             btnPacote2.setEnabled(true);
+            btnPacote2.setText("Contratar Mensal");
+            
             btnPacote3.setEnabled(true);
+            btnPacote3.setText("Contratar Mensal");
         }
     }
     
@@ -182,7 +263,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(cardPackage4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 190, -1));
 
         btnPacote3.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacote3.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacote3.setForeground(new java.awt.Color(255, 255, 255));
         btnPacote3.setText("Contratar Mensal");
         btnPacote3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacote3.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +274,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacote3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 130, -1));
 
         btnPacote1.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacote1.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacote1.setForeground(new java.awt.Color(255, 255, 255));
         btnPacote1.setText("Contratar Mensal");
         btnPacote1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacote1.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +285,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacote1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 140, -1));
 
         btnPacoteAvulso3.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacoteAvulso3.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacoteAvulso3.setForeground(new java.awt.Color(255, 255, 255));
         btnPacoteAvulso3.setText("Contratar Avulso");
         btnPacoteAvulso3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacoteAvulso3.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +296,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacoteAvulso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 130, -1));
 
         btnPacoteAvulso1.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacoteAvulso1.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacoteAvulso1.setForeground(new java.awt.Color(255, 255, 255));
         btnPacoteAvulso1.setText("Contratar Avulso");
         btnPacoteAvulso1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacoteAvulso1.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +307,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacoteAvulso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 140, -1));
 
         btnPacote2.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacote2.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacote2.setForeground(new java.awt.Color(255, 255, 255));
         btnPacote2.setText("Contratar Mensal");
         btnPacote2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacote2.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +318,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacote2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 140, -1));
 
         btnPacoteAvulso2.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacoteAvulso2.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacoteAvulso2.setForeground(new java.awt.Color(255, 255, 255));
         btnPacoteAvulso2.setText("Contratar Avulso");
         btnPacoteAvulso2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacoteAvulso2.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +329,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacoteAvulso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 140, -1));
 
         btnPacoteAvulso4.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacoteAvulso4.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacoteAvulso4.setForeground(new java.awt.Color(255, 255, 255));
         btnPacoteAvulso4.setText("Contratar Avulso");
         btnPacoteAvulso4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacoteAvulso4.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +340,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         jPanel1.add(btnPacoteAvulso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, 140, -1));
 
         btnPacote4.setBackground(new java.awt.Color(111, 111, 249));
-        btnPacote4.setForeground(new java.awt.Color(232, 232, 232));
+        btnPacote4.setForeground(new java.awt.Color(255, 255, 255));
         btnPacote4.setText("Contratar Mensal");
         btnPacote4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPacote4.addActionListener(new java.awt.event.ActionListener() {
@@ -277,7 +358,7 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -394,6 +475,9 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
             this.pacoteContratado.setMensagensDisponiveis(pacote.getQtdeMensagensMensais());
             this.pacoteContratado.setTipoPacote(tipoPacote);
             this.pacoteContratado.setDt_renovacao_contrato(data_formatada);
+            
+            this.pacoteContratado.setDt_expiracao_contrato(currentDate);
+            
             this.pacoteContratado.setHr_renovacao_contrato(hora_formatada);
             this.em.merge(this.pacoteContratado);
             this.em.getTransaction().commit();
@@ -433,6 +517,19 @@ public class DefinirPacoteForm extends javax.swing.JPanel {
         GlassPanePopup.closePopupLast();                
         MensagemModal mensagemModal = showMensagemModal(pacote);
         setTimeOut(() -> GlassPanePopup.showPopup(mensagemModal), 2000);
+        
+        if(this.pacoteContratado != null){
+            Date data_do_dia = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+
+            System.out.println("PACOTE EXPIRADO - " + this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
+            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
+                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
+            }else {
+                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
+            }
+        }
     }
     
 

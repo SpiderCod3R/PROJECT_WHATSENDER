@@ -119,7 +119,7 @@ public class MensagemModal extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPacote = new javax.swing.JTextPane();
         lblProgressMessage = new javax.swing.JLabel();
-        progressBar1 = new whatsender.gui.scrollbar.ScrollBarCustom();
+        progressBar1 = new whatsender.gui.progress_bar_custom.ProgressBarCustom();
 
         setBackground(new java.awt.Color(239, 239, 239));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25));
@@ -135,6 +135,10 @@ public class MensagemModal extends javax.swing.JPanel {
         lblProgressMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProgressMessage.setText("...");
 
+        progressBar1.setBackground(new java.awt.Color(233, 233, 233));
+        progressBar1.setForeground(new java.awt.Color(22, 207, 185));
+        progressBar1.setColorString(new java.awt.Color(22, 207, 185));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,12 +153,12 @@ public class MensagemModal extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addComponent(lblProgressMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 80, Short.MAX_VALUE))
+                        .addGap(0, 81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(progressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(progressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,9 +166,9 @@ public class MensagemModal extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(progressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(progressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProgressMessage)
                 .addContainerGap())
@@ -176,7 +180,7 @@ public class MensagemModal extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblProgressMessage;
     private javax.swing.JLabel lblTitle;
-    private whatsender.gui.scrollbar.ScrollBarCustom progressBar1;
+    private whatsender.gui.progress_bar_custom.ProgressBarCustom progressBar1;
     private javax.swing.JTextPane txtPacote;
     // End of variables declaration//GEN-END:variables
 }

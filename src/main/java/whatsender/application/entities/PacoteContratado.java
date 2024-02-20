@@ -2,6 +2,7 @@ package whatsender.application.entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -152,8 +153,14 @@ public class PacoteContratado implements Serializable{
         return dt_expiracao_contrato;
     }
 
-    public void setDt_expiracao_contrato(String dt_expiracao_contrato) {
-        this.dt_expiracao_contrato = dt_expiracao_contrato;
+    public void setDt_expiracao_contrato(Date dt_expiracao) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        cal.setTime(dt_expiracao); 
+        cal.add(Calendar.DATE, 30);
+
+        this.dt_expiracao_contrato = dateFormat.format(cal.getTime());
     }
     
     

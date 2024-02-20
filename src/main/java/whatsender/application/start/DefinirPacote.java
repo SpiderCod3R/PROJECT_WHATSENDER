@@ -397,6 +397,7 @@ public class DefinirPacote extends javax.swing.JFrame {
             this.pacoteContratado.setTipoPacote(tipoPacote);
             this.pacoteContratado.setDt_renovacao_contrato(data_formatada);
             this.pacoteContratado.setHr_renovacao_contrato(hora_formatada);
+            this.pacoteContratado.setDt_expiracao_contrato(currentDate);
             this.em.merge(this.pacoteContratado);
             this.em.getTransaction().commit();
         }
