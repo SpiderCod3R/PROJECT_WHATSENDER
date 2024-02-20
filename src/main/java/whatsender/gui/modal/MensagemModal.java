@@ -7,6 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import javax.persistence.Persistence;
+import whatsender.application.entities.Cliente;
 import whatsender.gui.modal.popup.GlassPanePopup;
 import whatsender.application.entities.Pacote;
 
@@ -45,6 +46,12 @@ public class MensagemModal extends javax.swing.JPanel {
     
     public void setMenssagem(String mensagem) {
         this.messageBox = mensagem;
+        txtPacote.setText(this.messageBox);
+    }
+    
+    public void setMenssagemCliente(Cliente cliente){
+        this.messageBox = "Dados do Cliente atualizados com sucesso.";
+        
         txtPacote.setText(this.messageBox);
     }
     

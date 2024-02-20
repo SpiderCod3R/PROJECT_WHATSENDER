@@ -19,7 +19,7 @@ import whatsender.gui.component.header.Header;
 import whatsender.gui.component.menu.MenuLateral;
 import whatsender.gui.component.menu.event_menu.EventMenuSelected;
 import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
-import whatsender.application.forms.ClientForm;
+import whatsender.application.configuracoes.EditorDeDadosDoClienteForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
 import whatsender.application.forms.SendMessageForm;
@@ -87,7 +87,7 @@ public class Configuracoes extends javax.swing.JFrame {
                         break;
                     case 1:
                         if(subMenuIndex==-1){
-                            mainForm.showForm(new ClientForm());
+                            mainForm.showForm(new EditorDeDadosDoClienteForm());
                         }
                         break;
                     case 2:

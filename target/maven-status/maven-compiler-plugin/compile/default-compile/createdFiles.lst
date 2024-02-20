@@ -13,6 +13,7 @@ whatsender\system\filechooser\win32\Shell32$BrowseInfo.class
 whatsender\application\entities\PacoteContratado.class
 whatsender\gui\modal\MessageConfirmationForm$1.class
 whatsender\gui\login\PanelSlide$1.class
+whatsender\application\configuracoes\EditorDeDadosDoClienteForm.class
 whatsender\application\splashscreen\ProgressBarCustom.class
 whatsender\gui\component\card\Card.class
 whatsender\application\entities\Pacote.class
@@ -94,6 +95,7 @@ whatsender\application\start\Configuracoes$6.class
 whatsender\gui\component\menu\event_menu\EventMenu.class
 whatsender\gui\swing\PopUpMenu.class
 whatsender\system\filechooser\win32\Ole32.class
+whatsender\application\configuracoes\EditorDeDadosDoClienteForm$1.class
 whatsender\gui\swing\PopUpMenu$1.class
 whatsender\gui\swing\shadow\GraphicsUtilities.class
 whatsender\gui\swing\MenuAnimation.class
@@ -155,7 +157,6 @@ whatsender\application\forms\SendMessageForm.class
 whatsender\gui\modal\popup\GlassPanePopup$1.class
 whatsender\gui\progress_bar_custom\ProgressBarCustom$1.class
 whatsender\application\configuracoes\DefinirPacoteForm$5.class
-whatsender\application\forms\ClientForm.class
 whatsender\gui\swing\Button$1.class
 whatsender\bot\driver\Browser.class
 whatsender\application\start\Application$5.class

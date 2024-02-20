@@ -16,7 +16,7 @@ import whatsender.gui.component.header.Header;
 import whatsender.gui.component.menu.MenuLateral;
 import whatsender.gui.component.menu.event_menu.EventMenuSelected;
 import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
-import whatsender.application.forms.ClientForm;
+import whatsender.application.configuracoes.EditorDeDadosDoClienteForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
 import whatsender.application.forms.SendMessageForm;

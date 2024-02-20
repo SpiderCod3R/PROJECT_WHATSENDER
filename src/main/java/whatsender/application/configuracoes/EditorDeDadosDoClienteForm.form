@@ -42,21 +42,17 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTelefoneComercial" min="-2" pref="125" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="inputComercialPhone" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="inputWhatsApp" min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="txtWhatsApp" min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="inputClientName1" alignment="0" min="-2" pref="553" max="-2" attributes="0"/>
+                          <Component id="txtNomeCliente" alignment="0" pref="553" max="32767" attributes="0"/>
+                          <Component id="btnSave" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
@@ -78,7 +74,7 @@
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="inputClientName1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNomeCliente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -86,14 +82,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="inputWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inputComercialPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefoneComercial" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSave1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnSave" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -122,9 +115,9 @@
             <Property name="text" type="java.lang.String" value="Telefone Comercial"/>
           </Properties>
         </Component>
-        <Component class="whatsender.gui.swing.input.TextField" name="inputClientName1">
+        <Component class="whatsender.gui.swing.input.TextField" name="txtNomeCliente">
         </Component>
-        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputWhatsApp">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="txtWhatsApp">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -137,12 +130,12 @@
             <Property name="text" type="java.lang.String" value="WhatsApp"/>
           </Properties>
         </Component>
-        <Component class="whatsender.gui.swing.input.FormatedTextField" name="inputComercialPhone">
+        <Component class="whatsender.gui.swing.input.FormatedTextField" name="txtTelefoneComercial">
         </Component>
         <Component class="whatsender.gui.custom_button.CustomButton" name="btnSave">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="99" red="0" type="rgb"/>
+              <Color blue="33" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -152,20 +145,9 @@
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="whatsender.gui.custom_button.CustomButton" name="btnSave1">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="0" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Cancelar"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

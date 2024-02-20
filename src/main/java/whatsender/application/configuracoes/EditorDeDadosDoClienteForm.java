@@ -1,13 +1,34 @@
-package whatsender.application.forms;
+package whatsender.application.configuracoes;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import whatsender.application.entities.Cliente;
+import whatsender.application.entities.Pacote;
+import whatsender.gui.modal.MensagemModal;
+import whatsender.gui.modal.popup.GlassPanePopup;
 
 /**
  *
  * @author ALEXANDRE
  */
-public class ClientForm extends javax.swing.JPanel {
-
-    public ClientForm() {
+public class EditorDeDadosDoClienteForm extends javax.swing.JPanel {
+    private EntityManagerFactory emf;
+    private EntityManager em;
+    private Cliente cliente;
+    
+    public EditorDeDadosDoClienteForm() {
         initComponents();
+        
+        this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
+        this.em = this.emf.createEntityManager();
+        
+        this.em.getTransaction().begin();
+        this.cliente = this.em.find(Cliente.class, 1);
+        
+        txtNomeCliente.setText(this.cliente.getClientName());
+        txtTelefoneComercial.setText(this.cliente.getPhoneNumber());
+        txtWhatsApp.setText(this.cliente.getWhatsApp());
     }
 
     @SuppressWarnings("unchecked")
@@ -17,12 +38,11 @@ public class ClientForm extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inputClientName1 = new whatsender.gui.swing.input.TextField();
-        inputWhatsApp = new whatsender.gui.swing.input.FormatedTextField();
+        txtNomeCliente = new whatsender.gui.swing.input.TextField();
+        txtWhatsApp = new whatsender.gui.swing.input.FormatedTextField();
         jLabel3 = new javax.swing.JLabel();
-        inputComercialPhone = new whatsender.gui.swing.input.FormatedTextField();
+        txtTelefoneComercial = new whatsender.gui.swing.input.FormatedTextField();
         btnSave = new whatsender.gui.custom_button.CustomButton();
-        btnSave1 = new whatsender.gui.custom_button.CustomButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -40,15 +60,15 @@ public class ClientForm extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(116, 114, 114));
         jLabel3.setText("WhatsApp");
 
-        btnSave.setBackground(new java.awt.Color(0, 153, 255));
+        btnSave.setBackground(new java.awt.Color(0, 153, 51));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Salvar Dados");
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        btnSave1.setBackground(new java.awt.Color(255, 0, 51));
-        btnSave1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave1.setText("Cancelar");
-        btnSave1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(116, 114, 114));
@@ -70,18 +90,15 @@ public class ClientForm extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefoneComercial, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(inputComercialPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(inputWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3))
-                        .addComponent(inputClientName1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addComponent(jLabel4))
@@ -98,19 +115,17 @@ public class ClientForm extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(inputClientName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputComercialPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefoneComercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -126,18 +141,48 @@ public class ClientForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        this.emf = Persistence.createEntityManagerFactory("whatsender-jpa");
+        this.em = this.emf.createEntityManager();
+        
+        this.em.getTransaction().begin();
+        this.cliente.setClientName(txtNomeCliente.getText());
+        this.cliente.setPhoneNumber(txtTelefoneComercial.getText());
+        this.cliente.setWhatsApp(txtWhatsApp.getText());
+        
+        this.em.merge(this.cliente);
+        this.em.getTransaction().commit();
+        
+        this.emf.close();
+        this.em.close();
+        
+        if(!this.em.isOpen()) {
+            GlassPanePopup.showPopup(showMensagemModal(this.cliente));
+        };
+        
+        txtNomeCliente.setText("");
+        txtTelefoneComercial.setText("");
+        txtWhatsApp.setText("");
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    
+    private MensagemModal showMensagemModal(Cliente cliente){
+        MensagemModal mensagemModal = new MensagemModal();
+        mensagemModal.setMenssagemCliente(cliente);
+        mensagemModal.setTitle("Atualizado com Sucesso.");
+        return mensagemModal;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private whatsender.gui.custom_button.CustomButton btnSave;
-    private whatsender.gui.custom_button.CustomButton btnSave1;
-    private whatsender.gui.swing.input.TextField inputClientName1;
-    private whatsender.gui.swing.input.FormatedTextField inputComercialPhone;
-    private whatsender.gui.swing.input.FormatedTextField inputWhatsApp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private whatsender.gui.swing.input.TextField txtNomeCliente;
+    private whatsender.gui.swing.input.FormatedTextField txtTelefoneComercial;
+    private whatsender.gui.swing.input.FormatedTextField txtWhatsApp;
     // End of variables declaration//GEN-END:variables
 }
