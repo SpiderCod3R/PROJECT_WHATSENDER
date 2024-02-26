@@ -132,7 +132,7 @@ public class FormHome extends javax.swing.JPanel {
         
         cardMessageSended.setData(new ModelCard("Mensagens", lstsNormalLogMessages.size(), valorNormal, iconMessage));
         cardMultiMessagesSended.setData(new ModelCard("Mensagens em Lote", lstsExtLogMessages.size(), valorExt, iconLote));
-        cardApplicationErrors.setData(new ModelCard("Erros", 0, 0, iconErrors));
+        //cardApplicationErrors.setData(new ModelCard("Erros", 0, 0, iconErrors));
     }
 
     @SuppressWarnings("unchecked")
@@ -142,7 +142,6 @@ public class FormHome extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         cardMessageSended = new whatsender.gui.component.card.Card();
         cardMultiMessagesSended = new whatsender.gui.component.card.Card();
-        cardApplicationErrors = new whatsender.gui.component.card.Card();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLog = new javax.swing.JTable();
         pnlWhatsError = new javax.swing.JPanel();
@@ -155,11 +154,8 @@ public class FormHome extends javax.swing.JPanel {
         cardMessageSended.setBackground(new java.awt.Color(43, 83, 204));
         cardMessageSended.setColorGradient(new java.awt.Color(94, 179, 221));
 
-        cardMultiMessagesSended.setBackground(new java.awt.Color(43, 83, 204));
-        cardMultiMessagesSended.setColorGradient(new java.awt.Color(153, 204, 255));
-
-        cardApplicationErrors.setBackground(new java.awt.Color(255, 177, 177));
-        cardApplicationErrors.setColorGradient(new java.awt.Color(131, 30, 54));
+        cardMultiMessagesSended.setBackground(new java.awt.Color(124, 200, 244));
+        cardMultiMessagesSended.setColorGradient(new java.awt.Color(12, 81, 100));
 
         tblLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -216,8 +212,7 @@ public class FormHome extends javax.swing.JPanel {
                         .addComponent(cardMessageSended, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(cardMultiMessagesSended, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(cardApplicationErrors, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(338, 338, 338))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -235,17 +230,15 @@ public class FormHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardMessageSended, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardMultiMessagesSended, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardApplicationErrors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                    .addComponent(cardMultiMessagesSended, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.gui.component.card.Card cardApplicationErrors;
     private whatsender.gui.component.card.Card cardMessageSended;
     private whatsender.gui.component.card.Card cardMultiMessagesSended;
     private javax.swing.JLabel jLabel1;

@@ -23,8 +23,7 @@
                       <Component id="cardMessageSended" min="-2" pref="270" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Component id="cardMultiMessagesSended" min="-2" pref="270" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                      <Component id="cardApplicationErrors" min="-2" pref="270" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="338" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" pref="952" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -48,11 +47,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="cardMessageSended" min="-2" max="-2" attributes="0"/>
                   <Component id="cardMultiMessagesSended" min="-2" max="-2" attributes="0"/>
-                  <Component id="cardApplicationErrors" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="354" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="426" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,20 +80,10 @@
     <Component class="whatsender.gui.component.card.Card" name="cardMultiMessagesSended">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="53" red="2b" type="rgb"/>
+          <Color blue="f4" green="c8" red="7c" type="rgb"/>
         </Property>
         <Property name="colorGradient" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="whatsender.gui.component.card.Card" name="cardApplicationErrors">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="b1" green="b1" red="ff" type="rgb"/>
-        </Property>
-        <Property name="colorGradient" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="36" green="1e" red="83" type="rgb"/>
+          <Color blue="64" green="51" red="c" type="rgb"/>
         </Property>
       </Properties>
     </Component>

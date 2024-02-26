@@ -240,11 +240,31 @@ public class EditorDePacoteForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtIndicadoParaKeyReleased
 
     private void txtValorPacoteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorPacoteKeyReleased
-        dadosPacote.setLblValue(txtValorPacote.getText());
+        try
+        {
+            Integer valor_pacote = Integer.parseInt(txtValorPacote.getText());
+            dadosPacote.setLblValue(valor_pacote.toString());
+        }
+        catch(NumberFormatException e)
+        {
+            System.err.println("Apenas numeros são permitidos nesse campo.");
+        }
+        
     }//GEN-LAST:event_txtValorPacoteKeyReleased
 
     private void txtQuantidadeMensagensKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeMensagensKeyReleased
-        dadosPacote.setLblQtdMensagens(txtQuantidadeMensagens.getText());
+        try
+        {
+            Integer qtde_maxima_mensagens = Integer.parseInt(txtQuantidadeMensagens.getText());
+            dadosPacote.setLblQtdMensagens(qtde_maxima_mensagens.toString());
+        }
+        catch(NumberFormatException e)
+        {
+            System.err.println("Apenas numeros são permitidos nesse campo.");
+        }
+        
+        
+        
     }//GEN-LAST:event_txtQuantidadeMensagensKeyReleased
 
 

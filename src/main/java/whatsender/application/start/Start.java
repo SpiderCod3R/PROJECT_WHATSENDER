@@ -1,5 +1,7 @@
 package whatsender.application.start;
 
+import whatsender.bot.driver.Browser;
+import whatsender.bot.driver.WhatsAppDriver;
 import whatsender.gui.splashscreen.SplashScreen;
 
 /**

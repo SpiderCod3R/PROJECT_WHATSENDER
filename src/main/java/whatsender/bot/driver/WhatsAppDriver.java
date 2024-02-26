@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -69,16 +70,20 @@ public class WhatsAppDriver {
             driver = new ChromeDriver(service, options);
         }
 
-        longWait = new WebDriverWait(driver, 300);
-        shortWait = new WebDriverWait(driver, 200);
+        Duration longWaitDuration = Duration.ofSeconds(300);
+        Duration shortWaitDuration = Duration.ofSeconds(200);
+        
+        longWait = new WebDriverWait(driver, longWaitDuration);
+        shortWait = new WebDriverWait(driver, shortWaitDuration);
 
         this.connected = false;
     }
     
     public void resetWaitPeriod(){
-        longWait = new WebDriverWait(driver, 5);
+        Duration longWaitDuration = Duration.ofSeconds(5);
+        longWait = new WebDriverWait(driver, longWaitDuration);
     }
-
+    
     /**
      * Will open the WhatApp Web client.
      */
