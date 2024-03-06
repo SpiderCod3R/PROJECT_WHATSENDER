@@ -182,7 +182,7 @@ public class FormHome extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 236, 236));
-        jLabel2.setText("Erro ao conectar com o WhatsApp Web. Tente novamente no Botao Vermelho no menu lateral.");
+        jLabel2.setText("Erro ao conectar com o WhatsApp Web. Tente sair e entrar novamente.");
 
         javax.swing.GroupLayout pnlWhatsErrorLayout = new javax.swing.GroupLayout(pnlWhatsError);
         pnlWhatsError.setLayout(pnlWhatsErrorLayout);

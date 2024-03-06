@@ -32,7 +32,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         setLblTitle(title);
     }
     
-    public MessageConfirmationForm( Pacote pacote) {
+    public MessageConfirmationForm( Pacote pacote, String tipo_pacote) {
         initComponents();
         setOpaque(false);
         txtPacote.setBackground(new Color(0, 0, 0, 0));
@@ -40,7 +40,7 @@ public class MessageConfirmationForm extends javax.swing.JPanel {
         txtPacote.setOpaque(false);
 
         messageBox = messageBox.
-                replace("[PACOTE]", pacote.getPacoteNome()).
+                replace("[PACOTE]", pacote.getPacoteNome() + " " + tipo_pacote).
                 replace("[INDICADO]", pacote.getPacoteDescricao()).
                 replace("[VALOR]", "R$: " + pacote.getValorPacote());
 

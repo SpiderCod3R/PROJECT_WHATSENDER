@@ -6,7 +6,7 @@ package whatsender.application.helpers;
  */
 public enum MessageType {
     NORMAL("normal"),
-    LOTE("info");
+    LOTE("lote");
     
     private String value;
 

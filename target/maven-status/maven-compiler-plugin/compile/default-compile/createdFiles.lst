@@ -17,6 +17,7 @@ whatsender\application\configuracoes\EditorDeDadosDoClienteForm.class
 whatsender\application\splashscreen\ProgressBarCustom.class
 whatsender\gui\component\card\Card.class
 whatsender\application\entities\Pacote.class
+whatsender\application\helpers\PacoteType.class
 whatsender\application\start\Configuracoes$5.class
 whatsender\gui\modal\popup\GlassPanePopup$2.class
 whatsender\application\entities\Consulta.class
@@ -147,6 +148,7 @@ whatsender\gui\swing\MenuItem$1.class
 whatsender\application\entities\Admin.class
 whatsender\application\configuracoes\EditorDePacoteForm$1.class
 whatsender\application\start\Configuracoes$3.class
+whatsender\application\entities\LogPacote.class
 whatsender\application\start\DefinirPacote$1.class
 whatsender\application\start\DefinirPacote$7.class
 whatsender\gui\swing\JRadioButtonCustom.class

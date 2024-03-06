@@ -43,9 +43,6 @@ public class PacoteContratado implements Serializable{
     private String hr_renovacao_contrato;
     
     private String dt_expiracao_contrato;
-    
-    
-    
 
     public PacoteContratado() {}
 
@@ -66,6 +63,7 @@ public class PacoteContratado implements Serializable{
         
         this.dt_contrato = data_formatada;
         this.hr_contrato = hora_formatada;
+        this.setDt_expiracao_contrato(currentDate);
         
     }
     
@@ -100,6 +98,16 @@ public class PacoteContratado implements Serializable{
     public void setMensagensDisponiveis(Integer mensagensDisponiveis) {
         this.mensagensDisponiveis = mensagensDisponiveis;
     }
+    
+    public void setMensagensAvulsaContratada(Integer mensagensContratada) {
+        this.mensagensContratada = this.mensagensContratada + mensagensContratada;
+    }
+    
+    public void setMensagensAvulsaDisponiveis(Integer mensagensDisponiveis) {
+        this.mensagensDisponiveis = this.mensagensDisponiveis + mensagensDisponiveis;
+    }
+    
+    
 
     public Integer getMensagensEnviadas() {
         return mensagensEnviadas;

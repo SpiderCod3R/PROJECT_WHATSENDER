@@ -16,7 +16,6 @@ import whatsender.gui.component.header.Header;
 import whatsender.gui.component.menu.MenuLateral;
 import whatsender.gui.component.menu.event_menu.EventMenuSelected;
 import whatsender.gui.component.menu.event_menu.EventShowPopUpMenu;
-import whatsender.application.configuracoes.EditorDeDadosDoClienteForm;
 import whatsender.application.forms.FormHome;
 import whatsender.application.forms.MainForm;
 import whatsender.application.forms.SendMessageForm;
@@ -153,7 +152,8 @@ public class Application extends javax.swing.JFrame {
         // INICIALIZANDO FONTES DE ICONES DO GOOGLE
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         // Carregando a tela inicial do APP
-        mainForm.showForm(new FormHome(WHATSAPP));
+        //mainForm.showForm(new FormHome(WHATSAPP));
+        mainForm.showForm(new SendMessageForm(WHATSAPP));
         //mainForm.showForm(new SendMessageForm(mainForm, whatsapp));
     }
 

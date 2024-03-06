@@ -13,6 +13,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\modal\popup\GlassPanePopup.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\PacoteContratado.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\SendMessageForm.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\LogPacote.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\PanelSlide.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\LogsForm.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\configuracoes\EditorDePacoteForm.java
@@ -23,6 +24,7 @@ C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\ja
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\PopUpMenu.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\forms\FormHome.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\login\component\ModernTextField.java
+C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\helpers\PacoteType.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\Button.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\gui\swing\PanelPopUp.java
 C:\Users\ALEXANDRE\Documents\NetBeansProjects\GNS_PROJECT_WHATSENDER\src\main\java\whatsender\application\entities\Cliente.java

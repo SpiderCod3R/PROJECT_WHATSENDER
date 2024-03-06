@@ -8,10 +8,11 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import whatsender.application.entities.LogPacote;
 import whatsender.gui.modal.popup.GlassPanePopup;
 import whatsender.application.entities.Pacote;
 import whatsender.application.entities.PacoteContratado;
+import whatsender.application.logs.LogType;
 import whatsender.gui.modal.MessageConfirmationForm;
 import whatsender.gui.modal.MensagemModal;
 import whatsender.gui.component.card.ModelCard;
@@ -27,7 +28,8 @@ public class DefinirPacote extends javax.swing.JFrame {
     private EntityManagerFactory emf;
     private EntityManager em;
     private Pacote pacote1, pacote2, pacote3, pacote4;
-    private PacoteContratado pacoteContratado;
+    private static PacoteContratado pacoteContratado;
+    private static LogPacote logPacote;
     
     
     public DefinirPacote() {
@@ -48,10 +50,10 @@ public class DefinirPacote extends javax.swing.JFrame {
         
         if( (this.pacote1 == null) && (this.pacote2 == null) && (this.pacote3 == null) && (this.pacote4 == null)){
             this.em.getTransaction().begin();
-            this.pacote1 = new Pacote(null, "Standard", "Indicado para pequenas\n empresas.", 20, 500, "101,01", "1 Usuário");
-            this.pacote2 = new Pacote(null, "Intermediário 1", "Indicado para \npequenas/média empresas.", 59, 1300, "251,96", "2 Usuários");
-            this.pacote3 = new Pacote(null, "Intermediário 2", "Indicado para \nmédia empresas.", 104, 2300, "349,90", "2 Usuários");
-            this.pacote4 = new Pacote(null, "Ilimitado", "Indicado para \ngrandes empresas.", 9999, 999999, "510,99", "4 Usuários");
+            this.pacote1 = new Pacote(null, "Standard", "Pequenas Empresas.", 20, 500, "101,01", "1 Usuário");
+            this.pacote2 = new Pacote(null, "Intermediário 1", "Pequenas/Média Empresas.", 59, 1300, "251,96", "2 Usuários");
+            this.pacote3 = new Pacote(null, "Intermediário 2", "Média Empresas.", 104, 2300, "349,90", "2 Usuários");
+            this.pacote4 = new Pacote(null, "Ilimitado", "Grandes Empresas.", 9999, 999999, "510,99", "4 Usuários");
             
             this.em.persist(this.pacote1);
             this.em.persist(this.pacote2);
@@ -62,26 +64,6 @@ public class DefinirPacote extends javax.swing.JFrame {
         }
         
         initCardData();
-
-        this.em.getTransaction().begin();
-        this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
-
-        this.em.getTransaction().commit();
-        
-        if(this.pacoteContratado != null){
-            Date data_do_dia = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
-
-
-//            System.out.println(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia)));
-//            if(this.pacoteContratado.getDt_expiracao_contrato().equals(dateFormat.format(data_do_dia))){
-//                exibe_pacote_contratado("Renovar Pacote", this.pacoteContratado, true);
-//            }else {
-//                exibe_pacote_contratado("Pacote Contratado", this.pacoteContratado, false);
-//            }
-        }
-                     
     }
     
     private void exibe_pacote_contratado(String texto_botao, PacoteContratado pacoteContratado, Boolean renovar){
@@ -386,25 +368,14 @@ public class DefinirPacote extends javax.swing.JFrame {
         this.pacoteContratado = this.em.find(PacoteContratado.class, 1);
         if(this.pacoteContratado == null){
             this.em.getTransaction().begin();
-            PacoteContratado pacoteContratado = new PacoteContratado(null, pacote, pacote.getQtdeMensagensMensais(), tipoPacote);        
+            
+            this.pacoteContratado = new PacoteContratado(null, pacote, pacote.getQtdeMensagensMensais(), tipoPacote);        
+            this.logPacote = new LogPacote(LogType.PACKAGE_HIRED, pacote, this.pacoteContratado);
+            
             this.em.persist(pacoteContratado);
-            this.em.getTransaction().commit();
-        }else{
-            this.em.getTransaction().begin();
-            this.pacoteContratado.setPacote(pacote);
-            this.pacoteContratado.setMensagensContratada(pacote.getQtdeMensagensMensais());
-            this.pacoteContratado.setMensagensDisponiveis(pacote.getQtdeMensagensMensais());
-            this.pacoteContratado.setTipoPacote(tipoPacote);
-            this.pacoteContratado.setDt_renovacao_contrato(data_formatada);
-            this.pacoteContratado.setHr_renovacao_contrato(hora_formatada);
-            this.pacoteContratado.setDt_expiracao_contrato(currentDate);
-            this.em.merge(this.pacoteContratado);
+            this.em.persist(logPacote);
             this.em.getTransaction().commit();
         }
-        
-        /***
-         * Verificar funcionalidade de Logs para pacote contratado
-         */
 
         this.em.close();
         this.emf.close();
@@ -447,7 +418,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }
     
     private void btnPacote1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacote1ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(pacote1);
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote1, "CONTRATO MENSAL");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -459,7 +430,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacote1ActionPerformed
 
     private void btnPacote2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacote2ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote2);
+        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote2, "CONTRATO MENSAL");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -470,7 +441,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacote2ActionPerformed
 
     private void btnPacote3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacote3ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote3);
+        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote3, "CONTRATO MENSAL");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -481,7 +452,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacote3ActionPerformed
 
     private void btnPacote4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacote4ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote4);
+        MessageConfirmationForm obj = new MessageConfirmationForm(this.pacote4, "CONTRATO MENSAL");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -492,7 +463,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacote4ActionPerformed
 
     private void btnPacoteAvulso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteAvulso1ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(pacote1);
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote1, "CONTRATO AVULSO");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -503,7 +474,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacoteAvulso1ActionPerformed
 
     private void btnPacoteAvulso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteAvulso2ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(pacote2);
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote2, "CONTRATO AVULSO");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -514,7 +485,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacoteAvulso2ActionPerformed
 
     private void btnPacoteAvulso3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteAvulso3ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(pacote3);
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote3, "CONTRATO AVULSO");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -525,7 +496,7 @@ public class DefinirPacote extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacoteAvulso3ActionPerformed
 
     private void btnPacoteAvulso4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacoteAvulso4ActionPerformed
-        MessageConfirmationForm obj = new MessageConfirmationForm(pacote4);
+        MessageConfirmationForm obj = new MessageConfirmationForm(pacote4,"CONTRATO AVULSO");
         obj.eventOK(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

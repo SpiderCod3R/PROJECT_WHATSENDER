@@ -27,7 +27,6 @@ import whatsender.application.entities.Cliente;
 import whatsender.application.entities.Contato;
 import whatsender.application.entities.Message;
 import whatsender.application.entities.LogMessage;
-import whatsender.application.entities.Pacote;
 import whatsender.application.entities.PacoteContratado;
 import whatsender.system.filechooser.JnaFileChooser;
 import whatsender.application.helpers.BannerType;
@@ -133,10 +132,6 @@ public class SendMessageForm extends javax.swing.JPanel {
             
             pnClientData.setVisible(false);
             pnClientForm.setVisible(true);
-             
-            inputClientName.setText("GLOBALNETSIS");
-            inputClientPhone.setText("(22)99999-9999");
-            inputClientWhatsApp.setText("(22)99999-9999");
         } else {
             pnClientData.setVisible(true);
             pnClientForm.setVisible(false);
@@ -178,11 +173,11 @@ public class SendMessageForm extends javax.swing.JPanel {
         em.close();
         emf.close();
         
-        inputContactName.setText("Alexandre"); 
-        inputSingleContact.setText("(22)996072173");
-        inputDate.setText("14/12/2023");
-        inputDoctor.setText("Luciano Borgia");
-        inputHora.setText("15:30");
+//        inputContactName.setText("Alexandre"); 
+//        inputSingleContact.setText("(22)996072173");
+//        inputDate.setText("14/12/2023");
+//        inputDoctor.setText("Luciano Borgia");
+//        inputHora.setText("15:30");
     }
 
     @SuppressWarnings("unchecked")
@@ -201,7 +196,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         rbSingleContact = new whatsender.gui.swing.JRadioButtonCustom();
         rbMultiContacts = new whatsender.gui.swing.JRadioButtonCustom();
         inputSingleContact = new whatsender.gui.swing.input.FormatedTextField();
-        btnInputSearch = new whatsender.gui.custom_button.CustomButton();
+        btnInputSearch = new whatsender.gui.swing.custom_button.SwingCustomButton();
         inputMultiContacts = new whatsender.gui.swing.input.TextField();
         inputContactName = new whatsender.gui.swing.input.TextField();
         lblContactname = new javax.swing.JLabel();
@@ -210,13 +205,13 @@ public class SendMessageForm extends javax.swing.JPanel {
         inputHora = new whatsender.gui.swing.input.FormatedTextField();
         lblHour = new javax.swing.JLabel();
         lblContactNumber = new javax.swing.JLabel();
-        btnAddToMessage = new whatsender.gui.custom_button.CustomButton();
+        btnAddToMessage = new whatsender.gui.swing.custom_button.SwingCustomButton();
         lblDoctor = new javax.swing.JLabel();
         inputDoctor = new whatsender.gui.swing.input.TextField();
         pnMessages = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputMessageArea = new whatsender.gui.swing.input.TextArea();
-        btnSendMessage = new whatsender.gui.custom_button.CustomButton();
+        btnSendMessage = new whatsender.gui.swing.custom_button.SwingCustomButton();
         pnClientForm = new javax.swing.JPanel();
         lblCompanyName1 = new javax.swing.JLabel();
         lblCompanyPhone1 = new javax.swing.JLabel();
@@ -224,7 +219,7 @@ public class SendMessageForm extends javax.swing.JPanel {
         inputClientName = new whatsender.gui.swing.input.TextField();
         inputClientPhone = new whatsender.gui.swing.input.FormatedTextField();
         inputClientWhatsApp = new whatsender.gui.swing.input.FormatedTextField();
-        btnSaveClient = new whatsender.gui.custom_button.CustomButton();
+        btnSaveClient = new whatsender.gui.swing.custom_button.SwingCustomButton();
         pnBannerMessage = new javax.swing.JPanel();
         lblBannerMessage = new javax.swing.JLabel();
 
@@ -329,7 +324,11 @@ public class SendMessageForm extends javax.swing.JPanel {
 
         lblDate.setText("Data da Consulta");
 
-        inputHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        try {
+            inputHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         lblHour.setText("Hora da Consulta");
 
@@ -1037,10 +1036,10 @@ public class SendMessageForm extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private whatsender.gui.custom_button.CustomButton btnAddToMessage;
-    private whatsender.gui.custom_button.CustomButton btnInputSearch;
-    private whatsender.gui.custom_button.CustomButton btnSaveClient;
-    private whatsender.gui.custom_button.CustomButton btnSendMessage;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnAddToMessage;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnInputSearch;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnSaveClient;
+    private whatsender.gui.swing.custom_button.SwingCustomButton btnSendMessage;
     private whatsender.gui.swing.input.TextField inputClientName;
     private whatsender.gui.swing.input.FormatedTextField inputClientPhone;
     private whatsender.gui.swing.input.FormatedTextField inputClientWhatsApp;

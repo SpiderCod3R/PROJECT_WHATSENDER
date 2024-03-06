@@ -1,18 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package whatsender.application.logs;
 
 /**
  *
- * @author ALEXANDRE
+ * @author ALEXANDRE ( THE GRAND MASTER )
  */
 public enum LogType {
     SUCCESS("sucesso"),
     INFO("info"),
     ERROR("erro"),
-    WARNING("aviso");
+    WARNING("aviso"),
+    PACKAGE_HIRED("pacote contratado"),
+    PACKAGE_CANCELLED("cliente cancelado"),
+    PACKAGE_RENEWED("pacote renovado");
     
     private String value;
 
